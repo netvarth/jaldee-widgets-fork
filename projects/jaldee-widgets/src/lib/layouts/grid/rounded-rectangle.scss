@@ -1,0 +1,68 @@
+.grid.rectangle-vertial-rounded .item-grid img {
+    transition: .3s;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.grid.rectangle-vertial-rounded .item-grid img:hover {
+    transform: scale(1.1) !important;
+}
+
+.grid.rectangle-vertial-rounded .item-grid img {
+    aspect-ratio: 1/1;
+}
+
+.grid.rectangle-vertial-rounded.pad-hover .item-grid {
+    padding: 15px;
+    background: #fff;
+    background-clip: padding-box;
+    border: none !important;
+    width: 95%;
+    margin: 5px
+}
+
+.grid.rectangle-vertial-rounded.pad-hover .item-grid img,
+.grid.rectangle-vertial-rounded.pad-hover .item-grid .image-wrapper {
+    border: none;
+    border-radius: 0 !important;
+    display: flex;
+}
+
+.grid.rectangle-vertial-rounded.pad-hover .action-grid {
+    margin: 5px 10% auto;
+}
+
+.grid.rectangle-vertial-rounded.pad-hover .item-grid:hover {
+    box-shadow: 0 0 10px #0000000d !important;
+}
+
+.grid.rectangle-vertial-rounded.pad-hover .content-text {
+    background: #f5f6fb !important;
+    padding: 10px;
+    height: 90px;
+    text-align: center;
+}
+
+@media (max-width:768px) {
+    .grid.rectangle-vertial-rounded.pad-hover .action-grid {
+        margin: 0;
+    }
+    .grid.rectangle-vertial-rounded.pad-hover .item-grid {
+        padding: 0 !important;
+    }
+    .grid.rectangle-vertial-rounded.pad-hover .action-grid {
+        margin: auto !important;
+    }
+}
+
+@media (max-width:991px) {
+    .grid.rectangle-vertial-rounded.pad-hover .image-wrapper {
+        padding: 0;
+    }
+}
+
+@media (max-width:767px) {
+    .grid.rectangle-vertial-rounded.pad-hover .image-wrapper {
+        padding: 0;
+    }
+}

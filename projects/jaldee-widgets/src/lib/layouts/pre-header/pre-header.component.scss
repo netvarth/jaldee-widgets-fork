@@ -1,0 +1,27 @@
+.announcement {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #977b7b;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+::ng-deep .announcement-container .announcement p {
+    margin-bottom: 0 !important;
+    // font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.jw-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.jw-carousel__item {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}

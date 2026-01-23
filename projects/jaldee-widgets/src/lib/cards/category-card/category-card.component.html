@@ -1,0 +1,11 @@
+<div class="category-card card p-0" *ngIf="content" [ngStyle]="{
+  'color': content.foregroundColor,
+  'background': (content.backgroundColor || 'transparent')
+}">
+  <div class="card-image">
+    <img *ngIf="content.image" [lazyImage]="content.image" [alt]="content.title" loading="lazy" priority="false">
+  </div>
+  <div class="card-title" *ngIf="content.title">
+    {{ content.title }}
+  </div>
+</div>

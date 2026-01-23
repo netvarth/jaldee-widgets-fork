@@ -1,0 +1,98 @@
+:host {
+  display: block;
+  color: #1f2933;
+  background: #ffffff;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.demo-shell {
+  padding-bottom: 48px;
+}
+
+.demo-section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.btn-primary {
+  background: #1f2937;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.hero-wrap {
+  padding: 0;
+}
+
+.grid-wrap {
+  padding: 24px 32px 0;
+}
+
+.cards-wrap {
+  padding: 32px;
+}
+
+.section-title {
+  margin: 0 0 16px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.card-grid + .card-grid {
+  margin-top: 16px;
+}
+
+.card-preview {
+  padding: 12px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #eee9df;
+  overflow: hidden;
+}
+
+.card-preview .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.card-preview .card {
+  width: 100%;
+  max-width: 100%;
+}
+
+.card-preview img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card-label {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b665b;
+}
+
+@media (max-width: 720px) {
+  .grid-wrap {
+    padding: 16px 20px 0;
+  }
+
+  .cards-wrap {
+    padding: 24px 20px;
+  }
+}

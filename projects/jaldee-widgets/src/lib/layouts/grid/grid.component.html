@@ -1,0 +1,83 @@
+<div id="{{section.id}}" [ngClass]="className" *ngIf="section.contentType!='dynamic'">
+    <div class="pt-1 text-center ">
+        <img *ngIf="section.titleImage && section.imagePosition=='top'" class="" [src]="section.titleImage"
+            alt="Card image cap" loading="lazy" priority="false">
+        <div *ngIf="section.preTitle && section.preTitle!=''" class="subtitle mb-2"
+            [ngStyle]="section.preTitleFontSize ? { 'font-size': section.preTitleFontSize } : null">
+            {{section.preTitle}}
+        </div>
+        <div *ngIf="section.title && section.title!=''" class="mt-2">
+            <h2 class="mb-0 heading"
+                [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+                {{section.title}}
+            </h2>
+        </div>
+        <img *ngIf="section.titleImage && section.imagePosition=='middle'" class="" [src]="section.titleImage"
+            alt="Card image cap" loading="lazy" priority="false">
+        <div *ngIf="section.subTitle && section.subTitle!=''" class="subtitle mt-2"
+            [ngStyle]="section.subTitleFontSize ? { 'font-size': section.subTitleFontSize } : null">
+            {{section.subTitle}}
+        </div>
+        <img *ngIf="section.titleImage && section.imagePosition=='bottom'" class="" [src]="section.titleImage"
+            alt="Card image cap" loading="lazy" priority="false">
+        <div class="no-padding mt-3 action-grid" [ngStyle]="{ 'grid-template-columns': gridColumns }">
+            <div *ngFor="let action of section.content; let i = index; trackBy: trackByIndex"
+                class="item-grid pointer-cursor" carouselslide (click)="_actionClicked(action, section.id)">
+                <!-- [ngStyle]="{ 'aspect-ratio': action.image_aspectRatio || '' }" -->
+                <ng-container *ngIf="!section['cardType'] || (section['cardType'] && section['cardType']=='')">
+                    <div class="image-wrapper">
+                        <img [src]="action.image" lazyImage alt="Card image cap" loading="lazy" priority="false">
+                    </div>
+                    <div class="content-text">
+                        <div class="title mb-1"
+                            [ngStyle]="action.titleFontSize ? { 'font-size': action.titleFontSize } : null">
+                            {{ action.title }}
+                        </div>
+                        <div class="title mb-1" *ngIf="action.description"
+                            [ngStyle]="action.descriptionFontSize ? { 'font-size': action.descriptionFontSize } : null"
+                            [innerHTML]="getHTMLContent(action.description)"></div>
+                        <div class="rate-wrapper">
+                            <span class="item-rate fw-bold">{{ action.price }}</span>
+                            <span *ngIf="action.mrp" class="item-mrp fw-bold ms-1">{{ action.mrp }}</span>
+                        </div>
+                    </div>
+                </ng-container>
+                <app-review-card [content]="action" *ngIf="action && section['cardType']=='review-card'"
+                    (actionClicked)="_actionClicked(action, section.id)"></app-review-card>
+                <app-service-card [content]="action" *ngIf="action && section['cardType']=='service-card'"
+                    (actionClicked)="_actionClicked(action, section.id)"></app-service-card>
+                <app-service-card2 [content]="action" *ngIf="action && section['cardType']=='service-card2'"
+                    [smallDevice]="smallDevice"
+                    (actionClicked)="_actionClicked(action, section.id)"></app-service-card2>
+                <app-service-card3 [content]="action" *ngIf="action && section['cardType']=='service-card3'"
+                    [smallDevice]="smallDevice"
+                    (actionClicked)="_actionClicked(action, section.id)"></app-service-card3>
+                <app-service-card4 [content]="action" *ngIf="action && section['cardType']=='service-card4'"
+                    [smallDevice]="smallDevice"
+                    (actionClicked)="_actionClicked(action, section.id)"></app-service-card4>
+                <app-normal-card [content]="action" *ngIf="section['cardType']=='normal-card'"></app-normal-card>
+                <app-normal-card-circle [content]="action"
+                    *ngIf="section['cardType']=='normal-card-circle'"></app-normal-card-circle>
+                <app-animated-card [content]="action" *ngIf="section['cardType']=='animated-card'"></app-animated-card>
+                <app-animated-card1 [content]="action"
+                    *ngIf="section['cardType']=='animated-card1'"></app-animated-card1>
+                <app-item-card [content]="action" *ngIf="action && section['cardType']=='item-card'"
+                    [smallDevice]="smallDevice" (actionClicked)="_actionClicked(action, section.id)"></app-item-card>
+                <app-about-card [content]="action" *ngIf="action && section['cardType']=='about-card'"
+                    (actionClicked)="_actionClicked(action, section.id)" [smallDevice]="smallDevice"></app-about-card>
+                <app-about-card1 [content]="action" *ngIf="action && section['cardType']=='about-card1'"
+                    (actionClicked)="_actionClicked(action, section.id)" [smallDevice]="smallDevice"></app-about-card1>
+                <app-contact-card [content]="action" *ngIf="action && section['cardType']=='contact-card'">
+                </app-contact-card>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center my-4"><button id="btnMore" *ngIf="section.showMore"
+            type="button" class="btn-viewallitems btn-primary pull-right" [ngStyle]="{
+    'color': isHovered ? section.backgroundColor : section.foregroundColor,
+    'background-color': isHovered ? section.foregroundColor : section.backgroundColor,
+    'border-color': isHovered ? section.backgroundColor : section.foregroundColor
+  }" (click)="moreClicked(section.moreLink)">
+            {{section.moreCaption}}
+        </button></div>
+</div>

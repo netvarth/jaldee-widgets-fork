@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f5f4f0;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.pointer-cursor {
+  cursor: pointer;
+}
+
+.pull-right {
+  float: right;
+}

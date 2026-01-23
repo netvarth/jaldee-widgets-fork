@@ -1,0 +1,43 @@
+img {
+    width: 87%;
+    padding: 15px;
+    height: auto;
+    border-radius: 25px !important;
+}
+
+.booknow {
+    // color: #1e4079;
+    background-color: white;
+    border-radius: 50px !important;
+    padding: 15px 30px;
+    border: 1px solid;
+    height: 100% !important;
+}
+
+.card-title {
+  width: 100%;
+  font-size: clamp(2.5rem, 2vw, 3rem);
+  font-weight: 800 !important;
+  text-align: center;
+  letter-spacing: 1.5px;
+  line-height:1.25;
+}
+
+.card-subtitle {
+  width: 100%;
+  font-size: clamp(1.15rem, 2vw, 1.25rem);
+  font-weight: 600 !important;
+  text-align: center;
+  padding: 10px 0;
+  line-height:1.25;
+}
+
+.card-description {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 300 !important;
+  line-height:1.5;
+}
+
+.text-justify {
+    text-align: justify;
+}

@@ -1,0 +1,47 @@
+.bg-about {
+    background: #FAF7F1;
+}
+
+.aboutUs-container {
+    margin: auto;
+    display: grid;
+    gap: 10px;
+    padding-top: 40px;
+    grid-template-columns: 50% 50%;
+}
+.fullWidth {
+    grid-template-columns: 100%;
+}
+
+@media screen and (max-width:991px) {
+    .aboutUs-container {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 100% !important;
+        padding: 10px;
+    }
+}
+
+.image {
+    margin: auto;
+    text-align: center;
+    display: flex;
+}
+
+.card-img {
+    background: #ad9773;
+    padding: 7px;
+    border-radius: 25px;
+    width: 40px !important;
+    height: 40px !important;
+}
+.description {
+    color: #4f4f4f;
+}
+.aboutus-h3 {
+    color: #ad9773;
+}
+.fullWidth .aboutus-h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem !important;
+}

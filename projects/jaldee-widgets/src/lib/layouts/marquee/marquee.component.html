@@ -1,0 +1,10 @@
+<div class="marquee-wrapper">
+  <div class="marquee-track">
+    <div class="marquee-card" *ngFor="let action of section.content; let i = index; trackBy: trackByIndex">
+      <h2 [ngStyle]="action.titleFontSize ? { 'font-size': action.titleFontSize } : null">{{ action.title }}</h2>
+    </div>
+     <div class="marquee-card" *ngFor="let action of section.content; let i = index; trackBy: trackByIndex">
+      <h2 [ngStyle]="action.titleFontSize ? { 'font-size': action.titleFontSize } : null">{{ action.title }}</h2>
+    </div>
+  </div>
+</div>

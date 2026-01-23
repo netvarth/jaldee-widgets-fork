@@ -1,0 +1,41 @@
+.type2-desc {
+    color: #4F4F4F;
+    min-height: 160px;
+}
+
+.review-date {
+    color: var(--anvogue-vercel-app-silver-chalice, var(--color-grey-63, #A0A0A0));
+    font-size: 12px !important;
+}
+
+.action-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 10px 0px;
+    text-overflow: ellipsis;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden;
+}
+.jw-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.jw-carousel__item {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+}
+
+.jw-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+
+.jw-carousel::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}

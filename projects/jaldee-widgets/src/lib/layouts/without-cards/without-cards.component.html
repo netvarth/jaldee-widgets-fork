@@ -1,0 +1,24 @@
+<div class="withoutCards" id="{{section.id}}">
+    <div class="container">
+        <h2 *ngIf="section.title"
+            [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+            {{ section.title }}
+        </h2>
+        <div class="card-container2">
+            <div class="card-content mt-4 text-center" *ngFor="let card of section.content">
+                <div class="mr-2 d-flex justify-content-center align-items-center">
+                    <img [src]="card.image" alt="" width="35" height="35" loading="lazy">
+                </div>
+                <div class="p-2">
+                    <div class="title"
+                        [ngStyle]="card.titleFontSize ? { 'font-size': card.titleFontSize } : null">
+                        {{card.title}}
+                    </div>
+                    <div class="description-type2"
+                        [ngStyle]="card.descriptionFontSize ? { 'font-size': card.descriptionFontSize } : null"
+                        [innerHTML]="card.description"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="card" *ngIf="content">
+  <div class="first-row d-flex g-3">
+    <div>
+      <img *ngIf="content.image" class="w-full" [lazyImage]="content.image" alt="Card image cap" loading="lazy"
+        priority="false">
+    </div>
+    <div class="card-titles">
+      <div class="card-title"
+        [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null">
+        {{content.title}}
+      </div>
+      <div class="card-subtitle" *ngIf="content.subTitle"
+        [ngStyle]="content.subTitleFontSize ? { 'font-size': content.subTitleFontSize } : null">
+        {{content.subTitle}}
+      </div>
+    </div>
+  </div>
+  <div class="card-description py-2" *ngIf="content.description"
+    [ngStyle]="content.descriptionFontSize ? { 'font-size': content.descriptionFontSize } : null"
+    [innerHTML]="content.description">
+  </div>
+</div>

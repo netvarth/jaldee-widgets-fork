@@ -1,0 +1,96 @@
+.card-title {
+  width: 100%;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 500 !important;
+  text-align: center;
+}
+
+.card-subtitle {
+  width: 100%;
+  font-size: clamp(0.9rem, 2vw, 0.9rem);
+  font-weight: 600 !important;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.image-container img {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 10px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+::ng-deep .rectangle-vertial-rounded .image-container img {
+  aspect-ratio: 4/5 !important;
+}
+
+.price-item,
+.mrp {
+  // color: #000;
+  letter-spacing: 0;
+  font-weight: 700;
+  // color: #000;
+}
+
+.price-item {
+  font-size: 1.5rem;
+  line-height: 30.66px;
+}
+
+.mrp {
+  text-decoration: line-through;
+  font-size: 1rem;
+  line-height: 1.6rem;
+  margin-left: 5px;
+  text-decoration-thickness: 1px;
+  text-decoration-skip-ink: auto;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.image-container img:hover {
+  opacity: 0.6;
+}
+.image-container img {
+  width: 100%;
+  display: block;
+}
+
+.image-container .btn-viewItem {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  width: 85%;
+  justify-content: center;
+  border-radius: 25.861px;
+  border: 2.643px solid rgba(255, 187, 17, 0.13);
+  background: #439b5f;
+  font-size: 14px;
+  color:#fff;
+  padding: 7px 10px !important;
+}
+
+/* Show button on hover */
+.image-container:hover .btn-viewItem {
+  opacity: 1;
+}
+
+/* Optional: Always show on small devices */
+@media (max-width: 768px) {
+  .image-container .btn-viewItem {
+    opacity: 1;
+    position: static;
+    margin-top: 10px;
+  }
+
+  .image-container {
+    text-align: center;
+  }
+}

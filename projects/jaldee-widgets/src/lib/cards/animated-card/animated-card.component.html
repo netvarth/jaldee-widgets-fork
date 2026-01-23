@@ -1,0 +1,18 @@
+<div class="card row flex-row p-1 align-items-center" [ngStyle]="{
+  'color': content.foregroundColor,'background':  (content.backgroundColor || 'transparent')}">
+  <div class="col-8">
+    <div class="card-text" *ngIf="content.title || content.subTitle">
+      <h2 class="card-title" *ngIf="content.title"
+        [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null">
+        {{content.title}}
+      </h2>
+      <p class="card-subtitle" *ngIf="content.subTitle"
+        [ngStyle]="content.subTitleFontSize ? { 'font-size': content.subTitleFontSize } : null">
+        {{content.subTitle}}
+      </p>
+    </div>
+  </div>
+   <div class="col-4 card-image p-0">
+      <img *ngIf="content.image" [lazyImage]="content.image"  alt="{{content.title}}" loading="lazy" priority="false">
+    </div>
+</div>

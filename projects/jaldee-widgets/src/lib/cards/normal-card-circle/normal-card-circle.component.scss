@@ -1,0 +1,37 @@
+.card {
+  width: 100%; /* Takes full width of parent */
+  margin: 0 auto; /* Centers the card */
+  position: relative;
+  overflow: hidden;
+  box-shadow: none !important;
+}
+
+.card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1; /* Ensures consistent image proportions (adjust as needed) */
+}
+
+.card-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Prevents image distortion */
+  display: block;
+  border-radius: 100% !important;
+}
+
+.card-title {
+  width: 100%;
+  padding: 1rem; /* Relative unit (scales with screen) */
+  font-size: clamp(1rem, 2vw, 1rem); /* Responsive font scaling */
+  font-weight: 800;
+  text-align: center;
+  height: 60px;
+}
+
+/* Optional: Stack cards in a grid layout for larger screens */
+@media (min-width: 768px) {
+  .card {
+    max-width: none; /* Reset if using grid */
+  }
+}

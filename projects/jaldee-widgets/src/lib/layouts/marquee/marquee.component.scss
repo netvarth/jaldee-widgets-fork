@@ -1,0 +1,41 @@
+.marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-marquee 20s linear infinite;
+}
+
+.marquee-card {
+  flex: 0 0 auto;
+  padding: 1rem;
+  text-align: center;
+
+}
+
+.marquee-card h1 {
+  font-weight: 800;
+}
+
+@keyframes scroll-marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .marquee-track {
+    animation-duration: 20s;
+  }
+}
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}

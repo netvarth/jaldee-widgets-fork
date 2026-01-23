@@ -1,0 +1,70 @@
+<div id="{{section.id}}" class="slider" [ngClass]="className" *ngIf="section.content">
+    <div class="pt-1 text-center">
+        <div *ngIf="section.title && section.title!=''" [class.mb-3]="section.subTitle && section.subTitle!=''">
+            <h2 class="fw-normal mb-3"
+                [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+                {{section.title}}
+            </h2>
+        </div>
+        <div *ngIf="section.subTitle && section.subTitle!=''" class="mt-3 mb-3 subTitle"
+            [ngStyle]="section.subTitleFontSize ? { 'font-size': section.subTitleFontSize } : null">
+            {{section.subTitle}}
+        </div>
+        <div class="padding action-grid">
+            <div class="jw-carousel">
+                <div class="jw-carousel__item" *ngFor="let action of section.content; let i = index; trackBy: trackByIndex">
+                    <div class="item" (click)="action.buttonOnHover?'':_actionClicked(action, action.link)">
+                        <div class="image-container slides">
+                            <!-- [ngStyle]="{ 'aspect-ratio': smallDevice? ((action.image_mob && action.image_mob!='')?action.image_mob_aspectRatio:action.image_mob_aspectRatio): action.image_aspectRatio || '' }" -->
+                            <div class="image-wrapper"
+                                *ngIf="!section['cardType'] || (section['cardType'] && section['cardType']=='')">
+                                <img [src]="smallDevice?((action.image_mob && action.image_mob!='')?action.image_mob:action.image):action.image"
+                                    [alt]="action.title"
+                                    *ngIf="action.image || (action.image_mob && action.image_mob!='')" loading="lazy">
+                                <div *ngIf="action.title && action.title!=''" class="text-center content-text">
+                                    <div class="action-name title"
+                                        [ngStyle]="action.titleFontSize ? { 'font-size': action.titleFontSize } : null">
+                                        {{action.title}}
+                                    </div>
+                                    <div *ngIf="action.price || action.mrp">
+                                        <span class="item-rate fw-bold">{{ action.price }}</span>
+                                        <span *ngIf="action.mrp" class="item-mrp fw-bold ms-1">{{ action.mrp }}</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="action.actionTitle" class="shop-now text-center fw-bold mb-3">
+                                    {{action.actionTitle}}</div>
+                                <button type="button" *ngIf="action.buttonHover" [id]="'btnItem' + i"
+                                    class="btn-viewItem btn-primary pull-right"
+                                    (click)="_actionClicked(action,section.id)">{{action.buttonCaption}}</button>
+                            </div>
+                            <app-review-card [content]="action" *ngIf="action && section['cardType']=='review-card'"
+                                (actionClicked)="_actionClicked(action, section.id)"></app-review-card>
+                            <app-service-card [content]="action" *ngIf="action && section['cardType']=='service-card'"
+                                (actionClicked)="_actionClicked(action, section.id)"></app-service-card>
+                            <app-service-card2 [content]="action" *ngIf="action && section['cardType']=='service-card2'"
+                                (actionClicked)="_actionClicked(action, section.id)"></app-service-card2>
+                            <app-service-card3 [content]="action" *ngIf="action && section['cardType']=='service-card3'"
+                                (actionClicked)="_actionClicked(action, section.id)"></app-service-card3>
+                            <app-normal-card [content]="action"
+                                *ngIf="section['cardType']=='normal-card'"></app-normal-card>
+                            <app-normal-card-circle [content]="action"
+                                *ngIf="section['cardType']=='normal-card-circle'"></app-normal-card-circle>
+                            <app-animated-card [content]="action"
+                                *ngIf="section['cardType']=='animated-card'"></app-animated-card>
+                            <app-animated-card1 [content]="action"
+                                *ngIf="section['cardType']=='animated-card1'"></app-animated-card1>
+                            <app-item-card [content]="action" *ngIf="action && section['cardType']=='item-card'"
+                                (actionClicked)="_actionClicked(action, section.id)" [smallDevice]="smallDevice"></app-item-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-center my-4">
+    <button id="btnMore" *ngIf="section.showMore" type="button"
+        class="btn-viewallitems btn-primary pull-right" (click)="moreClicked(section.moreLink)">
+        {{section.moreCaption}}
+    </button>
+</div>

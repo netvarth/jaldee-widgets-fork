@@ -1,0 +1,84 @@
+<div class="demo-shell">
+  <app-pre-header [header]="demoHeader"></app-pre-header>
+  <app-quick-access [section]="quickAccess"></app-quick-access>
+
+  <section class="demo-section hero-wrap">
+    <app-hero-section [section]="heroSection" (actionClicked)="handleAction($event)"></app-hero-section>
+  </section>
+
+  <section class="demo-section grid-wrap">
+    <app-grid [section]="gridSection" (actionClicked)="handleAction($event)"></app-grid>
+  </section>
+
+  <section class="demo-section cards-wrap">
+    <h2 class="section-title">Card Types</h2>
+    <div class="card-grid">
+      <div class="card-preview">
+        <app-banner-card [content]="cardSamples.banner" (actionClicked)="handleAction($event)"></app-banner-card>
+      </div>
+      <div class="card-preview">
+        <app-banner-card1 [content]="cardSamples.banner1" (actionClicked)="handleAction($event)"></app-banner-card1>
+      </div>
+      <div class="card-preview">
+        <app-normal-card [content]="cardSamples.normal"></app-normal-card>
+      </div>
+      <div class="card-preview">
+        <app-normal-card-circle [content]="cardSamples.normalCircle"></app-normal-card-circle>
+      </div>
+      <div class="card-preview">
+        <app-animated-card [content]="cardSamples.animated"></app-animated-card>
+      </div>
+      <div class="card-preview">
+        <app-animated-card1 [content]="cardSamples.animated1"></app-animated-card1>
+      </div>
+      <div class="card-preview">
+        <app-service-card [content]="cardSamples.service" (actionClicked)="handleAction($event)"></app-service-card>
+      </div>
+      <div class="card-preview">
+        <app-service-card2 [content]="cardSamples.service2" (actionClicked)="handleAction($event)"></app-service-card2>
+      </div>
+      <div class="card-preview">
+        <app-service-card3 [content]="cardSamples.service3" (actionClicked)="handleAction($event)"></app-service-card3>
+      </div>
+      <div class="card-preview">
+        <app-service-card4 [content]="cardSamples.service4" (actionClicked)="handleAction($event)"></app-service-card4>
+      </div>
+      <div class="card-preview">
+        <app-service-card5 [content]="cardSamples.service5" (actionClicked)="handleAction($event)"></app-service-card5>
+      </div>
+      <div class="card-preview">
+        <app-review-card [content]="cardSamples.review" (actionClicked)="handleAction($event)"></app-review-card>
+      </div>
+      <div class="card-preview">
+        <app-item-card [content]="cardSamples.item" (actionClicked)="handleAction($event)"></app-item-card>
+      </div>
+      <div class="card-preview">
+        <app-item-zoom-card [content]="cardSamples.itemZoom"></app-item-zoom-card>
+      </div>
+      <div class="card-preview">
+        <app-about-card [content]="cardSamples.about" (actionClicked)="handleAction($event)"></app-about-card>
+      </div>
+      <div class="card-preview">
+        <app-about-card1 [content]="cardSamples.about1" (actionClicked)="handleAction($event)"></app-about-card1>
+      </div>
+      <div class="card-preview">
+        <app-contact-card [content]="cardSamples.contact"></app-contact-card>
+      </div>
+      <div class="card-preview">
+        <app-category-card [content]="cardSamples.category"></app-category-card>
+      </div>
+      <div class="card-preview">
+        <app-blog-card [content]="cardSamples.blog"></app-blog-card>
+      </div>
+      <div class="card-preview">
+        <app-testimonial-card [content]="cardSamples.testimonial"></app-testimonial-card>
+      </div>
+    </div>
+    <div class="card-grid missing-grid" *ngIf="missingCardTypes.length">
+      <div class="card-preview card-image-tile" *ngFor="let card of missingCardTypes">
+        <img [src]="card.image" [alt]="card.name">
+        <div class="card-label">{{ card.name }}</div>
+      </div>
+    </div>
+  </section>
+</div>

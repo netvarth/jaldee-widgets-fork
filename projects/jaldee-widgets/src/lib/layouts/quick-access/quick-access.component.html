@@ -1,0 +1,6 @@
+<div id="{{section?.id}}">
+    <a *ngIf="section['content']?.[0].title || section['content']?.[0].image || section['content']?.[0].link" class="whatsapp" target="_blank" [title]="section['content']?.[0].title"
+        [href]="section['content']?.[0].link" [ngStyle]="section['content']?.[0].styles">
+        <img [src]="section['content']?.[0].image" alt="">
+    </a>
+</div>

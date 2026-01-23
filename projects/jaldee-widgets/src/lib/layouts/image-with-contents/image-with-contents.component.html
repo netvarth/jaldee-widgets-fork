@@ -1,0 +1,32 @@
+<div [ngClass]="className">
+    <h2 *ngIf="section.title"
+        [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+        {{ section.title }}
+    </h2>
+    <div class="aboutUs-container" [class.fullWidth]="!(section.image || section.video)">
+        <div *ngIf="section.image" class="image">                            
+            <img [src]="section.image" alt="" width="100%" height="400px" loading="lazy" >
+        </div>
+        <div *ngIf="section.video" class="">
+            <video [src]="section.video" muted class="video-banner" controls>
+                Your browser does not support the video tag.
+            </video>                                                   
+            </div>
+        <div *ngIf="section.content && section.content.length > 0" class="d-flex justify-content-center flex-column">
+            <div class="card-content d-flex gap-3 mt-3 mb-3" *ngFor="let card of section.content">
+                <div *ngIf="card.image">
+                    <img class="card-img" [src]="card.image" alt="" width="40" height="40" loading="lazy">
+                </div>
+                <div class="p-2">
+                    <h3 class="fw-bold mb-2 aboutus-h3"
+                        [ngStyle]="card.titleFontSize ? { 'font-size': card.titleFontSize } : null">
+                        {{card.title}}
+                    </h3>
+                    <div class="description" *ngIf="card.description"
+                        [ngStyle]="card.descriptionFontSize ? { 'font-size': card.descriptionFontSize } : null"
+                        innerHTML="{{card.description}}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

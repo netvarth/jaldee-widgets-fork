@@ -1,0 +1,12 @@
+<div id="preheader" class="announcement-container">
+    <div class="col-lg-12 no-padding">
+        <div class="jw-carousel" *ngIf="items?.length">
+            <div class="jw-carousel__item"
+                *ngFor="let announcement of items; let i = index; trackBy: trackByIndex">
+                <div class="announcement" [innerHTML]="announcement.message"
+                    [ngStyle]="{ 'color': announcement.foregroundColor, 'background-color': announcement.backgroundColor, 'font-size': announcement.fontSize ? (announcement.fontSize + 'px') : '1.1rem' }">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

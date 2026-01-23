@@ -1,0 +1,28 @@
+<div class="p-0">
+    <div class="image-container">
+        <img [lazyImage]="smallDevice?((content.image_mob && content.image_mob!='')?content.image_mob:content.image):content.image"
+            [alt]="content.title" *ngIf="content.image || (content.image_mob && content.image_mob!='')" loading="lazy">
+        <button type="button"  [id]="'btnItem'" [ngStyle]="{
+    'color': content.foregroundColor,
+    'background-color': content.backgroundColor
+  }"
+            class="btn-viewItem p-button-primary btn-primary pull-right" *ngIf="!smallDevice"
+            (click)="_contentClicked(content,'.')">{{content.buttonCaption || 'View Item'}}</button>
+    </div>
+    <div class="content-wrapper">
+        <div *ngIf="content.title && content.title!='' || (content.name && content.name!='')">
+            <div class="card-title"
+                [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null">
+                {{content.title || content.name}}
+            </div>
+            <div class="card-subtitle" *ngIf="content.subTitle"
+                [ngStyle]="content.subTitleFontSize ? { 'font-size': content.subTitleFontSize } : null">
+                {{content.subTitle}}
+            </div>
+            <div *ngIf="content.price || content.mrp">
+                <span class="price-item test" *ngIf="content.price"><span class="currency_symbol">₹</span>{{ content.price }}</span>
+                <span class="mrp" *ngIf="content.mrp && content.mrp!=content.price"><span class="currency_symbol">₹</span>{{ content.mrp }}</span>
+            </div>
+        </div>
+    </div>
+</div>

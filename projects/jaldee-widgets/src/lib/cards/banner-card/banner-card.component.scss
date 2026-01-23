@@ -1,0 +1,84 @@
+@media (min-width:1200px) {
+    .cover-profile {
+        width: 55% !important;
+    }
+}
+
+.cover-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.cover-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(0, 51, 102, 0.5);
+    gap: 2rem;
+    opacity: 0.8;
+    padding: 3rem 1rem;
+}
+
+@media (min-width: 768px) {
+    .cover-content {
+        padding: 6rem 4rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .cover-content {
+        padding: 10rem 15rem;
+    }
+}
+
+.booknow {
+    color: #1e4079;
+    background-color: white;
+    border-radius: 50px !important;
+    padding: 15px 30px;
+        border: 1px solid;
+    height: 100% !important;
+}
+
+.divider {
+    border: 1px solid #F6F9F9;
+    width: 18%;
+}
+
+@media (min-width:900px) {
+    h1.business-name {
+        font-size: 4rem !important;
+    }
+}
+
+
+.image-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  img, video {
+    width: 100%;
+    height: auto; /* Allow natural height on small devices */
+    // object-fit: cover;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    // max-height: 75vh;
+  }
+
+  
+  @media screen and (max-width: 767px) {
+    img {
+      position: static; /* Avoid absolute positioning issues */
+      height: auto;
+    }
+  }

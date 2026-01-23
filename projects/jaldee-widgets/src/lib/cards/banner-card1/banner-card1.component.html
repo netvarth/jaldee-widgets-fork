@@ -1,0 +1,36 @@
+<div class="banner-wrapper">
+    <div class="banner-image">
+        <img [src]="content.image" [alt]="content.title" *ngIf="!smallDevice && !mediumDevice">
+        <img [src]="content.image_mob ? content.image_mob : content.image" [alt]="content.title" *ngIf="smallDevice || mediumDevice">
+        <div class="banner-content">
+            <div class="cover-profile">
+                <div>
+                    <h4 class="fs-4" *ngIf="content.subTitle"
+                        [ngStyle]="content.subTitleFontSize ? { 'font-size': content.subTitleFontSize } : null">
+                        {{content.subTitle}}
+                    </h4>
+                </div>
+                <div *ngIf="content.title">
+                    <h1 class="fw-bold mb-2 mb-md-4"
+                        [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null">
+                        {{content.title}}
+                    </h1>
+                </div>
+                <div class="profile-description" *ngIf="content.description">
+                    <p [ngStyle]="content.descriptionFontSize ? { 'font-size': content.descriptionFontSize } : null"
+                        [innerHTML]="content.description"></p>
+                </div>
+                <div>
+                    <button type="button" (click)="_contentClicked(content)" class="banner-button"
+                        id="btnBookNow" *ngIf="content.buttonCaption" (mouseenter)="isHovered = true"
+                        (mouseleave)="isHovered = false" [ngStyle]="{
+    'color': isHovered ? content.backgroundColor : content.foregroundColor,
+    'background-color': isHovered ? content.foregroundColor : content.backgroundColor,
+    'border-color': isHovered ? content.backgroundColor : content.foregroundColor
+  }">
+                        {{content.buttonCaption}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>

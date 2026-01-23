@@ -1,0 +1,61 @@
+.banner-image {
+  width: 100%;
+  height: 100%;
+}
+
+.banner-image img {
+    width: 100%;
+    height: auto;
+}
+
+.banner-content {
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  transform: translateY(-50%);
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+}
+.profile-description{
+    font-size: 1.15rem;
+    font-weight: 400;
+}
+/* Mobile (content top overlay on image) */
+@media (max-width: 768px) {
+  .banner-content {
+    top: 1%;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 95%;
+    margin: auto;
+    text-align: center;
+    padding: .5rem 1rem;
+  }
+}
+
+@media (max-width: 991px) {
+      .banner-content {
+      top: 10%;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+     width: 90%;
+    margin: auto;
+    text-align: center;
+   padding: .75rem 1.15rem;
+  }
+}
+
+
+
+.banner-button{
+    color: #1e4079;
+    background-color: white;
+    border-radius: 50px !important;
+    margin-top: 10px;
+    padding: 10px 40px;
+        border: 1px solid;
+    height: 100% !important;
+}

@@ -1,0 +1,16 @@
+.card-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Prevents image distortion */
+  display: block;
+  // animation: float 3s ease-in-out infinite;
+}
+
+.card:hover .card-image {
+  transform: scale(1.05) rotate(1deg); /* Gentle zoom + tilt */
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}

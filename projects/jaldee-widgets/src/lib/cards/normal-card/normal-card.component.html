@@ -1,0 +1,10 @@
+<div class="card p-0" *ngIf="content" [ngStyle]="{
+  'color': content.foregroundColor,'background':  (content.backgroundColor || 'transparent')}">
+  <div class="card-image">
+    <img *ngIf="content.image" [lazyImage]="content.image" alt="Card image cap" loading="lazy" priority="false">
+    <div *ngIf="content.title" class="card-title"
+      [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null">
+      {{content.title}}
+    </div>
+  </div>
+</div>

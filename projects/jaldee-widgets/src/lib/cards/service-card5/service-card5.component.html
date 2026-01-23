@@ -1,0 +1,31 @@
+<div class="card p-0 d-flex flex-row justify-content-between" *ngIf="content"  [ngStyle]="{
+    'color': content.foregroundColor,
+    'background-color':content.backgroundColor
+  }">
+  <div class="card-content p-2">
+    <div class="card-title"
+      [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null">
+      {{content.title}}
+    </div>
+    <div class="card-subtitle" *ngIf="content.subTitle"
+      [ngStyle]="content.subTitleFontSize ? { 'font-size': content.subTitleFontSize } : null">
+      {{content.subTitle}}
+    </div>
+    <p class="card-description" *ngIf="content.description"
+      [ngStyle]="content.descriptionFontSize ? { 'font-size': content.descriptionFontSize } : null">
+      {{content.description}}
+    </p>
+
+    <div class="card-action" *ngIf="content.buttonCaption">
+    <a (click)="_contentClicked(content)" class="pointer-cursor" (mouseenter)="isHovered = true"
+      (mouseleave)="isHovered = false" [ngStyle]="{
+    'color': isHovered ? content.backgroundColor : content.foregroundColor
+  }">
+      {{content.buttonCaption}}</a>
+  </div>
+  </div>
+  <div class="card-image d-flex align-items-end" *ngIf="content.image">
+    <img  class="w-full" [src]="content.image" lazyImage alt="Card image cap" loading="lazy"
+      priority="false">
+  </div>
+</div>

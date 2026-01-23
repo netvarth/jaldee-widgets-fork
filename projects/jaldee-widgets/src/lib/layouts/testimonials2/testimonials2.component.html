@@ -1,0 +1,37 @@
+<div  class="testimonialsType2" id="{{section.id}}" [ngClass]="section.className?section.className:''">
+    <div class="testimonials-container pb-3">
+        <div class="text-center">
+            <h5 *ngIf="section.subtitle"
+                [ngStyle]="section.subTitleFontSize ? { 'font-size': section.subTitleFontSize } : null">
+                {{ section.subtitle }}
+            </h5>
+            <h2 class="p-5 m-0 fw-normal" *ngIf="section.title"
+                [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+                {{ section.title }}
+            </h2>
+        </div>
+        <div class="no-padding container">
+            <div class="jw-carousel">
+                <div class="jw-carousel__item" *ngFor="let action of section.content">
+                    <div class="" (click)="_actionClicked(action,section.id)">
+                        <div class="pointer-cursor card">
+                            <div class="">
+                                <div class="type2-desc mt-2" *ngIf="action.description"
+                                    [ngStyle]="action.descriptionFontSize ? { 'font-size': action.descriptionFontSize } : null"
+                                    [innerHTML]="getHTMLContent(action.description)">
+                                </div>
+                                <div class="action-title fs-5 m-0 fw-bold"
+                                    [ngStyle]="action.titleFontSize ? { 'font-size': action.titleFontSize } : null">
+                                    {{action.title}}
+                                </div>
+                                <div class="review-date fw-bold">
+                                    {{action.date}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

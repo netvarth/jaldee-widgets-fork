@@ -1,0 +1,35 @@
+<div class="contact-card"
+     [style.background]="content.backgroundColor"
+     [style.color]="content.foregroundColor"
+     [class.left-image]="content.imageAlignment === 'left'"
+     [class.right-image]="content.imageAlignment === 'right'">
+     
+  <div class="card-image" *ngIf="content.image">
+    <img [lazyImage]="content.image" 
+         [style.aspect-ratio]="content.image_aspectRatio || '1/1'"
+         [style.max-width.px]="content.image_width || 80">
+  </div>
+
+  <div class="card-content text-{{content.textAlignment?content.textAlignment:'start'}}">
+    
+    <h2 [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null">{{ content.title }}</h2>
+    <h3 *ngIf="content.subTitle"
+      [ngStyle]="content.subTitleFontSize ? { 'font-size': content.subTitleFontSize } : null">
+      {{ content.subTitle }}
+    </h3>
+    <p [ngStyle]="content.descriptionFontSize ? { 'font-size': content.descriptionFontSize } : null"
+      [innerHTML]="content.description"></p>
+    
+    <a *ngIf="content.buttonCaption"
+       [href]="content.link"
+       class="card-button"
+       [style.background]="content.foregroundColor"
+       [style.color]="content.backgroundColor"
+       [style.border-color]="content.foregroundColor"
+       (mouseenter)="hover = true"
+       (mouseleave)="hover = false"
+       [style.transform]="hover && content.buttonHover ? 'translateY(-2px)' : 'none'">
+      {{ content.buttonCaption }}
+    </a>
+  </div>
+</div>

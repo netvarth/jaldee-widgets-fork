@@ -1,0 +1,28 @@
+.grid.rectangle .item-grid {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    border: .5px solid #d1d1d1;
+    margin: 10px 10px 0 0;
+    padding: 0 !important;
+    background: #f5f6fb !important;
+}
+
+.grid.rectangle .item-grid img {
+    height: auto !important;
+    width: 100px !important;
+    aspect-ratio: 1/1 !important;
+}
+
+.grid.rectangle .item-grid .image-wrapper {
+    display: flex;
+    border-radius: 0 !important;
+}
+
+.grid.rectangle .item-grid .content-text .title {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    color: #436b50;
+}
