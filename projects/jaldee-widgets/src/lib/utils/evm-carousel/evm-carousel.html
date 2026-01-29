@@ -1,0 +1,47 @@
+  <div class="evm-carousel-wrapper" role="listbox">
+  @if (config.showNav) {
+    <button class="nav prev" (click)="prev()" aria-label="Previous slide">‹</button>
+  }
+  <div class="evm-carousel-stage"
+       [style.width.%]="itemsToShow * (100 / (itemsToShow || 1))"
+       [style.transform]="'translateX(-' + (currentIndex * (100/itemsToShow)) + '%)'"
+       [style.padding]="'0 ' + (config.stagePadding || 0) + 'px'"
+       (swipeleft)="next()"
+       (swiperight)="prev()">
+    @for (item of items; track $index) {
+      <div class="evm-carousel-item"
+           [style.flex]="'0 0 ' + (100/itemsToShow) + '%'"
+           role="option"
+           [attr.aria-selected]="currentIndex === $index">
+        <ng-container 
+          *ngTemplateOutlet="itemTemplate; context: {$implicit: item}">
+        </ng-container>
+      </div>
+    }
+  </div>
+
+  @if (config.showNav) {
+    <button class="nav next" (click)="next()" aria-label="Next slide">›</button>
+  }
+
+  @if (config.showDots) {
+    <div class="dots">
+      @for (item of items; track $index; let idx = $index) {
+        <span [class.active]="idx === currentIndex"
+              (click)="goTo(idx)"
+              role="button"
+              aria-label="Go to slide {{ idx+1 }}"></span>
+      }
+    </div>
+  }
+</div>
+
+<ng-template #itemTemplate let-item>
+  <div class="banner-card">
+    <img [src]="item.image"
+         [attr.loading]="config.lazyLoad ? 'lazy' : null"
+         alt="{{item.title}}">
+    <h3>{{ item.title }}</h3>
+    <p>{{ item.description }}</p>
+  </div>
+</ng-template>
