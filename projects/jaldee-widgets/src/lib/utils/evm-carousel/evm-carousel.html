@@ -3,18 +3,23 @@
     <button class="nav prev" (click)="prev()" aria-label="Previous slide">‹</button>
   }
   <div class="evm-carousel-stage"
+       #stage
        [style.width.%]="itemsToShow * (100 / (itemsToShow || 1))"
-       [style.transform]="'translateX(-' + (currentIndex * (100/itemsToShow)) + '%)'"
+       [style.transform]="'translateX(-' + (currentIndex * (100/(itemsToShow || 1))) + '%)'"
        [style.padding]="'0 ' + (config.stagePadding || 0) + 'px'"
-       (swipeleft)="next()"
-       (swiperight)="prev()">
-    @for (item of items; track $index) {
+       [style.transition]="transitionStyle"
+       (pointerdown)="onPointerDown($event)"
+       (pointermove)="onPointerMove($event)"
+       (pointerup)="onPointerUp($event)"
+       (pointercancel)="onPointerCancel($event)">
+    @for (item of renderedItems; track $index) {
       <div class="evm-carousel-item"
            [style.flex]="'0 0 ' + (100/itemsToShow) + '%'"
+           [style.padding.px]="config.itemPadding ?? 0"
            role="option"
            [attr.aria-selected]="currentIndex === $index">
         <ng-container 
-          *ngTemplateOutlet="itemTemplate; context: {$implicit: item}">
+          *ngTemplateOutlet="userTemplate || defaultTemplate; context: {$implicit: item, index: $index}">
         </ng-container>
       </div>
     }
@@ -36,9 +41,10 @@
   }
 </div>
 
-<ng-template #itemTemplate let-item>
+<ng-template #defaultTemplate let-item let-index="index">
   <div class="banner-card">
     <img [src]="item.image"
+         draggable="false"
          [attr.loading]="config.lazyLoad ? 'lazy' : null"
          alt="{{item.title}}">
     <h3>{{ item.title }}</h3>

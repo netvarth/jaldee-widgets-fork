@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import {
   AboutCardComponent,
   AboutCard1Component,
@@ -26,11 +27,13 @@ import {
   ItemZoomCardComponent,
   TestimonialCardComponent
 } from 'jaldee-widgets';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   imports: [
     CommonModule,
+    RouterModule,
     PreHeaderComponent,
     QuickAccessComponent,
     HeroSectionComponent,
@@ -60,6 +63,19 @@ import {
   styleUrl: './app.css'
 })
 export class App {
+  isPreviewRoute = false;
+
+  constructor(private router: Router) {
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event) => {
+      const nav = event as NavigationEnd;
+      this.isPreviewRoute = nav.urlAfterRedirects?.startsWith('/preview') ?? false;
+    });
+  }
+
+  openPreview() {
+    this.router.navigate(['/preview']);
+  }
+
   cardTypeImages: Record<string, string> = {
     'normal-card': 'https://jaldeeuiscale.s3.ap-south-1.amazonaws.com/JALDEE/images/card-types/normal-card.png',
     'normal-card-circle': 'https://jaldeeuiscale.s3.ap-south-1.amazonaws.com/JALDEE/images/card-types/circle-card.png',

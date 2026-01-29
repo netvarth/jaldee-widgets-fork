@@ -1,4 +1,9 @@
-<div class="demo-shell">
+<router-outlet></router-outlet>
+
+<div class="demo-shell" *ngIf="!isPreviewRoute">
+  <div class="preview-control">
+    <button class="preview-btn" type="button" (click)="openPreview()">Open JSON preview</button>
+  </div>
   <app-pre-header [header]="demoHeader"></app-pre-header>
   <app-quick-access [section]="quickAccess"></app-quick-access>
 

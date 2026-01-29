@@ -13,6 +13,17 @@
 .evm-carousel-stage {
   display: flex;
   transition: transform 0.5s ease-in-out;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.evm-carousel-stage:active {
+  cursor: grabbing;
+}
+.evm-carousel-stage img,
+.evm-carousel-wrapper img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  user-select: none;
 }
 
 .evm-carousel-item {

@@ -39,6 +39,23 @@
   padding: 32px;
 }
 
+.preview-control {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+.preview-btn {
+  border: none;
+  background: #1f2937;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
 .section-title {
   margin: 0 0 16px;
   font-size: 20px;

@@ -1,35 +1,62 @@
-<div id="{{section.id}}" class="slide-container hero-section" [ngClass]="section.className">
-    <h2 *ngIf="section.title"
-        [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
-        {{ section.title }}
+<div id="{{ section.id }}" class="slide-container hero-section" [ngClass]="section.className">
+  <div class="hero-heading" *ngIf="section.title">
+    <h2 [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+      {{ section.title }}
     </h2>
-    <div class="col-lg-12 no-padding">
-        <div class="jw-carousel" *ngIf="section.content">
-            <div class="jw-carousel__item"
-                *ngFor="let banner of section.content; let i = index; trackBy: trackByIndex">
-                <app-banner-card1 [content]="banner" (actionClicked)="bannerClicked(banner)"
-                    [smallDevice]="smallDevice" [mediumDevice]="mediumDevice"
-                    *ngIf="section.cardType=='banner-card1'"></app-banner-card1>
-                <app-banner-card [content]="banner" (actionClicked)="bannerClicked(banner)"
-                    [smallDevice]="smallDevice" [mediumDevice]="mediumDevice"
-                    *ngIf="section.cardType=='banner-card'"></app-banner-card>
-                <div class="image-container slides pointer-cursor" (click)="bannerClicked(banner)"
-                    *ngIf="!section.cardType || section.cardType==''" (touchstart)="onTouchStart($event)"
-                    (touchmove)="onTouchMove($event)">
-                    <div class="image-wrapper" *ngIf="!banner.video || banner.video===''"
-                        [ngStyle]="{ 'aspect-ratio': smallDevice? ((banner.image_mob && banner.image_mob!='')?banner.image_mob_aspectRatio:banner.image_mob_aspectRatio): banner.image_aspectRatio || null }">
-                        <img [src]="banner.image" [alt]="banner.title" *ngIf="!smallDevice">
-                        <img [src]="banner.image_mob ? banner.image_mob : banner.image" [alt]="banner.title"
-                            *ngIf="smallDevice">
-                    </div>
-                    <div class="image-wrapper" *ngIf="banner.video && banner.video!==''">
-                        <video [src]="banner.video" autoplay muted loop playsinline preload="auto"
-                            (loadedmetadata)="playVideo($event)" class="video-banner">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
+    <p *ngIf="section.subTitle" [ngStyle]="section.subTitleFontSize ? { 'font-size': section.subTitleFontSize } : null">
+      {{ section.subTitle }}
+    </p>
+  </div>
+
+  <div class="hero-carousel w-100" *ngIf="section.content?.length">
+    <evm-carousel [items]="section.content" [config]="evmCarouselConfig">
+      <ng-template #itemTemplate let-banner let-i="index">
+        <ng-container *ngIf="section.cardType === 'banner-card1'">
+          <app-banner-card1
+            [content]="banner"
+            (actionClicked)="bannerClicked(banner)"
+            [smallDevice]="smallDevice"
+            [mediumDevice]="mediumDevice"
+          ></app-banner-card1>
+        </ng-container>
+        <ng-container *ngIf="section.cardType === 'banner-card'">
+          <app-banner-card
+            [content]="banner"
+            (actionClicked)="bannerClicked(banner)"
+            [smallDevice]="smallDevice"
+            [mediumDevice]="mediumDevice"
+          ></app-banner-card>
+        </ng-container>
+        <ng-container *ngIf="!section.cardType || section.cardType === ''">
+          <div
+            class="image-container slides pointer-cursor"
+            (click)="bannerClicked(banner)"
+            (touchstart)="onTouchStart($event)"
+            (touchmove)="onTouchMove($event)"
+          >
+            <div class="image-wrapper" *ngIf="!banner.video || banner.video === ''"
+              [ngStyle]="{ 'aspect-ratio': smallDevice ? (banner.image_mob_aspectRatio || banner.image_aspectRatio) : banner.image_aspectRatio || null }">
+              <img [src]="banner.image" [alt]="banner.title" *ngIf="!smallDevice">
+              <img [src]="banner.image_mob ? banner.image_mob : banner.image" [alt]="banner.title"
+                *ngIf="smallDevice">
             </div>
-        </div>
-    </div>
+            <div class="image-wrapper" *ngIf="banner.video && banner.video !== ''">
+              <video
+                [src]="banner.video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto"
+                (loadedmetadata)="playVideo($event)"
+                class="video-banner"
+              >
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </ng-container>
+      </ng-template>
+    </evm-carousel>
+  </div>
 </div>

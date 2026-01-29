@@ -1,12 +1,21 @@
 <div id="preheader" class="announcement-container">
-    <div class="col-lg-12 no-padding">
-        <div class="jw-carousel" *ngIf="items?.length">
-            <div class="jw-carousel__item"
-                *ngFor="let announcement of items; let i = index; trackBy: trackByIndex">
+    <div class="col-lg-12 no-padding" *ngIf="visibleAnnouncements?.length">
+        <div class="preheader-carousel">
+            <button *ngIf="showArrows" type="button" class="carousel-arrow prev" (click)="scrollPrev()" aria-label="Previous announcement" [style.color]="arrowColor">‹</button>
+            <div class="jw-carousel" #carouselContainer>
+                <div class="jw-carousel__item"
+                    *ngFor="let announcement of visibleAnnouncements; let i = index; trackBy: trackByIndex">
                 <div class="announcement" [innerHTML]="announcement.message"
-                    [ngStyle]="{ 'color': announcement.foregroundColor, 'background-color': announcement.backgroundColor, 'font-size': announcement.fontSize ? (announcement.fontSize + 'px') : '1.1rem' }">
+                    [ngStyle]="{ 
+                        'color': announcement.foregroundColor, 
+                        'background-color': announcement.backgroundColor, 
+                        'font-size': announcement.fontSize ? (announcement.fontSize + 'px') : '1.1rem',
+                        'height': getAnnouncementHeight(announcement)
+                    }">
+                    </div>
                 </div>
             </div>
+            <button *ngIf="showArrows" type="button" class="carousel-arrow next" (click)="scrollNext()" aria-label="Next announcement" [style.color]="arrowColor">›</button>
         </div>
     </div>
 </div>

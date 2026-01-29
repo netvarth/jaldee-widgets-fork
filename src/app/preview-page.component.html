@@ -1,0 +1,93 @@
+<div class="preview-page" [ngStyle]="getPreviewRootStyles()">
+  <header class="preview-toolbar">
+    <div>
+      <p class="muted-label">Preview mode</p>
+      <h1>{{ previewConfig['seo']?.title || 'Template preview' }}</h1>
+    </div>
+    <button routerLink="/" class="preview-btn">Back to demo</button>
+  </header>
+
+  <app-pre-header [header]="previewConfig.header"></app-pre-header>
+
+  <div class="preview-stage">
+    <ng-container *ngFor="let section of previewConfig.sections || []; trackBy: trackByFn">
+      <section
+        [id]="section.id"
+        [class]="getSectionClasses(section)"
+        [class.fade-in]="section['loaded']"
+        [class.hidden]="!section['loaded']"
+        [ngClass]="section.containerType"
+        [ngStyle]="{
+          color: section.foregroundColor,
+          background: section.backgroundColor,
+          'font-family': getFontFamily(),
+          'background-image': section.backgroundImage ? 'url(' + section.backgroundImage + ')' : null
+        }"
+        *ngIf="section['visible'] !== false"
+      >
+        <div [ngSwitch]="section.layout" lazyLoad (visible)="logVisibility(section)">
+          <app-banner-with-content
+            *ngSwitchCase="'bannerWithContent'"
+            [section]="section"
+            [smallDevice]="smallDevice"
+            [mediumDevice]="mediumDevice"
+          ></app-banner-with-content>
+          <app-banner-with-content
+            *ngSwitchCase="'bannerWithText'"
+            [section]="section"
+            [smallDevice]="smallDevice"
+            [mediumDevice]="mediumDevice"
+          ></app-banner-with-content>
+          <app-image-with-contents
+            *ngSwitchCase="'imageWithContents'"
+            [section]="section"
+            [smallDevice]="smallDevice"
+            [mediumDevice]="mediumDevice"
+          ></app-image-with-contents>
+          <app-hero-section
+            *ngSwitchCase="'banner'"
+            [section]="section"
+            [smallDevice]="smallDevice"
+            [mediumDevice]="mediumDevice"
+          ></app-hero-section>
+          <app-slider
+            *ngSwitchCase="'slider'"
+            [section]="section"
+            [smallDevice]="smallDevice"
+            [mediumDevice]="mediumDevice"
+            (actionClicked)="actionClicked($event)"
+          ></app-slider>
+          <app-without-cards *ngSwitchCase="'withoutCards'" [section]="section"></app-without-cards>
+          <app-grid
+            *ngSwitchCase="'grid'"
+            [section]="section"
+            [smallDevice]="smallDevice"
+            [mediumDevice]="mediumDevice"
+          ></app-grid>
+          <app-about-us *ngSwitchCase="'aboutus'" [section]="section" (actionClicked)="actionClicked($event)"></app-about-us>
+          <app-testimonials
+            *ngSwitchCase="'testimonials'"
+            [section]="section"
+            [mediumDevice]="mediumDevice"
+            [smallDevice]="smallDevice"
+            (actionClicked)="actionClicked($event)"
+          ></app-testimonials>
+          <app-testimonials2
+            *ngSwitchCase="'testimonialsType2'"
+            [section]="section"
+            [mediumDevice]="mediumDevice"
+            [smallDevice]="smallDevice"
+            (actionClicked)="actionClicked($event)"
+          ></app-testimonials2>
+          <app-blog *ngSwitchCase="'blogType1'" [section]="section" (actionClicked)="actionClicked($event)"></app-blog>
+          <app-marquee *ngSwitchCase="'marquee'" [section]="section" (actionClicked)="actionClicked($event)"></app-marquee>
+          <app-layout1 *ngSwitchCase="'layout1'"></app-layout1>
+          <div class="preview-unsupported" *ngSwitchDefault>
+            <strong>Unsupported layout:</strong>
+            <span>{{ section.layout || 'unknown' }}</span>
+          </div>
+        </div>
+      </section>
+    </ng-container>
+  </div>
+</div>
