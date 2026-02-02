@@ -1,44 +1,57 @@
-  <div class="evm-carousel-wrapper" role="listbox">
-  @if (config.showNav) {
-    <button class="nav prev" (click)="prev()" aria-label="Previous slide">‹</button>
-  }
-  <div class="evm-carousel-stage"
-       #stage
-       [style.width.%]="itemsToShow * (100 / (itemsToShow || 1))"
-       [style.transform]="'translateX(-' + (currentIndex * (100/(itemsToShow || 1))) + '%)'"
-       [style.padding]="'0 ' + (config.stagePadding || 0) + 'px'"
-       [style.transition]="transitionStyle"
-       (pointerdown)="onPointerDown($event)"
-       (pointermove)="onPointerMove($event)"
-       (pointerup)="onPointerUp($event)"
-       (pointercancel)="onPointerCancel($event)">
-    @for (item of renderedItems; track $index) {
-      <div class="evm-carousel-item"
-           [style.flex]="'0 0 ' + (100/itemsToShow) + '%'"
-           [style.padding.px]="config.itemPadding ?? 0"
-           role="option"
-           [attr.aria-selected]="currentIndex === $index">
-        <ng-container 
-          *ngTemplateOutlet="userTemplate || defaultTemplate; context: {$implicit: item, index: $index}">
-        </ng-container>
-      </div>
-    }
+<div class="evm-carousel-wrapper" role="listbox">
+  <button
+    *ngIf="config.showNav"
+    class="nav prev"
+    (click)="prev()"
+    aria-label="Previous slide"
+  >
+    ‹
+  </button>
+  <div
+    class="evm-carousel-stage"
+    #stage
+    [style.width.%]="itemsToShow * (100 / (itemsToShow || 1))"
+    [style.transform]="'translateX(-' + (currentIndex * (100/(itemsToShow || 1))) + '%)'"
+    [style.padding]="'0 ' + (config.stagePadding || 0) + 'px'"
+    [style.transition]="transitionStyle"
+    (pointerdown)="onPointerDown($event)"
+    (pointermove)="onPointerMove($event)"
+    (pointerup)="onPointerUp($event)"
+    (pointercancel)="onPointerCancel($event)"
+  >
+    <div
+      class="evm-carousel-item"
+      *ngFor="let item of renderedItems; let idx = index"
+      [style.flex]="'0 0 ' + (100/itemsToShow) + '%'"
+      [style.padding.px]="config.itemPadding ?? 0"
+      role="option"
+      [attr.aria-selected]="currentIndex === idx"
+    >
+      <ng-container
+        *ngTemplateOutlet="userTemplate || defaultTemplate; context: {$implicit: item, index: idx}"
+      >
+      </ng-container>
+    </div>
   </div>
 
-  @if (config.showNav) {
-    <button class="nav next" (click)="next()" aria-label="Next slide">›</button>
-  }
+  <button
+    *ngIf="config.showNav"
+    class="nav next"
+    (click)="next()"
+    aria-label="Next slide"
+  >
+    ›
+  </button>
 
-  @if (config.showDots) {
-    <div class="dots">
-      @for (item of items; track $index; let idx = $index) {
-        <span [class.active]="idx === currentIndex"
-              (click)="goTo(idx)"
-              role="button"
-              aria-label="Go to slide {{ idx+1 }}"></span>
-      }
-    </div>
-  }
+  <div class="dots" *ngIf="config.showDots">
+    <span
+      *ngFor="let item of items; let idx = index"
+      [class.active]="idx === currentIndex"
+      (click)="goTo(idx)"
+      role="button"
+      [attr.aria-label]="'Go to slide ' + (idx + 1)"
+    ></span>
+  </div>
 </div>
 
 <ng-template #defaultTemplate let-item let-index="index">

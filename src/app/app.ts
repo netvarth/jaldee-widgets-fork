@@ -30,6 +30,7 @@ import {
 import { filter } from 'rxjs';
 
 @Component({
+  standalone: true,
   selector: 'app-root',
   imports: [
     CommonModule,
@@ -60,7 +61,7 @@ import { filter } from 'rxjs';
     TestimonialCardComponent
   ],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
   isPreviewRoute = false;

@@ -3,9 +3,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
+    "baseUrl": ".",
+    "lib": [
+      "es2022",
+      "dom"
+    ],
+    "module": "es2020",
+    "moduleResolution": "node",
+    "target": "ES2022",
     "paths": {
       "jaldee-widgets": [
         "./projects/jaldee-widgets/src/public-api.ts"
@@ -14,14 +19,16 @@
         "./projects/jaldee-widgets/src/lib/*"
       ]
     },
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "isolatedModules": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "ES2022",
-    "module": "preserve"
+    "types": []
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
