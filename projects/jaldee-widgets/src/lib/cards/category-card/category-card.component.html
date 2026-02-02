@@ -1,11 +1,12 @@
-<div class="category-card card p-0" *ngIf="content" [ngStyle]="{
-  'color': content.foregroundColor,
-  'background': (content.backgroundColor || 'transparent')
+<div class="category-card" *ngIf="content" [ngStyle]="{
+  'background': content.backgroundColor || '#f5f5f5'
 }">
-  <div class="card-image">
+  <div class="category-card__media">
     <img *ngIf="content.image" [lazyImage]="content.image" [alt]="content.title" loading="lazy" priority="false">
-  </div>
-  <div class="card-title" *ngIf="content.title">
-    {{ content.title }}
+    <div class="category-card__overlay">
+      <p class="category-card__tag" *ngIf="content.tag">{{ content.tag }}</p>
+      <h3 class="category-card__title" *ngIf="content.title">{{ content.title }}</h3>
+      <p class="category-card__subtitle" *ngIf="content.subTitle">{{ content.subTitle }}</p>
+    </div>
   </div>
 </div>

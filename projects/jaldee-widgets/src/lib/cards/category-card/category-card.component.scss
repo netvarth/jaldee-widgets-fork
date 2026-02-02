@@ -1,5 +1,55 @@
-@media (max-width:991px) {
-    .category-card {
-        display: none !important;
-    }
+.category-card {
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+
+.category-card__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: #e6e6e6;
+}
+
+.category-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.category-card__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 80%);
+}
+
+.category-card__tag {
+  margin: 0 0 4px;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.category-card__title {
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: capitalize;
+  max-width: 100%;
+}
+
+.category-card__subtitle {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
 }

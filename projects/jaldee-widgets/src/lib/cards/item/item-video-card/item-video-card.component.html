@@ -1,0 +1,66 @@
+<article class="item-video-card pointer-cursor" *ngIf="content" (click)="handleClick()">
+  <div class="item-video-card__media">
+    <video
+      #videoPlayer
+      *ngIf="content.video"
+      class="item-video-card__video"
+      muted
+      loop
+      playsinline
+      preload="metadata"
+     
+    >
+     <!-- poster="{{ content.image || content.image_mob }}" -->
+      <source [src]="content.video" type="video/mp4" />
+    </video>
+    <!-- <img
+      *ngIf="!content.video && (content.image || (content.image_mob && content.image_mob !== ''))"
+      [lazyImage]="smallDevice ? ((content.image_mob && content.image_mob !== '') ? content.image_mob : content.image) : content.image"
+      [alt]="content.title"
+      loading="lazy"
+    /> -->
+    <div
+      *ngIf="content.video"
+      class="item-video-card__play-overlay"
+      (click)="toggleVideoPlay($event)"
+    >
+      <span *ngIf="!isVideoPlaying">&#9658;</span>
+      <span *ngIf="isVideoPlaying">&#10074;&#10074;</span>
+    </div>
+  </div>
+  <div class="item-video-card__content">
+    <div class="item-video-card__thumb" *ngIf="content.thumb || content.image">
+      <img
+        [lazyImage]="content.thumb || content.image"
+        [alt]="content.title"
+        loading="lazy"
+      />
+    </div>
+    <div class="item-video-card__details">
+      <div class="item-video-card__head">
+        <h3
+          *ngIf="content.title"
+          class="item-video-card__title"
+          [ngStyle]="getTitleFontSize()"
+        >
+          {{ content.title }}
+        </h3>
+        <p
+          *ngIf="content.subTitle"
+          class="item-video-card__subtitle"
+          [ngStyle]="getSubtitleFontSize()"
+        >
+          {{ content.subTitle }}
+        </p>
+      </div>
+      <div class="item-video-card__prices">
+        <span class="item-video-card__price" *ngIf="content.price">
+          {{ getCurrencySymbol() }}{{ content.price }}
+        </span>
+        <span class="item-video-card__mrp" *ngIf="content.mrp && content.mrp !== content.price">
+          {{ getCurrencySymbol() }}{{ content.mrp }}
+        </span>
+      </div>
+    </div>
+  </div>
+</article>

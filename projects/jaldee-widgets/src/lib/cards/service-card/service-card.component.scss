@@ -12,12 +12,13 @@
 .card-title {
   width: 100%;
   padding: 0.5rem;
-  /* Relative unit (scales with screen) */
   font-size: clamp(1.5rem, 2vw, 1.5rem);
-  /* Responsive font scaling */
   font-weight: 800;
   text-align: center;
-  -webkit-line-clamp: 2 !important;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-subtitle {

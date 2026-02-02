@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { LazyImageDirective } from '../../utils/lazy-image.directive';
+import { LazyImageDirective } from '../../../utils/lazy-image.directive';
 
 @Component({
   selector: 'app-item-zoom-card',

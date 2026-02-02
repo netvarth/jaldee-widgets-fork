@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { LazyImageDirective } from '../../utils/lazy-image.directive';
+import { LazyImageDirective } from '../../../utils/lazy-image.directive';
 
 @Component({
-  selector: 'app-item-card',
+  selector: 'app-item-card1',
   standalone: true,
   imports: [CommonModule, LazyImageDirective],
-  templateUrl: './item-card.component.html',
-  styleUrls: ['./item-card.component.scss']
+  templateUrl: './item-card1.component.html',
+  styleUrls: ['./item-card1.component.scss']
 })
-export class ItemCardComponent {
+export class ItemCardComponent1 {
 
   @Input() content: any;
   @Output() actionClicked = new EventEmitter<any>();
@@ -19,6 +19,9 @@ export class ItemCardComponent {
     this.actionClicked.emit({ action: action, target: target });
   }
 
+  getCurrencySymbol(): string {
+    return this.content?.currencySymbol ?? '₹';
+  }
 }
 
 

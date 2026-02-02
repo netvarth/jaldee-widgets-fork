@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { CarouselConfig, EvmCarousel, ResponsiveOption } from '../../utils/evm-carousel/evm-carousel';
 import { applyContentFontDefaults } from '../../utils/font-utils';
-import { BannerCard1Component, BannerCardComponent } from 'jaldee-widgets';
+import { BannerCard1Component } from '../../cards/banner-card1/banner-card1.component';
+import { BannerCardComponent } from '../../cards/banner-card/banner-card.component';
 
 @Component({
   selector: 'app-hero-section',

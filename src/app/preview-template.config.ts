@@ -33,8 +33,8 @@ export interface PreviewTemplateConfig extends TemplateConfig {
 export const previewTemplateConfig: PreviewTemplateConfig = {
   "accountID": 129412,
   "template": "mixed-template1",
-  "primaryFont": "'DynaPuff',sans-serif",
-  "secondaryFont": "'DynaPuff',sans-serif",
+  "primaryFont": "'Poppins', sans-serif",
+  "secondaryFont": "'Poppins', sans-serif",
   "primaryCustomFontUrl": "DynaPuff",
   "secondaryCustomFontUrl": "DynaPuff",
   "foregroundColor": "",
@@ -62,8 +62,8 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
       "text": "Contact Us",
       "link": "/contact",
       "icon": "fa-envelope",
-      "foregroundColor": "",
-      "backgroundColor": ""
+      "foregroundColor": "#ff2424",
+      "backgroundColor": "#800000"
     },
     "menu": [
       {
@@ -199,6 +199,12 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
       "contentDescriptionFontSize": "",
       "contentForegroundColor": "",
       "contentBackgroundColor": "",
+      "tag": {
+        "style": "Accent Top Right",
+        "label": "Pre-Order",
+        "background": "#6366f1",
+        "foreground": "#ffffff"
+      },
       "layout": "banner",
       "classType": "group",
       "className": "",
@@ -233,7 +239,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": "",
           "mrp": "",
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "",
@@ -262,7 +274,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": "",
           "mrp": "",
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         }
       ],
       "contentType": "static",
@@ -294,6 +312,12 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
       "contentDescriptionFontSize": "",
       "contentForegroundColor": "#ffffff",
       "contentBackgroundColor": "#7B1F25",
+      "tag": {
+        "style": "",
+        "label": "",
+        "background": "",
+        "foreground": ""
+      },
       "layout": "grid",
       "classType": "custom",
       "className": "my-2 grid rectangle-vertial-rounded pad-hover container",
@@ -328,7 +352,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": "",
           "mrp": "",
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "Handloom Cotton",
@@ -357,7 +387,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": "",
           "mrp": "",
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "Handloom Linen",
@@ -386,7 +422,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": "",
           "mrp": "",
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "Kanjeevarm Sarees",
@@ -415,7 +457,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": "",
           "mrp": "",
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "Tussar Silk",
@@ -444,7 +492,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": "",
           "mrp": "",
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "Fendi Schiffon",
@@ -473,7 +527,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": "",
           "mrp": "",
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "Durga Pooja",
@@ -502,7 +562,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": "",
           "mrp": "",
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "Satin Georgette",
@@ -531,7 +597,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": "",
           "mrp": "",
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         }
       ],
       "contentType": "static",
@@ -552,7 +624,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
         "dots": false
       },
       "cols_md_options": {
-        "items": 4,
+        "items": 2,
         "loop": false,
         "margin": 10,
         "autoplay": false,
@@ -587,6 +659,12 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
       "contentDescriptionFontSize": "",
       "contentForegroundColor": "",
       "contentBackgroundColor": "",
+      "tag": {
+        "style": "",
+        "label": "",
+        "background": "",
+        "foreground": ""
+      },
       "layout": "slider",
       "classType": "group",
       "className": "category-list container gallery my-5",
@@ -621,7 +699,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": 5163.33,
           "mrp": 8330,
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "Green Rajsahi Silk Saree",
@@ -650,7 +734,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": 5163.33,
           "mrp": 8330,
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "Woven Art Silk Saree in Gree... ",
@@ -679,7 +769,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": "",
           "mrp": "",
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "Woven Art Silk Jacquard...",
@@ -708,10 +804,16 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": 5163.33,
           "mrp": 8330,
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
-          "title": "Woven Art Silk Jacquard Blue ",
+          "title": "Woven Art Silk Jacquard... ",
           "subTitle": "",
           "titleFontSize": "12px",
           "subTitleFontSize": null,
@@ -737,7 +839,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": 5163.33,
           "mrp": 8330,
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         }
       ],
       "contentType": "static",
@@ -767,9 +875,9 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
       },
       "cols_xl_options": {
         "items": 4,
-        "loop": true,
+        "loop": false,
         "margin": 10,
-        "autoplay": true,
+        "autoplay": false,
         "autoplayTimeout": 3000,
         "dots": false
       }
@@ -793,6 +901,12 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
       "contentDescriptionFontSize": "",
       "contentForegroundColor": "",
       "contentBackgroundColor": "",
+      "tag": {
+        "style": "",
+        "label": "",
+        "background": "",
+        "foreground": ""
+      },
       "layout": "grid",
       "classType": "group",
       "className": "",
@@ -827,7 +941,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": 1380,
           "mrp": 2000,
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "Yellow with Sky Blue Combo",
@@ -856,7 +976,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": 650,
           "mrp": 850,
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "Burnt orange meet coffee brown elegance ..",
@@ -885,7 +1011,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": 1399,
           "mrp": 1500,
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         },
         {
           "title": "Draped in heritage,Woven with...",
@@ -914,7 +1046,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": 1380,
           "mrp": 2000,
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         }
       ],
       "contentType": "static",
@@ -927,7 +1065,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
       "backgroundImage": "",
       "visible": true,
       "cols_xs_options": {
-        "items": 1,
+        "items": 2,
         "loop": false,
         "margin": 10,
         "autoplay": false,
@@ -970,6 +1108,12 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
       "contentDescriptionFontSize": "",
       "contentForegroundColor": "",
       "contentBackgroundColor": "",
+      "tag": {
+        "style": "",
+        "label": "",
+        "background": "",
+        "foreground": ""
+      },
       "layout": "grid",
       "classType": "group",
       "className": "",
@@ -1004,7 +1148,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": 5163.33,
           "mrp": 8330,
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "Accent Top Right",
+            "label": "Pre-Order",
+            "background": "#16a34a",
+            "foreground": "#ffffff"
+          }
         },
         {
           "title": "Green Rajsahi Silk Saree",
@@ -1033,7 +1183,13 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "price": 5163.33,
           "mrp": 8330,
           "buttonHover": false,
-          "buttonCaption": ""
+          "buttonCaption": "",
+          "tag": {
+            "style": "",
+            "label": "",
+            "background": "",
+            "foreground": ""
+          }
         }
       ],
       "contentType": "static",

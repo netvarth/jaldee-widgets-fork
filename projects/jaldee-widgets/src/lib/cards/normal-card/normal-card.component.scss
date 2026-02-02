@@ -11,7 +11,7 @@
 .card-image {
   position: relative;
   width: 100%;
-  aspect-ratio: 16/9; /* Ensures consistent image proportions (adjust as needed) */
+  // aspect-ratio: 16/9; /* Ensures consistent image proportions (adjust as needed) */
 }
 
 .card-image img {
@@ -32,6 +32,9 @@
   font-size: clamp(1rem, 2vw, 1.3rem); /* Responsive font scaling */
   font-weight: bold;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Optional: Stack cards in a grid layout for larger screens */

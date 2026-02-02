@@ -63,6 +63,12 @@
                     *ngIf="section['cardType']=='animated-card1'"></app-animated-card1>
                 <app-item-card [content]="action" *ngIf="action && section['cardType']=='item-card'"
                     [smallDevice]="smallDevice" (actionClicked)="_actionClicked(action, section.id)"></app-item-card>
+                <app-item-card1 [content]="action" *ngIf="action && section['cardType']=='item-card1'"
+                    [smallDevice]="smallDevice" (actionClicked)="_actionClicked(action, section.id)"></app-item-card1>
+                <app-item-video-card [content]="action" *ngIf="action && section['cardType']=='item-video-card'"
+                    [smallDevice]="smallDevice" (actionClicked)="_actionClicked(action, section.id)"></app-item-video-card>
+                <app-category-card [content]="action" *ngIf="action && section['cardType']=='category-card'"
+                    (click)="_actionClicked(action, section.id)"></app-category-card>
                 <app-about-card [content]="action" *ngIf="action && section['cardType']=='about-card'"
                     (actionClicked)="_actionClicked(action, section.id)" [smallDevice]="smallDevice"></app-about-card>
                 <app-about-card1 [content]="action" *ngIf="action && section['cardType']=='about-card1'"

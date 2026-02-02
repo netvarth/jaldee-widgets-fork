@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { NormalCardCircleComponent } from '../../cards/normal-card-circle/normal-card-circle.component';
 import { AnimatedCard1Component } from '../../cards/animated-card1/animated-card1.component';
 import { AnimatedCardComponent } from '../../cards/animated-card/animated-card.component';
-import { ItemCardComponent } from '../../cards/item-card/item-card.component';
+import { ItemCardComponent } from '../../cards/item/item-card/item-card.component';
 import { NormalCardComponent } from '../../cards/normal-card/normal-card.component';
 import { ServiceCardComponent } from '../../cards/service-card/service-card.component';
 import { ServiceCard3Component } from '../../cards/service-card3/service-card3.component';

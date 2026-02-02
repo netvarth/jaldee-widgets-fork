@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
   AboutUsComponent,
@@ -49,8 +49,11 @@ export class PreviewPageComponent implements OnInit {
   smallDevice = false;
   mediumDevice = false;
   private loadedFonts = new Set<string>();
+  private readonly smallBreakpoint = 767;
+  private readonly mediumBreakpoint = 1023;
 
   ngOnInit(): void {
+    this.updateDeviceFlags(this.getWindowWidth());
     this.loadFontFromConfig(
       this.resolveString(this.config['primaryCustomFontUrl']) ||
         this.extractFontName(this.resolveString(this.config['primaryFont']))
@@ -59,6 +62,20 @@ export class PreviewPageComponent implements OnInit {
       this.resolveString(this.config['secondaryCustomFontUrl']) ||
         this.extractFontName(this.resolveString(this.config['secondaryFont']))
     );
+  }
+
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    this.updateDeviceFlags(this.getWindowWidth());
+  }
+
+  private getWindowWidth(): number {
+    return typeof window !== 'undefined' ? window.innerWidth : Number.MAX_SAFE_INTEGER;
+  }
+
+  private updateDeviceFlags(width: number): void {
+    this.smallDevice = width <= this.smallBreakpoint;
+    this.mediumDevice = width > this.smallBreakpoint && width <= this.mediumBreakpoint;
   }
 
   trackByFn(index: number, section: any): string | number {

@@ -1,0 +1,27 @@
+<article class="item-card1 pointer-cursor" *ngIf="content">
+  <div class="item-card1__image">
+    <img *ngIf="content.image || (content.image_mob && content.image_mob !== '')"
+      [lazyImage]="smallDevice ? ((content.image_mob && content.image_mob !== '') ? content.image_mob : content.image) : content.image"
+      [alt]="content.title" loading="lazy" />
+    <span *ngIf="content.badgeText" class="item-card1__badge">{{ content.badgeText }}</span>
+  </div>
+  <div class="item-card1__content">
+    <h3 *ngIf="content.title" class="item-card1__title"
+      [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null">
+      {{ content.title }}
+    </h3>
+    <p *ngIf="content.subTitle" class="item-card1__subtitle"
+      [ngStyle]="content.subTitleFontSize ? { 'font-size': content.subTitleFontSize } : null">
+      {{ content.subTitle }}
+    </p>
+    <div *ngIf="content.price || content.mrp" class="item-card1__prices">
+      <span class="item-card1__mrp" *ngIf="content.mrp && content.mrp !== content.price">
+        {{ getCurrencySymbol() }}{{ content.mrp }}
+      </span>
+      <span class="item-card1__price" *ngIf="content.price">
+        {{ getCurrencySymbol() }}{{ content.price }}
+      </span>
+
+    </div>
+  </div>
+</article>
