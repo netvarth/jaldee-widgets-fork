@@ -40,6 +40,7 @@ export * from './lib/layouts/testimonials/testimonials.component';
 export * from './lib/layouts/testimonials2/testimonials2.component';
 export * from './lib/layouts/without-cards/without-cards.component';
 export * from './lib/models/template-config.model';
+export * from './lib/utils/evm-carousel/evm-carousel';
 export * from './lib/utils/font-utils';
 export * from './lib/utils/lazy-image.directive';
 export * from './lib/utils/lazy-load.directive';

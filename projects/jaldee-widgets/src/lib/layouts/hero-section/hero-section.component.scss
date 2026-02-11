@@ -29,3 +29,14 @@
     height: auto;
   }
 }
+
+.image-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  img, video {
+    width: 100%;
+    height: auto; 
+  }
