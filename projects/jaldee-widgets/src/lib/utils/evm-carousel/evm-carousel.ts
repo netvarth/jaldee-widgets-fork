@@ -44,11 +44,23 @@ export interface CarouselConfig {
   styleUrls: ['./evm-carousel.css']
 })
 export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
+
+  readonly Math = Math; // 👈 add this line
+
   @Input() config!: CarouselConfig;
   @Input() items: any[] = [];
   @ViewChild('stage', { static: true }) stageRef?: ElementRef<HTMLElement>;
-  @ContentChild('itemTemplate', { read: TemplateRef }) userTemplate?: TemplateRef<any>;
-  @ViewChild('defaultTemplate', { static: true }) defaultTemplate?: TemplateRef<any>;
+  // @ContentChild('itemTemplate', { read: TemplateRef }) userTemplate?: TemplateRef<any>;
+  // @ViewChild('defaultTemplate', { static: true }) defaultTemplate?: TemplateRef<any>;
+
+  @ContentChild('itemTemplate', { read: TemplateRef })
+  userTemplate: TemplateRef<any> | null = null;
+
+  @ViewChild('defaultTemplate', { static: true })
+  defaultTemplate!: TemplateRef<any>;
+
+
+
   currentIndex = 0;
   intervalId: any;
   loopResetTimer: any;
@@ -141,36 +153,73 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
       try {
         const stageEl = this.stageRef?.nativeElement;
         stageEl?.releasePointerCapture?.(pointerId);
-      } catch {}
+      } catch { }
     }
     this.pointerId = null;
   }
 
   private calculateResponsiveItems(force = false) {
+
     const width = window.innerWidth;
 
-    if (this.config.responsiveOptions && this.config.responsiveOptions.length) {
+    // ✅ CENTER MODE LOGIC
+    if (this.config.center) {
+
+      let baseItems = this.config.items || 1;
+
+      if (this.config.responsiveOptions?.length) {
+        for (const option of this.config.responsiveOptions) {
+          const bp = parseInt(option.breakpoint, 10);
+          if (width <= bp) {
+            baseItems = option.numVisible;
+            break;
+          }
+        }
+      }
+
+      const oddItems = this.normalizeCenterItems(baseItems);
+
+      if (force || this.itemsToShow !== oddItems) {
+        this.itemsToShow = oddItems;
+        this.buildRenderedItems();
+      }
+
+      return;
+    }
+
+    // ✅ DEFAULT (unchanged behavior)
+    if (this.config.responsiveOptions?.length) {
       for (const option of this.config.responsiveOptions) {
-        const bp = parseInt(option.breakpoint, 10); // '1024px' → 1024
+        const bp = parseInt(option.breakpoint, 10);
         if (width <= bp) {
           const target = this.normalizeItemsToShow(option.numVisible);
           if (force || this.itemsToShow !== target) {
             this.itemsToShow = target;
             this.buildRenderedItems();
           }
-          // you could also store option.numScroll if you want scroll step size
           return;
         }
       }
     }
 
-    // fallback to default
     const fallback = this.normalizeItemsToShow(this.config.items);
     if (force || this.itemsToShow !== fallback) {
       this.itemsToShow = fallback;
       this.buildRenderedItems();
     }
   }
+
+  private normalizeCenterItems(value: number): number {
+    let num = Math.max(1, Math.floor(Number(value) || 1));
+
+    // make it odd
+    if (num % 2 === 0) {
+      num = num - 1;
+    }
+
+    return num < 1 ? 1 : num;
+  }
+
 
   private normalizeItemsToShow(value: number): number {
     const num = Number(value);
@@ -299,4 +348,32 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
   get transitionStyle(): string {
     return this.disableTransition ? 'none' : 'transform 0.5s ease-in-out';
   }
+  getFlex(): string {
+    return '0 0 ' + (100 / this.itemsToShow) + '%';
+  }
+
+  getTransform(): string {
+    const percentage = 100 / this.itemsToShow;
+    return 'translateX(-' + (this.currentIndex * percentage) + '%)';
+  }
+
+isCenter(idx: number): boolean {
+  if (!this.config?.center) return false;
+
+  const centerIndex = this.currentIndex + Math.floor(this.itemsToShow / 2);
+  return idx === centerIndex;
+}
+getItemScale(idx: number): number {
+  if (!this.config.center) return 1;
+
+  const centerIndex = this.currentIndex + Math.floor(this.itemsToShow / 2);
+  const distance = Math.abs(idx - centerIndex);
+
+  if (distance === 0) return 1;        // center
+  if (distance === 1) return 0.95;     // near center
+  if (distance === 2) return 0.85;     // far
+  return 0.85;                         // default for safety
+}
+
+
 }

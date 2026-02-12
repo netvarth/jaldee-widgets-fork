@@ -71,3 +71,14 @@
   background: rgba(255, 255, 255, 0.95);
   transform: scale(1.25);
 }
+
+/* ========================================= */
+/* CENTER MODE (SAFE - affects only center) */
+/* ========================================= */
+
+.center-mode .evm-carousel-item {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+
+

@@ -1,4 +1,9 @@
-<div class="evm-carousel-wrapper" role="listbox">
+<div 
+  class="evm-carousel-wrapper"
+  [class.center-mode]="config.center"
+  role="listbox"
+>
+
   <button
     *ngIf="config.showNav"
     class="nav prev"
@@ -7,11 +12,11 @@
   >
     ‹
   </button>
+
   <div
     class="evm-carousel-stage"
     #stage
-    [style.width.%]="itemsToShow * (100 / (itemsToShow || 1))"
-    [style.transform]="'translateX(-' + (currentIndex * (100/(itemsToShow || 1))) + '%)'"
+    [style.transform]="getTransform()"
     [style.padding]="'0 ' + (config.stagePadding || 0) + 'px'"
     [style.transition]="transitionStyle"
     (pointerdown)="onPointerDown($event)"
@@ -19,19 +24,22 @@
     (pointerup)="onPointerUp($event)"
     (pointercancel)="onPointerCancel($event)"
   >
+
     <div
       class="evm-carousel-item"
       *ngFor="let item of renderedItems; let idx = index"
-      [style.flex]="'0 0 ' + (100/itemsToShow) + '%'"
+      [style.flex]="getFlex()"
       [style.padding.px]="config.itemPadding ?? 0"
+      [style.transform]="'scale(' + getItemScale(idx) + ')'"
+      [style.opacity]="getItemScale(idx) === 1 ? 1 : 0.6"
       role="option"
       [attr.aria-selected]="currentIndex === idx"
     >
-      <ng-container
-        *ngTemplateOutlet="userTemplate || defaultTemplate; context: {$implicit: item, index: idx}"
-      >
-      </ng-container>
+<ng-container
+  *ngTemplateOutlet="userTemplate || defaultTemplate; context: {$implicit: item, index: idx}"
+></ng-container>
     </div>
+
   </div>
 
   <button
@@ -43,24 +51,12 @@
     ›
   </button>
 
-  <div class="dots" *ngIf="config.showDots">
+  <div class="dots" *ngIf="config.showDots && !config.center">
     <span
       *ngFor="let item of items; let idx = index"
       [class.active]="idx === currentIndex"
       (click)="goTo(idx)"
-      role="button"
-      [attr.aria-label]="'Go to slide ' + (idx + 1)"
     ></span>
   </div>
-</div>
 
-<ng-template #defaultTemplate let-item let-index="index">
-  <div class="banner-card">
-    <img [src]="item.image"
-         draggable="false"
-         [attr.loading]="config.lazyLoad ? 'lazy' : null"
-         alt="{{item.title}}">
-    <h3>{{ item.title }}</h3>
-    <p>{{ item.description }}</p>
-  </div>
-</ng-template>
+</div>

@@ -64,7 +64,9 @@ export class SliderComponent implements OnChanges {
       showNav: false,
       showDots: this.getBooleanOption('dots', slides > 1),
       responsiveOptions: this.buildResponsiveOptions(),
-      itemPadding: this.numericOption('margin', 16)
+      itemPadding: this.numericOption('margin', 16),
+      stagePadding: this.numericOption('stagePadding', 0),
+      center: this.getBooleanOption('center', false)
     };
   }
 
