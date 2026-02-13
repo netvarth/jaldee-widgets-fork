@@ -1,0 +1,19 @@
+<div class="promo-card" *ngIf="content" (click)="_actionClicked(content)" [attr.data-link]="targetLink">
+  <img
+    class="promo-img"
+    [lazyImage]="image"
+    [alt]="content.title"
+    loading="lazy">
+
+    <div class="promo-overlay">
+      <div class="promo-title" [ngStyle]="{ 'font-size': titleFontSize || '16px' }">
+        {{ truncatedTitle }}
+      </div>
+    <a class="promo-btn"
+       [ngStyle]="{ 'font-size': subTitleFontSize || '11px' }"
+       (click)="onButtonClick($event)"
+       >
+      {{ buttonCaption }}
+    </a>
+  </div>
+</div>

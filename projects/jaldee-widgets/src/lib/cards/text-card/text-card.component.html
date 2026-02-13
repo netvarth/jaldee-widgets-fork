@@ -1,0 +1,7 @@
+<div class="text-card" *ngIf="items.length" [ngStyle]="{ color: textColor }">
+  <ul>
+    <li *ngFor="let item of items" [ngStyle]="{ 'font-size': fontSize || '14px' }">
+      {{ item }}
+    </li>
+  </ul>
+</div>

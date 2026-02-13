@@ -1,11 +1,45 @@
-<div class="card p-0" *ngIf="content" [ngStyle]="{
-  'color': content.foregroundColor,
-  'background': (content.backgroundColor || 'transparent')
-}">
-  <div class="card-image">
-    <img *ngIf="content.image" [lazyImage]="content.image" [alt]="content.title" loading="lazy" priority="false">
-  </div>
-  <div class="card-title" *ngIf="content.title">
-    {{ content.title }}
+<div class="testimonial-card" *ngIf="content" [ngStyle]="{ 'background-color': content.backgroundColor || '#f5f5f5' }">
+  <div class="testimonial-container">
+
+    <div class="testimonial-image" *ngIf="content.image">
+      <img [lazyImage]="content.image" [alt]="content.authorName || content.title || 'Customer Image'" loading="lazy">
+    </div>
+
+    <div class="testimonial-content">
+      <span
+        class="testimonial-text"
+        *ngIf="content.description || content.text"
+        [innerHTML]="content.description || content.text"
+        [ngStyle]="{ 'font-size': fontDescriptionSize || '14px' }">
+      </span>
+
+      <div class="testimonial-author">
+        <div
+          class="author-name"
+          *ngIf="content.authorName"
+          [ngStyle]="{ 'font-size': fontTitleSize || '14px' }">
+          {{ content.authorName }}
+        </div>
+        <div
+          class="author-location"
+          *ngIf="content.authorLocation"
+          [ngStyle]="{ 'font-size': fontSubTitleSize || '12px' }">
+          {{ content.authorLocation }}
+        </div>
+        <div
+          class="author-title"
+          *ngIf="content.title && !content.authorName"
+          [ngStyle]="{ 'font-size': fontTitleSize || '14px' }">
+          {{ content.title }}
+        </div>
+        <div
+          class="author-location"
+          *ngIf="content.subTitle && !content.authorLocation"
+          [ngStyle]="{ 'font-size': fontSubTitleSize || '12px' }">
+          {{ content.subTitle }}
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

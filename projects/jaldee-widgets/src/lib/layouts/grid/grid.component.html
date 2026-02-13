@@ -25,7 +25,7 @@
                 class="item-grid pointer-cursor" carouselslide (click)="_actionClicked(action, section.id)">
                 <!-- [ngStyle]="{ 'aspect-ratio': action.image_aspectRatio || '' }" -->
                 <ng-container *ngIf="!section['cardType'] || (section['cardType'] && section['cardType']=='')">
-                    <div class="image-wrapper">
+                    <div class="image-wrapper" *ngIf="action.image">
                         <img [src]="action.image" lazyImage alt="Card image cap" loading="lazy" priority="false">
                     </div>
                     <div class="content-text">

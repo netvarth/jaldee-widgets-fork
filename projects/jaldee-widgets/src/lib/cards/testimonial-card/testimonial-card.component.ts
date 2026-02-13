@@ -11,6 +11,24 @@ import { LazyImageDirective } from '../../utils/lazy-image.directive';
 })
 export class TestimonialCardComponent {
   @Input() content: any;
+  get primaryEntry(): any {
+    if (this.content && Array.isArray(this.content.content) && this.content.content.length) {
+      return this.content.content[0];
+    }
+    return this.content;
+  }
+
+  get fontTitleSize(): string | null {
+    return this.primaryEntry?.titleFontSize ?? null;
+  }
+
+  get fontSubTitleSize(): string | null {
+    return this.primaryEntry?.subTitleFontSize ?? null;
+  }
+
+  get fontDescriptionSize(): string | null {
+    return this.primaryEntry?.descriptionFontSize ?? null;
+  }
 }
 
 
