@@ -1,0 +1,14 @@
+<ng-container *ngIf="data?.visible">
+  <ng-container [ngSwitch]="data?.variant">
+    <app-footer-fashion-4col
+      *ngSwitchCase="'fashion-4col'"
+      [data]="data"
+      (actionPerformed)="handleAction($event)"
+    ></app-footer-fashion-4col>
+    <app-footer-minimal
+      *ngSwitchDefault
+      [data]="data"
+      (actionPerformed)="handleAction($event)"
+    ></app-footer-minimal>
+  </ng-container>
+</ng-container>

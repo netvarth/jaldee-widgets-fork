@@ -1,45 +1,57 @@
-<div  id="{{section.id}}" class="container mb-4 mt-5">
-    <div *ngIf="section.preTitle && section.preTitle!=''" class="subtitle"
-        [ngStyle]="section.preTitleFontSize ? { 'font-size': section.preTitleFontSize } : null">
-        {{section.preTitle}}
-    </div>
-    <div *ngIf="section.title && section.title!=''">
-        <h2 class="heading"
-            [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
-            {{section.title}}
-        </h2>
-    </div>
-    <img *ngIf="section.titleImage && section.imagePosition=='middle'" class="" [src]="section.titleImage" alt="Card image cap" loading="lazy">
-    <div *ngIf="section.subTitle && section.subTitle!=''" class="mt-3 mb-3 subtitle"
-        [ngStyle]="section.subTitleFontSize ? { 'font-size': section.subTitleFontSize } : null">
-        {{section.subTitle}}
-    </div>
-    <div class="aboutUs-container" *ngFor="let content of section.content">
-        <div class="p-2">
-            <img [src]="content.image" alt="" width="100%" loading="lazy" [ngStyle]="{ 'aspect-ratio':  content.image_aspectRatio || '' }">
-        </div>
-        <div class="p-2">
-            <!-- <div *ngIf="content.preTitle" class="mt-3 mb-3 subTitle">
-                {{content.preTitle}}
-            </div>
-            <div *ngIf="content.title">
-                <h1 class="fw-bold mb-3">{{content.title}}</h1>
-            </div>
-            <div *ngIf="content.subTitle" class="mt-3 mb-3 subTitle">
-                {{content.subTitle}}
-            </div> -->
+<div id="{{section.id}}" [ngClass]="section.className">
+  <div *ngIf="section.preTitle && section.preTitle!=''" class="subtitle"
+    [ngStyle]="section.preTitleFontSize ? { 'font-size': section.preTitleFontSize } : null">
+    {{section.preTitle}}
+  </div>
+  <div *ngIf="section.title && section.title!=''">
+    <h2 class="heading" [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+      {{section.title}}
+    </h2>
+  </div>
+  <img *ngIf="section.titleImage && section.imagePosition=='middle'" class="" [src]="section.titleImage"
+    alt="Card image cap" loading="lazy">
+  <div *ngIf="section.subTitle && section.subTitle!=''" class="mt-3 mb-3 subtitle"
+    [ngStyle]="section.subTitleFontSize ? { 'font-size': section.subTitleFontSize } : null">
+    {{section.subTitle}}
+  </div>
+
+
+  <ng-container [ngSwitch]="section.cardType">
+
+    <app-about-card *ngSwitchCase="'about-card'" [content]="section" [smallDevice]="smallDevice"
+      (actionClicked)="_actionClicked(section.content, section.id)">
+    </app-about-card>
+
+    <app-about-card1 *ngSwitchCase="'about-card1'" [content]="section" [smallDevice]="smallDevice"
+      (actionClicked)="_actionClicked(section.content, section.id)">
+    </app-about-card1>
+
+    <app-about-card2 *ngSwitchCase="'about-card2'" [content]="section" [smallDevice]="smallDevice"
+      (actionClicked)="_actionClicked(section.content, section.id)">
+    </app-about-card2>
+
+    <ng-container *ngSwitchDefault>
+      <ng-container *ngFor="let content of section.content">
+        <div class="aboutUs-container">
+          <div class="p-2" *ngIf="content.image">
+            <img [src]="content.image" alt="" width="100%" loading="lazy"
+              [ngStyle]="{ 'aspect-ratio':  content.image_aspectRatio || '' }">
+          </div>
+          <div class="p-2">
             <div class="description-type2"
-                [ngStyle]="content.descriptionFontSize ? { 'font-size': content.descriptionFontSize } : null"
-                [innerHTML]="getHTMLContent(content.description)">              
+              [ngStyle]="content.descriptionFontSize ? { 'font-size': content.descriptionFontSize } : null"
+              [innerHTML]="getHTMLContent(content.description)">
             </div>
             <div *ngIf="content.title" class="d-flex justify-content-start mt-3">
-                <button type="button" id="btnMore"
-                    class="btn-about btn-primary pull-right"
-                    [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null"
-                    (click)="_actionClicked(content,section.id)">
-                    {{content.title}}
-                </button>
+              <button type="button" id="btnMore" class="btn-about btn-primary pull-right"
+                [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null"
+                (click)="_actionClicked(content, section.id)">
+                {{content.title}}
+              </button>
             </div>
+          </div>
         </div>
-    </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
 </div>

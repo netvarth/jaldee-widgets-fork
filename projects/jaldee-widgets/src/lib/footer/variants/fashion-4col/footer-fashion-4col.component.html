@@ -1,0 +1,58 @@
+<footer
+  class="preview-footer"
+  *ngIf="data?.visible"
+  [ngStyle]="{
+    color: data?.foregroundColor || '#fff',
+    background: data?.backgroundColor || '#111'
+  }"
+>
+  <div class="preview-footer__inner" [ngClass]="data?.variant">
+    <div class="footer-brand">
+      <img
+        *ngIf="data?.logo"
+        [src]="data?.logo"
+        alt="brand logo"
+        loading="lazy"
+        [style.aspect-ratio]="data?.logoAspectRatio || 'auto' "
+      />
+      <div class="footer-brand__text">
+        <p class="brand-name" *ngIf="data?.brandName">{{ data?.brandName }}</p>
+        <p *ngIf="data?.addressLine1">{{ data?.addressLine1 }}</p>
+        <p *ngIf="data?.addressLine2">{{ data?.addressLine2 }}</p>
+      </div>
+      <div class="footer-social-links">
+        <ng-container *ngFor="let social of socialLinks">
+          <a
+            *ngIf="social.visible !== false && social.url"
+            [href]="social.url"
+            target="_blank"
+            rel="noreferrer"
+            [attr.aria-label]="social.platform"
+          >
+            <img
+              *ngIf="getIconImage(social)"
+              class="social-icon"
+              [src]="getIconImage(social)"
+              [alt]="social.platform"
+              loading="lazy"
+            />
+            <i *ngIf="!getIconImage(social) && getIconClass(social)" [class]="'fa ' + getIconClass(social)"></i>
+            <span *ngIf="!getIconImage(social) && !getIconClass(social)">{{ social.platform }}</span>
+          </a>
+        </ng-container>
+      </div>
+    </div>
+    <div class="footer-columns">
+      <div class="footer-column" *ngFor="let column of visibleColumns">
+        <h3 *ngIf="column.title">{{ column.title }}</h3>
+        <ul>
+          <li *ngFor="let link of column.links ?? []">
+            <a *ngIf="link?.visible !== false" [href]="link.link || '#'">
+              {{ link.label }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

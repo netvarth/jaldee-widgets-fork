@@ -1,4 +1,5 @@
-<div class="text-card" *ngIf="items.length" [ngStyle]="{ color: textColor }">
+<div class="text-card"  *ngIf="items.length" [ngStyle]="{
+  'color': content.foregroundColor,'background':  (content.backgroundColor || 'transparent')}">
   <ul>
     <li *ngFor="let item of items" [ngStyle]="{ 'font-size': fontSize || '14px' }">
       {{ item }}

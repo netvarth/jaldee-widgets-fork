@@ -1,14 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { NormalCardCircleComponent } from '../../cards/normal-card-circle/normal-card-circle.component';
 import { AnimatedCard1Component } from '../../cards/animated-card1/animated-card1.component';
 import { AnimatedCardComponent } from '../../cards/animated-card/animated-card.component';
 import { ItemCardComponent } from '../../cards/item/item-card/item-card.component';
+import { ItemCard2Component } from '../../cards/item/item-card2/item-card2.component';
 import { NormalCardComponent } from '../../cards/normal-card/normal-card.component';
 import { ServiceCardComponent } from '../../cards/service-card/service-card.component';
 import { ServiceCard3Component } from '../../cards/service-card3/service-card3.component';
 import { ServiceCard2Component } from '../../cards/service-card2/service-card2.component';
 import { ReviewCardComponent } from '../../cards/review-card/review-card.component';
+import { TestimonialCardComponent } from '../../cards/testimonial-card/testimonial-card.component';
+import { TextCardComponent } from '../../cards/text-card/text-card.component';
 import { applyContentFontDefaults } from '../../utils/font-utils';
 import { CarouselConfig, EvmCarousel, ResponsiveOption } from '../../utils/evm-carousel/evm-carousel';
 
@@ -21,12 +24,15 @@ import { CarouselConfig, EvmCarousel, ResponsiveOption } from '../../utils/evm-c
     NormalCardComponent,
     NormalCardCircleComponent,
     ItemCardComponent,
+    ItemCard2Component,
     AnimatedCardComponent,
     AnimatedCard1Component,
     ServiceCardComponent,
     ServiceCard2Component,
     ServiceCard3Component,
     ReviewCardComponent,
+    TestimonialCardComponent,
+    TextCardComponent,
     EvmCarousel
   ],
   templateUrl: './slider.component.html',
@@ -39,12 +45,15 @@ export class SliderComponent implements OnChanges {
   @Input() mediumDevice: boolean | undefined;
   @Output() actionClicked = new EventEmitter<any>();
   className: string = '';
+  centerMode = false;
+  @ViewChild(EvmCarousel) carousel?: EvmCarousel;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.className = [
       this.section?.className,
       this.section?.titlePosition
     ].filter(Boolean).join(' ');
+    this.centerMode = this.getBooleanOption('center', false);
 
     if (this.section?.content?.length) {
       this.section.content = this.section.content.map((item: any) =>
@@ -61,7 +70,7 @@ export class SliderComponent implements OnChanges {
       loop: this.getBooleanOption('loop', false),
       autoplay: this.getBooleanOption('autoplay', false),
       autoplayTimeout: this.numericOption('autoplayTimeout', 5000),
-      showNav: false,
+      showNav: this.shouldShowNav(items),
       showDots: this.getBooleanOption('dots', slides > 1),
       responsiveOptions: this.buildResponsiveOptions(),
       itemPadding: this.numericOption('margin', 16),
@@ -144,6 +153,12 @@ export class SliderComponent implements OnChanges {
     return slides > Math.max(1, Math.floor(items));
   }
 
+  onCarouselItemClick(event: { item: any; index: number; renderedIndex: number }) {
+    if (event?.item && !event.item?.buttonOnHover) {
+      this._actionClicked(event.item, event.item?.link);
+    }
+  }
+
   getActionAspectRatio(action: any): Record<string, string> | null {
     const ratio =
       this.smallDevice && action?.image_mob_aspectRatio
@@ -162,6 +177,16 @@ export class SliderComponent implements OnChanges {
 
   moreClicked(link: string) {
     this.actionClicked.emit({ action: { link }, target: this.section?.id, type: 'more' });
+  }
+
+  shouldShowItemCardDetails(renderedIndex: number): boolean {
+    if (!this.centerMode) {
+      return true;
+    }
+    if (!this.carousel) {
+      return renderedIndex === 0;
+    }
+    return this.carousel.isCenter(renderedIndex);
   }
 }
 

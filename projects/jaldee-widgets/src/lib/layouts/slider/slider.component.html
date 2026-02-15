@@ -12,10 +12,10 @@
         </div>
         <div class="padding action-grid">
             <div class="slider-carousel" *ngIf="section.content?.length">
-                <evm-carousel [items]="section.content" [config]="sliderCarouselConfig">
+                <evm-carousel [items]="section.content" [config]="sliderCarouselConfig" (itemClick)="onCarouselItemClick($event)">
                     <ng-template #itemTemplate let-action let-i="index">
                         <div class="jw-carousel__item">
-                            <div class="item" (click)="action.buttonOnHover?'':_actionClicked(action, action.link)">
+                            <div class="item">
                                 <div class="image-container slides">
                                     <!-- [ngStyle]="{ 'aspect-ratio': smallDevice? ((action.image_mob && action.image_mob!='')?action.image_mob_aspectRatio:action.image_mob_aspectRatio): action.image_aspectRatio || '' }" -->
                                     <div class="image-wrapper"
@@ -39,7 +39,7 @@
                                         </div>
                                         <button type="button" *ngIf="action.buttonHover" [id]="'btnItem' + i"
                                             class="btn-viewItem btn-primary pull-right"
-                                            (click)="_actionClicked(action,section.id)">{{action.buttonCaption}}</button>
+                                            (click)="_actionClicked(action,section.id); $event.stopPropagation()">{{action.buttonCaption}}</button>
                                     </div>
                                     <app-review-card [content]="action" *ngIf="action && section['cardType']=='review-card'"
                                         (actionClicked)="_actionClicked(action, section.id)"></app-review-card>
@@ -59,6 +59,11 @@
                                         *ngIf="section['cardType']=='animated-card1'"></app-animated-card1>
                                     <app-item-card [content]="action" *ngIf="action && section['cardType']=='item-card'"
                                         (actionClicked)="_actionClicked(action, section.id)" [smallDevice]="smallDevice"></app-item-card>
+                                    <app-item-card2 [content]="action" *ngIf="action && section['cardType']=='item-card2'"
+                                        (actionClicked)="_actionClicked(action, section.id)" [smallDevice]="smallDevice"
+                                        [showOverlay]="shouldShowItemCardDetails(i)"></app-item-card2>
+                                    <app-testimonial-card [content]="action" *ngIf="action && section['cardType']=='testimonial-card'"></app-testimonial-card>
+                                    <app-text-card [content]="action" *ngIf="action && section['cardType']=='text-card'"></app-text-card>
                                 </div>
                             </div>
                         </div>

@@ -4,15 +4,6 @@
   role="listbox"
 >
 
-  <button
-    *ngIf="config.showNav"
-    class="nav prev"
-    (click)="prev()"
-    aria-label="Previous slide"
-  >
-    ‹
-  </button>
-
   <div
     class="evm-carousel-stage"
     #stage
@@ -28,6 +19,7 @@
     <div
       class="evm-carousel-item"
       *ngFor="let item of renderedItems; let idx = index"
+      [attr.data-rendered-index]="idx"
       [style.flex]="getFlex()"
       [style.padding.px]="config.itemPadding ?? 0"
       [style.transform]="'scale(' + getItemScale(idx) + ')'"
@@ -42,14 +34,18 @@
 
   </div>
 
-  <button
-    *ngIf="config.showNav"
-    class="nav next"
-    (click)="next()"
-    aria-label="Next slide"
-  >
-    ›
-  </button>
+  <div class="evm-carousel-nav" *ngIf="config.showNav">
+    <button class="nav prev" (click)="prev()" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M15 5l-6 7 6 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+    <button class="nav next" (click)="next()" aria-label="Next slide">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 5l6 7-6 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+  </div>
 
   <div class="dots" *ngIf="config.showDots && !config.center">
     <span

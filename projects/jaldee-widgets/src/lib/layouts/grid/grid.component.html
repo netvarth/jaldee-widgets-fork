@@ -63,16 +63,16 @@
                     *ngIf="section['cardType']=='animated-card1'"></app-animated-card1>
                 <app-item-card [content]="action" *ngIf="action && section['cardType']=='item-card'"
                     [smallDevice]="smallDevice" (actionClicked)="_actionClicked(action, section.id)"></app-item-card>
+                <app-item-card2 [content]="action" *ngIf="action && section['cardType']=='item-card2'"
+                    [smallDevice]="smallDevice" (actionClicked)="_actionClicked(action, section.id)"></app-item-card2>
                 <app-item-card1 [content]="action" *ngIf="action && section['cardType']=='item-card1'"
                     [smallDevice]="smallDevice" (actionClicked)="_actionClicked(action, section.id)"></app-item-card1>
                 <app-item-video-card [content]="action" *ngIf="action && section['cardType']=='item-video-card'"
                     [smallDevice]="smallDevice" (actionClicked)="_actionClicked(action, section.id)"></app-item-video-card>
                 <app-category-card [content]="action" *ngIf="action && section['cardType']=='category-card'"
                     (click)="_actionClicked(action, section.id)"></app-category-card>
-                <app-about-card [content]="action" *ngIf="action && section['cardType']=='about-card'"
-                    (actionClicked)="_actionClicked(action, section.id)" [smallDevice]="smallDevice"></app-about-card>
-                <app-about-card1 [content]="action" *ngIf="action && section['cardType']=='about-card1'"
-                    (actionClicked)="_actionClicked(action, section.id)" [smallDevice]="smallDevice"></app-about-card1>
+                <app-testimonial-card [content]="action" *ngIf="action && section['cardType']=='testimonial-card'"></app-testimonial-card>
+                <app-text-card [content]="action" *ngIf="action && section['cardType']=='text-card'"></app-text-card>
                 <app-contact-card [content]="action" *ngIf="action && section['cardType']=='contact-card'">
                 </app-contact-card>
             </div>

@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NormalCardComponent } from '../../cards/normal-card/normal-card.component';
 import { ItemCardComponent } from '../../cards/item/item-card/item-card.component';
 import { ItemCardComponent1 } from '../../cards/item/item-card1/item-card1.component';
+import { ItemCard2Component } from '../../cards/item/item-card2/item-card2.component';
 import { ItemVideoCardComponent } from '../../cards/item/item-video-card/item-video-card.component';
 import { AnimatedCardComponent } from '../../cards/animated-card/animated-card.component';
 import { AnimatedCard1Component } from '../../cards/animated-card1/animated-card1.component';
@@ -12,9 +13,9 @@ import { ServiceCardComponent } from '../../cards/service-card/service-card.comp
 import { ServiceCard2Component } from '../../cards/service-card2/service-card2.component';
 import { ServiceCard3Component } from '../../cards/service-card3/service-card3.component';
 import { ReviewCardComponent } from '../../cards/review-card/review-card.component';
-import { AboutCardComponent } from '../../cards/about-card/about-card.component';
+import { TestimonialCardComponent } from '../../cards/testimonial-card/testimonial-card.component';
+import { TextCardComponent } from '../../cards/text-card/text-card.component';
 import { ContactCardComponent } from '../../cards/contact-card/contact-card.component';
-import { AboutCard1Component } from '../../cards/about-card1/about-card1.component';
 import { ServiceCard4Component } from '../../cards/service-card4/service-card4.component';
 import { CategoryCardComponent } from '../../cards/category-card/category-card.component';
 import { LazyImageDirective } from '../../utils/lazy-image.directive';
@@ -24,9 +25,8 @@ import { applyContentFontDefaults } from '../../utils/font-utils';
   selector: 'app-grid',
   standalone: true,
   imports: [CommonModule, NormalCardComponent, NormalCardCircleComponent,
-    ItemCardComponent, ItemCardComponent1, ItemVideoCardComponent, AnimatedCardComponent, AnimatedCard1Component, ServiceCardComponent,
-    ServiceCard2Component, ServiceCard3Component, ServiceCard4Component, ReviewCardComponent, AboutCardComponent,
-    AboutCard1Component, ContactCardComponent, CategoryCardComponent, LazyImageDirective],
+    ItemCardComponent, ItemCardComponent1, ItemCard2Component, ItemVideoCardComponent, AnimatedCardComponent, AnimatedCard1Component, ServiceCardComponent,
+    ServiceCard2Component, ServiceCard3Component, ServiceCard4Component, ReviewCardComponent, ContactCardComponent, CategoryCardComponent, TestimonialCardComponent, TextCardComponent, LazyImageDirective],
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })

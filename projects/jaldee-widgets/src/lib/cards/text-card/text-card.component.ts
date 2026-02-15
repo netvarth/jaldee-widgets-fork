@@ -24,11 +24,7 @@ export class TextCardComponent {
     return [this.content.title || this.content.text || ''].filter(Boolean);
   }
 
-  get textColor(): string {
-    return this.content?.foregroundColor || '#1c1c1c';
-  }
-
   get fontSize(): string | null {
-    return this.content?.descriptionFontSize ?? null;
+    return this.content?.titleFontSize ?? null;
   }
 }

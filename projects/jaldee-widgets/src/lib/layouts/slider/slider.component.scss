@@ -120,6 +120,15 @@ img {
   overflow: hidden;
 }
 
+.jw-carousel__item,
+.jw-carousel__item .item {
+  height: 100%;
+}
+
+.jw-carousel__item .item {
+  display: flex;
+}
+
 .slider-carousel .owl-nav {
   position: absolute;
   top: 50%;

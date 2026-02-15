@@ -12,6 +12,7 @@ import { LazyImageDirective } from '../../../utils/lazy-image.directive';
 export class ItemCard2Component {
   @Input() content: any;
   @Input() smallDevice: boolean | undefined;
+  @Input() showOverlay = true;
   @Output() actionClicked = new EventEmitter<any>();
 
   get image(): string {

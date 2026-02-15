@@ -5,6 +5,7 @@ import {
   AboutUsComponent,
   BannerWithContentComponent,
   BlogComponent,
+  FooterData,
   GridComponent,
   HeroSectionComponent,
   ImageWithContentsComponent,
@@ -12,6 +13,7 @@ import {
   LazyLoadDirective,
   MarqueeComponent,
   PreHeaderComponent,
+  PreviewFooterComponent,
   SliderComponent,
   Testimonials2Component,
   TestimonialsComponent,
@@ -38,7 +40,8 @@ import { previewTemplateConfig } from './preview-template.config';
     BlogComponent,
     MarqueeComponent,
     Layout1Component,
-    LazyLoadDirective
+    LazyLoadDirective,
+    PreviewFooterComponent
   ],
   templateUrl: './preview-page.component.html',
   styleUrls: ['./preview-page.component.scss']
@@ -136,4 +139,9 @@ export class PreviewPageComponent implements OnInit {
   private resolveString(value: unknown): string {
     return typeof value === 'string' ? value : '';
   }
+
+  get footer(): FooterData | undefined {
+    return this.previewConfig['footer'] as FooterData | undefined;
+  }
+
 }

@@ -3,11 +3,13 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  EventEmitter,
   HostListener,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
+  Output,
   SimpleChanges,
   TemplateRef,
   ViewChild
@@ -59,6 +61,12 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
   @ViewChild('defaultTemplate', { static: true })
   defaultTemplate!: TemplateRef<any>;
 
+  @Output() itemClick = new EventEmitter<{
+    item: any;
+    index: number;
+    renderedIndex: number;
+  }>();
+
 
 
   currentIndex = 0;
@@ -103,13 +111,17 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
     this.calculateResponsiveItems();
   }
 
+  private pointerCaptured = false;
+  private pointerDownItemIndex: number | null = null;
+  private tapThreshold = 10;
+
   onPointerDown(event: PointerEvent) {
     this.pointerActive = true;
     this.pointerStartX = event.clientX;
     this.pointerStartY = event.clientY;
     this.pointerId = event.pointerId;
-    this.stageRef?.nativeElement?.setPointerCapture?.(event.pointerId);
-    event.preventDefault();
+    this.pointerCaptured = false;
+    this.pointerDownItemIndex = this.getRenderedIndexFromTarget(event.target);
   }
 
   onPointerMove(event: PointerEvent) {
@@ -120,6 +132,10 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
     const dy = event.clientY - this.pointerStartY;
     const threshold = 10;
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
+      if (!this.pointerCaptured) {
+        this.stageRef?.nativeElement?.setPointerCapture?.(event.pointerId);
+        this.pointerCaptured = true;
+      }
       event.preventDefault();
     }
   }
@@ -131,12 +147,19 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
     const dx = event.clientX - this.pointerStartX;
     const dy = event.clientY - this.pointerStartY;
     const minDistance = 30;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > minDistance) {
+    const didSwipe = Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > minDistance;
+    if (didSwipe) {
       if (dx < 0) {
         this.next();
       } else {
         this.prev();
       }
+    } else if (
+      Math.abs(dx) <= this.tapThreshold &&
+      Math.abs(dy) <= this.tapThreshold &&
+      this.pointerDownItemIndex != null
+    ) {
+      this.handleItemClick(this.pointerDownItemIndex);
     }
     this.resetPointer(event.pointerId);
   }
@@ -152,10 +175,30 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
     if (pointerId != null) {
       try {
         const stageEl = this.stageRef?.nativeElement;
-        stageEl?.releasePointerCapture?.(pointerId);
+        if (this.pointerCaptured) {
+          stageEl?.releasePointerCapture?.(pointerId);
+          this.pointerCaptured = false;
+        }
       } catch { }
     }
     this.pointerId = null;
+    this.pointerDownItemIndex = null;
+  }
+
+  private getRenderedIndexFromTarget(target: EventTarget | null): number | null {
+    let element = target as HTMLElement | null;
+    const stageEl = this.stageRef?.nativeElement;
+    while (element && element !== stageEl) {
+      const attr = element.getAttribute?.('data-rendered-index');
+      if (attr != null) {
+        const parsed = Number(attr);
+        if (Number.isFinite(parsed)) {
+          return parsed;
+        }
+      }
+      element = element.parentElement;
+    }
+    return null;
   }
 
   private calculateResponsiveItems(force = false) {
@@ -273,7 +316,24 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
     }
   }
   goTo(index: number) {
-    this.currentIndex = index;
+    this.setIndex(index);
+  }
+
+  goToOriginalIndex(index: number, alignCenter = false) {
+    const centerOffset = alignCenter ? Math.floor(this.itemsToShow / 2) : 0;
+    const baseIndex = this.config.loop ? this.itemsToShow : 0;
+    this.setIndex(baseIndex + index - centerOffset);
+  }
+
+  private setIndex(value: number) {
+    if (!this.renderedItems.length) {
+      this.currentIndex = 0;
+      return;
+    }
+    this.disableTransition = false;
+    const maxIndex = Math.max(0, this.renderedItems.length - this.itemsToShow);
+    const clamped = Math.min(Math.max(Math.floor(value), 0), maxIndex);
+    this.currentIndex = clamped;
   }
 
   private buildRenderedItems() {
@@ -357,7 +417,30 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
     return 'translateX(-' + (this.currentIndex * percentage) + '%)';
   }
 
-isCenter(idx: number): boolean {
+  handleItemClick(renderedIndex: number): void {
+    const slides = Array.isArray(this.items) ? this.items : [];
+    if (!slides.length) {
+      return;
+    }
+    const loopBase = this.config.loop ? this.itemsToShow : 0;
+    const rawIndex = renderedIndex - loopBase;
+    const normalizedIndex =
+      ((rawIndex % slides.length) + slides.length) % slides.length;
+    const alignCenter = !!this.config.center;
+    const centerIndex = this.currentIndex + Math.floor(this.itemsToShow / 2);
+    const shouldRecenterOnly = alignCenter && renderedIndex !== centerIndex;
+    this.goToOriginalIndex(normalizedIndex, alignCenter);
+    if (shouldRecenterOnly) {
+      return;
+    }
+    this.itemClick.emit({
+      item: slides[normalizedIndex],
+      index: normalizedIndex,
+      renderedIndex
+    });
+  }
+
+  isCenter(idx: number): boolean {
   if (!this.config?.center) return false;
 
   const centerIndex = this.currentIndex + Math.floor(this.itemsToShow / 2);
@@ -370,8 +453,8 @@ getItemScale(idx: number): number {
   const distance = Math.abs(idx - centerIndex);
 
   if (distance === 0) return 1;        // center
-  if (distance === 1) return 0.95;     // near center
-  if (distance === 2) return 0.85;     // far
+  if (distance === 1) return 0.85;     // near center
+  if (distance === 2) return 0.75;     // far
   return 0.85;                         // default for safety
 }
 

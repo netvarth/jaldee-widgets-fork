@@ -1,36 +1,48 @@
-<div class="row g-3 align-items-center justify-content-start about-container" id="aboutusId"
-    [ngStyle]="getContentStyles()"
-    [class.flex-row-reverse]="!smallDevice && content.imageAlignment === 'right'" 
-    [class.flex-column-reverse]="smallDevice && content.imageAlignment === 'right'">
-    <div [ngClass]="smallDevice?'col-12':'col-6'">
-        <img [lazyImage]="content.image" [alt]="content.title" *ngIf="!smallDevice" class="myclasss">
-        <img [lazyImage]="content.image_mob ? content.image_mob : content.image" [alt]="content.title" *ngIf="smallDevice">
+<div
+  class="row g-3 align-items-center justify-content-start about-container"
+  id="aboutusId"
+  [ngStyle]="getContentStyles()"
+  [class.flex-row-reverse]="!smallDevice && imageAlignment === 'right'"
+  [class.flex-column-reverse]="smallDevice && imageAlignment === 'right'">
+  <div [ngClass]="smallDevice ? 'col-12' : 'col-6'">
+    <img [lazyImage]="image" [alt]="titleText" *ngIf="!smallDevice && image" class="myclasss">
+    <img [lazyImage]="mobileImage" [alt]="titleText" *ngIf="smallDevice && mobileImage">
+  </div>
+  <div [ngClass]="smallDevice ? 'col-12' : 'col-6'">
+    <div
+      class="my-2 card-subtitle text-{{textAlignment}}"
+      *ngIf="subTitleText"
+      [ngStyle]="subTitleFontSize ? { 'font-size': subTitleFontSize } : null">
+      {{subTitleText}}
     </div>
-    <div [ngClass]="smallDevice?'col-12':'col-6'">
-        <div class="my-2 card-subtitle text-{{content.textAlignment?content.textAlignment:'start'}}"
-            *ngIf="content.subTitle"
-            [ngStyle]="content.subTitleFontSize ? { 'font-size': content.subTitleFontSize } : null">
-            {{content.subTitle}}
-        </div>
-        <div class="my-2">
-            <h2 class="fw-bold card-title text-{{content.textAlignment?content.textAlignment:'start'}}"
-                [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null">
-                {{content.title}}</h2>
-        </div>
-        <div class="my-4 card-description text-{{content.textAlignment?content.textAlignment:'start'}}"
-            *ngIf="content.description"
-            [ngStyle]="content.descriptionFontSize ? { 'font-size': content.descriptionFontSize } : null"
-            [innerHTML]="content.description">
-        </div>
-        <div class="my-3 text-{{content.textAlignment?content.textAlignment:'start'}}" *ngIf="content.buttonCaption">
-            <button type="button" (click)="_contentClicked(content)" class="booknow" id="btnBookNow"
-                (mouseenter)="isHovered = true" (mouseleave)="isHovered = false" [ngStyle]="{
-    'color': isHovered ?  content.backgroundColor : content.foregroundColor,
-    'background-color': isHovered ?content.foregroundColor : content.backgroundColor,
-    'border-color': isHovered ? content.foregroundColor : content.backgroundColor
-  }">
-                {{content.buttonCaption}}
-            </button>
-        </div>
+    <div class="my-2">
+      <h2
+        class="fw-bold card-title text-{{textAlignment}}"
+        [ngStyle]="titleFontSize ? { 'font-size': titleFontSize } : null">
+        {{titleText}}
+      </h2>
     </div>
+    <div
+      class="my-4 card-description text-{{textAlignment}}"
+      *ngIf="description"
+      [ngStyle]="descriptionFontSize ? { 'font-size': descriptionFontSize } : null"
+      [innerHTML]="description">
+    </div>
+    <div class="my-3 text-{{textAlignment}}" *ngIf="buttonCaption">
+      <button
+        type="button"
+        (click)="_contentClicked(primaryEntry)"
+        class="booknow"
+        id="btnBookNow"
+        (mouseenter)="isHovered = true"
+        (mouseleave)="isHovered = false"
+        [ngStyle]="{
+          'color': isHovered ? hoverColors.background : hoverColors.foreground,
+          'background-color': isHovered ? hoverColors.foreground : hoverColors.background,
+          'border-color': isHovered ? hoverColors.foreground : hoverColors.background
+        }">
+        {{buttonCaption}}
+      </button>
+    </div>
+  </div>
 </div>
