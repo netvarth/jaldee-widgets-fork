@@ -9,6 +9,20 @@
 
   <app-pre-header [header]="previewConfig.header"></app-pre-header>
 
+  <lib-preview-header
+    *ngIf="headerData"
+    [data]="headerData"
+    [variant]="headerData.name"
+    [isLoggedIn]="headerLoggedIn"
+    [cartCount]="headerCartCount"
+    [wishlistCount]="headerWishlistCount"
+    [showSearch]="headerShowSearch"
+    [hideItemSearch]="headerHideItemSearch"
+    [smallDevice]="smallDevice"
+    [showCart]="headerShowCart"
+    (actionPerformed)="headerActionPerformed($event)"
+  ></lib-preview-header>
+
   <div class="preview-stage">
     <ng-container *ngFor="let section of previewConfig.sections || []; trackBy: trackByFn">
       <section

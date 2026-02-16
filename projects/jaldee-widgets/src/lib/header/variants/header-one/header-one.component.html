@@ -1,0 +1,55 @@
+<header class="header-one" *ngIf="data">
+  <div class="top-row">
+    <div class="brand" (click)="emit({ type: 'home' })">
+      <img *ngIf="logo || data.logo" [src]="logo || data.logo" alt="Logo" />
+    </div>
+    <div class="mobile-menu" *ngIf="smallDevice && menuItems.length">
+      <button type="button" (click)="emit({ type: 'menu-open' })">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+    <div class="search" *ngIf="showSearch && !hideItemSearch">
+      <input
+        type="text"
+        placeholder="Search"
+        [(ngModel)]="searchValue"
+        (keyup.enter)="triggerSearch()"
+      />
+      <button type="button" (click)="triggerSearch()">
+        <svg class="search-icon" viewBox="0 0 24 24">
+          <path d="M15.5 14h-.79l-.28-.27A6 6 0 1 0 14 15.5l.27.28v.79L20 21.5 21.5 20ZM6.5 11a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0Z" />
+        </svg>
+      </button>
+    </div>
+    <div class="actions">
+      <button type="button" (click)="isLoggedIn ? emit({ type: 'user' }) : doLogin()">
+        <i class="fa fa-user-circle-o"></i>
+        <span>{{ isLoggedIn ? 'Account' : 'Login' }}</span>
+      </button>
+      <button *ngIf="showWishlist" type="button" (click)="goToWishlist()">
+        <i class="fa fa-heart-o"></i>
+        <span>Wishlist</span>
+        <span *ngIf="wishlistCount">({{ wishlistCount }})</span>
+      </button>
+      <button *ngIf="showCart" type="button" (click)="goToCart()">
+        <i class="fa fa-shopping-bag"></i>
+        <span>Cart</span>
+        <span *ngIf="cartCount">({{ cartCount }})</span>
+      </button>
+      <button *ngIf="isLoggedIn" type="button" (click)="doLogout()">
+        <i class="fa fa-sign-out"></i>
+        <span>Logout</span>
+      </button>
+    </div>
+  </div>
+  <nav class="menu">
+    <button
+      class="menu-item"
+      *ngFor="let item of menuItems"
+      (click)="menuClick(item)"
+    >
+      <i *ngIf="item.icon" [ngClass]="item.icon"></i>
+      {{ item.title }}
+    </button>
+  </nav>
+</header>

@@ -1,0 +1,33 @@
+<header class="header-four" *ngIf="data">
+  <div class="top-row">
+    <div class="brand" (click)="emit({ type: 'home' })">
+      <img *ngIf="logo || data?.logo" [src]="logo || data?.logo" alt="Logo" />
+    </div>
+    <nav class="nav">
+      <button
+        class="nav-item"
+        *ngFor="let item of menuItems"
+        (click)="menuClick(item)"
+      >
+        <i *ngIf="item.icon" [ngClass]="item.icon"></i>
+        {{ item.title }}
+      </button>
+    </nav>
+    <div class="actions">
+      <button *ngIf="showSearch" (click)="triggerSearch()">
+        <i class="fa fa-search"></i>
+      </button>
+      <button type="button" (click)="goToCart()" *ngIf="showCart">
+        <i class="fa fa-shopping-bag"></i>
+        <span>{{ cartCount || 0 }}</span>
+      </button>
+      <button type="button" (click)="isLoggedIn ? emit({ type: 'user' }) : doLogin()">
+        <i class="fa fa-user-circle-o"></i>
+        <span>{{ isLoggedIn ? 'Account' : 'Login' }}</span>
+      </button>
+      <button *ngIf="isLoggedIn" type="button" (click)="doLogout()">
+        <i class="fa fa-sign-out"></i>
+      </button>
+    </div>
+  </div>
+</header>

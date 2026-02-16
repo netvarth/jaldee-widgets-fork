@@ -1,0 +1,68 @@
+<header class="header-fashion container" *ngIf="data">
+  <div class="top-row">
+    <div class="brand" (click)="emit({ type: 'home' })">
+      <img [src]="logoSrc" alt="logo" />
+    </div>
+
+    <div class="search-wrapper" *ngIf="showSearch">
+      <input
+        type="text"
+        placeholder="Search"
+        [(ngModel)]="searchValue"
+        (keyup.enter)="emit({ type: 'search', payload: searchValue })"
+      />
+      <button type="button" (click)="emit({ type: 'search', payload: searchValue })">
+        <svg
+          class="search-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M15.5 14h-.79l-.28-.27A6 6 0 1 0 14 15.5l.27.28v.79L20 21.5 21.5 20ZM6.5 11a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0Z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <div class="quick-actions">
+      <button type="button" (click)="emit({ type: 'help' })">
+        <i [class]="getActionIcon('help')"></i>
+        <span>Help</span>
+      </button>
+      <span class="divider"></span>
+      <button type="button" (click)="emit({ type: 'wishlist' })">
+        <i [class]="getActionIcon('wishlist')"></i>
+        <span>Wishlist</span>
+      </button>
+      <span class="divider"></span>
+      <button *ngIf="showCart" type="button" (click)="emit({ type: 'cart' })">
+        <i [class]="getActionIcon('cart')"></i>
+        <span>Bag</span>
+      </button>
+      <span class="divider"></span>
+      <button
+        *ngIf="showLogin"
+        type="button"
+        (click)="emit({ type: isLoggedIn ? 'account' : 'login' })"
+      >
+        <i [class]="getActionIcon(isLoggedIn ? 'account' : 'login')"></i>
+        <span>{{ isLoggedIn ? 'Account' : 'Login' }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="menu-row">
+    <nav>
+      <a
+        *ngFor="let item of visibleMenu"
+        class="nav-item"
+        [class.active]="item.link === activeMenu"
+        (click)="navigate(item)"
+      >
+        <i class="menu-icon" [class]="getMenuIcon(item)"></i>
+        {{ item.title }}
+      </a>
+    </nav>
+  </div>
+</header>

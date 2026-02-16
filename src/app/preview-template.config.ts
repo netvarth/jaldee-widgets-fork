@@ -47,7 +47,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
     "canonicalUrl": ""
   },
   "header": {
-    "name": "header1",
+    "name": "fashion",
     "title": "Dhyan Clinic",
     "description": "Booking with Order Template",
     "showCart": true,
@@ -1471,7 +1471,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
     "copyright": "Copyright @ 2025 | Powered by Jaldee Soft Pvt Ltd",
     "logo": "https://jaldeeuiscale.s3.ap-south-1.amazonaws.com/46805/site_assets/Frame%201.png",
     "logoAspectRatio": null,
-    "variant": "fashion-4col",
+    "variant": "minimal",
     "brandName": "",
     "addressLine1": "Vandana House, Palakkal Devi Temple Road",
     "addressLine2": "Ramanattukara, Kozhikode, Kerala 673633",

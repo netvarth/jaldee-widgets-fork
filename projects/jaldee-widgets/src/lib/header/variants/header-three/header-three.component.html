@@ -1,0 +1,43 @@
+<header class="header-three" *ngIf="data">
+  <div class="header-grid">
+    <div class="left" *ngIf="!smallDevice">
+      <div class="search" *ngIf="showSearch && !hideItemSearch">
+        <input
+          type="text"
+          placeholder="what are you looking for?"
+          [(ngModel)]="searchValue"
+          (keyup.enter)="triggerSearch()"
+        />
+        <button type="button" (click)="triggerSearch()">
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <path d="M15.5 14h-.79l-.28-.27A6 6 0 1 0 14 15.5l.27.28v.79L20 21.5 21.5 20ZM6.5 11a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0Z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="middle">
+      <div class="brand" (click)="emit({ type: 'home' })">
+        <img *ngIf="logo || data.logo" [src]="logo || data.logo" alt="Logo" />
+      </div>
+    </div>
+    <div class="right">
+      <button type="button" (click)="isLoggedIn ? emit({ type: 'user' }) : doLogin()">
+        <i class="fa fa-user-circle-o"></i>
+        <span>{{ isLoggedIn ? 'Account' : 'Login' }}</span>
+      </button>
+      <button *ngIf="showCart" type="button" (click)="goToCart()">
+        <i class="fa fa-shopping-bag"></i>
+        <span>Cart</span>
+        <span *ngIf="cartCount">({{ cartCount }})</span>
+      </button>
+    </div>
+  </div>
+  <nav class="navbar" *ngIf="menuItems.length">
+    <ul>
+      <li *ngFor="let item of menuItems" (click)="menuClick(item)">
+        <i *ngIf="item.icon" [ngClass]="item.icon"></i>
+        {{ item.title }}
+      </li>
+    </ul>
+  </nav>
+</header>

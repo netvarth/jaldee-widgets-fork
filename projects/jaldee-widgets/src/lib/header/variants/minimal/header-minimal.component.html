@@ -1,0 +1,51 @@
+<header class="header-minimal" *ngIf="data" [ngStyle]="headerStyles">
+  <div class="header-top">
+    <div class="brand" (click)="emit({ type: 'home' })">
+      <img [src]="logoSrc" alt="logo" />
+    </div>
+    <div class="search-box" *ngIf="showSearch">
+      <input
+        type="text"
+        placeholder="Search"
+        (keyup.enter)="emit({ type: 'search', payload: searchValue })"
+        [(ngModel)]="searchValue"
+      />
+      <button type="button" (click)="emit({ type: 'search', payload: searchValue })">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+    <div class="actions">
+      <button type="button" (click)="emit({ type: 'help' })">
+        <i [class]="getActionIcon('help')"></i>
+        <span>Help</span>
+      </button>
+      <span class="divider">|</span>
+      <button type="button" (click)="emit({ type: 'wishlist' })">
+        <i [class]="getActionIcon('wishlist')"></i>
+        <span>Wishlist</span>
+      </button>
+      <span class="divider">|</span>
+      <button *ngIf="showCart" type="button" (click)="emit({ type: 'cart' })">
+        <i [class]="getActionIcon('cart')"></i>
+        <span>Bag</span>
+      </button>
+      <span class="divider">|</span>
+      <button type="button" (click)="emit({ type: isLoggedIn ? 'account' : 'login' })">
+        <i [class]="getActionIcon(isLoggedIn ? 'account' : 'login')"></i>
+        <span>{{ isLoggedIn ? 'Account' : 'Login' }}</span>
+      </button>
+    </div>
+  </div>
+  <nav class="nav" [ngStyle]="{ color: headerStyles['color'] }">
+    <a
+      *ngFor="let item of visibleMenu"
+      class="nav-item"
+      [class.active]="item.link === activeMenu"
+      (click)="navigate(item)"
+    >
+      <img *ngIf="item['iconImage']" class="menu-icon" [src]="item['iconImage']" [alt]="item.title" />
+      <i *ngIf="!item['iconImage']" [class]="getMenuIcon(item)"></i>
+      {{ item.title }}
+    </a>
+  </nav>
+</header>

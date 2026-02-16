@@ -1,0 +1,131 @@
+.header-minimal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-top: 6px solid #c79a6b;
+  border-bottom: 1px solid #e0dfdf;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 24px 8px;
+  background: #fff;
+}
+
+.brand img {
+  height: 50px;
+  cursor: pointer;
+}
+
+.search-box {
+  flex: 1;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 25px;
+  background: #f6f6f6;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  height: 34px;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-box button {
+  border: none;
+  background: #111;
+  color: #fff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: inherit;
+}
+
+.actions button {
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  color: inherit;
+  padding: 6px 4px;
+}
+
+.divider {
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 18px;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 12px 0 16px;
+  margin: 0 100px;
+  border-top: none;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.nav-item {
+  cursor: pointer;
+  color: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 0;
+  min-width: 90px;
+  text-align: center;
+}
+
+.nav-item i {
+  margin-right: 6px;
+}
+
+.menu-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  margin-right: 6px;
+}
+
+@media (max-width: 960px) {
+  .header-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}

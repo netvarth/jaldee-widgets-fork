@@ -7,6 +7,7 @@ import {
   BlogComponent,
   FooterData,
   GridComponent,
+  HeaderData,
   HeroSectionComponent,
   ImageWithContentsComponent,
   Layout1Component,
@@ -14,13 +15,14 @@ import {
   MarqueeComponent,
   PreHeaderComponent,
   PreviewFooterComponent,
+  PreviewHeaderComponent,
   SliderComponent,
   Testimonials2Component,
   TestimonialsComponent,
   WithoutCardsComponent
 } from 'jaldee-widgets';
 import { previewTemplateConfig } from './preview-template.config';
-
+type HeaderVariant = 'minimal' | 'fashion';
 @Component({
   selector: 'app-preview-page',
   standalone: true,
@@ -41,7 +43,8 @@ import { previewTemplateConfig } from './preview-template.config';
     MarqueeComponent,
     Layout1Component,
     LazyLoadDirective,
-    PreviewFooterComponent
+    PreviewFooterComponent,
+    PreviewHeaderComponent
   ],
   templateUrl: './preview-page.component.html',
   styleUrls: ['./preview-page.component.scss']
@@ -54,6 +57,10 @@ export class PreviewPageComponent implements OnInit {
   private loadedFonts = new Set<string>();
   private readonly smallBreakpoint = 767;
   private readonly mediumBreakpoint = 1023;
+
+  headerCartCount = 0;
+  headerWishlistCount = 0;
+  headerLoggedIn = false;
 
   ngOnInit(): void {
     this.updateDeviceFlags(this.getWindowWidth());
@@ -140,8 +147,49 @@ export class PreviewPageComponent implements OnInit {
     return typeof value === 'string' ? value : '';
   }
 
+  get headerShowSearch(): boolean {
+    return this.previewConfig.header?.['showSearch'] !== false;
+  }
+
+  get headerShowCart(): boolean {
+    return this.previewConfig.header?.['showCart'] !== false;
+  }
+
+  get headerHideItemSearch(): boolean {
+    return this.previewConfig.header?.['hideItemSearch'] === true;
+  }
+
   get footer(): FooterData | undefined {
     return this.previewConfig['footer'] as FooterData | undefined;
   }
 
+  get headerData(): HeaderData | undefined {
+    const header = this.previewConfig['header'] as HeaderData | undefined;
+    if (!header) {
+      return undefined;
+    }
+    return {
+      ...header,
+      logo: header.logo || this.previewConfig.logo
+    };
+  }
+
+  get headerVariant(): HeaderVariant {
+    const headerName = (this.headerData?.name ?? '').toLowerCase();
+    if (headerName?.includes('fashion')) {
+      return 'fashion';
+    }
+    if (headerName?.includes('minimal')) {
+      return 'minimal';
+    }
+    return 'minimal';
+  }
+
+  footerActionPerformed(event: string) {
+    console.log('Footer action:', event);
+  }
+
+  headerActionPerformed(event: { type: string; payload?: any }) {
+    console.log('Header action:', event);
+  }
 }
