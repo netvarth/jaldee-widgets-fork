@@ -46,9 +46,9 @@
       <div class="footer-column" *ngFor="let column of visibleColumns">
         <h3 *ngIf="column.title">{{ column.title }}</h3>
         <ul>
-          <li *ngFor="let link of column.links ?? []">
-            <a *ngIf="link?.visible !== false" [href]="link.link || '#'">
-              {{ link.label }}
+          <li *ngFor="let item of column.links ?? []">
+            <a *ngIf="item?.visible !== false" (click)="goTo(item.link)">
+              {{ item.label }}
             </a>
           </li>
         </ul>
