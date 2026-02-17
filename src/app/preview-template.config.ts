@@ -31,19 +31,19 @@ export interface PreviewTemplateConfig extends TemplateConfig {
 }
 
 export const previewTemplateConfig: PreviewTemplateConfig = {
-  "accountID": 46806,
+  "accountID": 128609,
   "template": "mixed-template1",
-  "primaryFont": "'Figtree', sans-serif",
-  "secondaryFont": "'Figtree', sans-serif",
+  "primaryFont": "'Open Sans', sans-serif",
+  "secondaryFont": "'Open Sans', sans-serif",
   "primaryCustomFontUrl": "",
   "secondaryCustomFontUrl": "",
   "theme": "theme-black1",
   "logo": "https://jaldeeuiscale.s3.ap-south-1.amazonaws.com/46805/site_assets/image%203.png",
   "aspectRatio": null,
   "seo": {
-    "title": "",
-    "description": "",
-    "keywords": "",
+    "title": "Dhyan Darsh Bakers",
+    "description": "Dhyan Darsh Bake",
+    "keywords": "Dhyan Darsh Bake",
     "canonicalUrl": ""
   },
   "header": {
@@ -105,7 +105,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
       {
         "id": "2x21qmk",
         "title": "Categories",
-        "link": "",
+        "link": "categories",
         "linkType": "internal",
         "icon": "",
         "parentId": null,
@@ -124,7 +124,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
       {
         "id": "kr6794u",
         "title": "About Us",
-        "link": "",
+        "link": "aboutus",
         "linkType": "internal",
         "icon": "",
         "parentId": null,
@@ -160,12 +160,32 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
         "submenu": []
       }
     ],
+    "loginMenu": [
+      {
+        "title": "Dashboard",
+        "link": "dashboard",
+        "linkType": "internal",
+        "icon": "fa-tachometer"
+      },
+      {
+        "title": "Family Members",
+        "link": "members",
+        "linkType": "internal",
+        "icon": "fa-users"
+      },
+      {
+        "title": "Logout",
+        "link": "logout",
+        "linkType": "internal",
+        "icon": "fa-sign-out"
+      }
+    ],
     "announcements": [
       {
         "id": "l6ts6o0",
         "message": "<p>Kanistha Welcomes you</p>",
         "fontSize": 12,
-        "foregroundColor": "",
+        "foregroundColor": "#f0e1f0",
         "backgroundColor": "#B8AB98"
       }
     ]
@@ -197,8 +217,8 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
         "foreground": ""
       },
       "layout": "banner",
-      "classType": "group",
-      "className": "",
+      "classType": "custom",
+      "className": "pt-1",
       "image": null,
       "titleImage": null,
       "imagePosition": "top",
@@ -211,7 +231,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "description": "",
           "descriptionFontSize": null,
           "useSectionFontSizes": true,
-          "link": "",
+          "link": "items",
           "foregroundColor": "",
           "backgroundColor": "",
           "fontSize": "",
@@ -221,8 +241,8 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "image_aspectRatio": null,
           "image_width": 500,
           "image_height": 500,
-          "image_mob": "",
-          "image_mob_aspectRatio": null,
+          "image_mob": "https://jaldeeuiscale.s3.ap-south-1.amazonaws.com/154843/site_assets/424d05dce5ff3ec9c943a611a44a1b296be65215.webp",
+          "image_mob_aspectRatio": "0.8",
           "image_mob_width": 500,
           "image_mob_height": 500,
           "video": "",
@@ -289,7 +309,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "description": "",
           "descriptionFontSize": null,
           "useSectionFontSizes": true,
-          "link": "",
+          "link": "item/9aa7275b-1c19-4a8b-9667-66717a3d53d5_socit?itemEncid=9aa7275b-1c19-4a8b-9667-66717a3d53d5_socit",
           "foregroundColor": "",
           "backgroundColor": "",
           "fontSize": "",
@@ -324,7 +344,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "description": "",
           "descriptionFontSize": null,
           "useSectionFontSizes": true,
-          "link": "",
+          "link": "item/8ece558e-94fa-4277-8662-bdea3693b900_socit?itemEncid=8ece558e-94fa-4277-8662-bdea3693b900_socit",
           "foregroundColor": "",
           "backgroundColor": "",
           "fontSize": "",
@@ -359,7 +379,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "description": "",
           "descriptionFontSize": null,
           "useSectionFontSizes": true,
-          "link": "",
+          "link": "item/b4e8415f-6f32-461e-83ab-ef3d947e5c4d_socit?itemEncid=b4e8415f-6f32-461e-83ab-ef3d947e5c4d_socit",
           "foregroundColor": "",
           "backgroundColor": "",
           "fontSize": "",
@@ -394,7 +414,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "description": "",
           "descriptionFontSize": null,
           "useSectionFontSizes": true,
-          "link": "",
+          "link": "item/88cf3722-a325-464b-8dfe-1b57548e4e4f_socit?itemEncid=88cf3722-a325-464b-8dfe-1b57548e4e4f_socit",
           "foregroundColor": "",
           "backgroundColor": "",
           "fontSize": "",
@@ -429,7 +449,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "description": "",
           "descriptionFontSize": null,
           "useSectionFontSizes": true,
-          "link": "",
+          "link": "item/dad90034-0d97-4978-a0db-289ae89e010c_socit?itemEncid=dad90034-0d97-4978-a0db-289ae89e010c_socit",
           "foregroundColor": "",
           "backgroundColor": "",
           "fontSize": "",
@@ -464,7 +484,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "description": "",
           "descriptionFontSize": null,
           "useSectionFontSizes": true,
-          "link": "",
+          "link": "item/19167153-afb4-4b82-a418-e3360d27e67a_socit?itemEncid=19167153-afb4-4b82-a418-e3360d27e67a_socit",
           "foregroundColor": "",
           "backgroundColor": "",
           "fontSize": "",
@@ -509,7 +529,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
         "autoplayTimeout": 3000,
         "dots": false,
         "center": true,
-        "nav": false
+        "nav": true
       },
       "cols_md_options": {
         "items": 3,
@@ -519,7 +539,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
         "autoplayTimeout": 3000,
         "dots": false,
         "center": true,
-        "nav": false
+        "nav": true
       },
       "cols_xl_options": {
         "items": 5,
@@ -529,7 +549,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
         "autoplayTimeout": 3000,
         "dots": false,
         "center": true,
-        "nav": false
+        "nav": true
       }
     },
     {
@@ -720,7 +740,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "description": "",
           "descriptionFontSize": null,
           "useSectionFontSizes": true,
-          "link": "",
+          "link": "item/b4e8415f-6f32-461e-83ab-ef3d947e5c4d_socit?itemEncid=b4e8415f-6f32-461e-83ab-ef3d947e5c4d_socit",
           "foregroundColor": "",
           "backgroundColor": "",
           "fontSize": "",
@@ -933,7 +953,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "description": "",
           "descriptionFontSize": null,
           "useSectionFontSizes": false,
-          "link": "",
+          "link": "?_t=privacy",
           "foregroundColor": "",
           "backgroundColor": "",
           "fontSize": "",
@@ -968,7 +988,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "description": "",
           "descriptionFontSize": null,
           "useSectionFontSizes": false,
-          "link": "",
+          "link": "?_t=refund",
           "foregroundColor": "",
           "backgroundColor": "",
           "fontSize": "",
@@ -1003,7 +1023,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "description": "",
           "descriptionFontSize": null,
           "useSectionFontSizes": false,
-          "link": "",
+          "link": "?_t=shipping",
           "foregroundColor": "",
           "backgroundColor": "",
           "fontSize": "",
@@ -1038,7 +1058,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "description": "",
           "descriptionFontSize": null,
           "useSectionFontSizes": false,
-          "link": "",
+          "link": "?_t=terms",
           "foregroundColor": "",
           "backgroundColor": "",
           "fontSize": "",
@@ -1146,7 +1166,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
           "description": "",
           "descriptionFontSize": null,
           "useSectionFontSizes": true,
-          "link": "",
+          "link": "item/e5cef2c9-87b3-425b-91cc-3b171ef09d10_socit?itemEncid=e5cef2c9-87b3-425b-91cc-3b171ef09d10_socit",
           "foregroundColor": "",
           "backgroundColor": "",
           "fontSize": "",
@@ -1471,7 +1491,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
     "copyright": "Copyright @ 2025 | Powered by Jaldee Soft Pvt Ltd",
     "logo": "https://jaldeeuiscale.s3.ap-south-1.amazonaws.com/46805/site_assets/Frame%201.png",
     "logoAspectRatio": null,
-    "variant": "minimal",
+    "variant": "fashion-4col",
     "brandName": "",
     "addressLine1": "Vandana House, Palakkal Devi Temple Road",
     "addressLine2": "Ramanattukara, Kozhikode, Kerala 673633",
@@ -1516,17 +1536,17 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
         "links": [
           {
             "label": "Privacy Policy",
-            "link": "privacy",
+            "link": "?_t=privacy",
             "visible": true
           },
           {
             "label": "Refund Policy",
-            "link": "refund",
+            "link": "?_t=refund",
             "visible": true
           },
           {
             "label": "Shipping Policy",
-            "link": "shipping",
+            "link": "?_t=shipping",
             "visible": true
           }
         ]
@@ -1581,10 +1601,10 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
       },
       {
         "title": "shipping",
-        "link": "",
+        "link": "dhyandarshbakers?_t=privacy",
         "displayName": "Shipping Policy",
         "icon": "",
-        "visible": false
+        "visible": true
       },
       {
         "title": "about",
@@ -1602,7 +1622,7 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
       },
       {
         "title": "terms",
-        "link": "",
+        "link": "dhyandarshbakers?_t=terms",
         "displayName": "Terms & Conditions",
         "icon": "",
         "visible": true

@@ -1,61 +1,29 @@
-  <ng-container *ngIf="data">
+<ng-container *ngIf="data">
   <ng-container [ngSwitch]="variant">
-    <app-header-one
-      *ngSwitchCase="'header1'"
-      [data]="data"
-      [logo]="data.logo"
-      [menuItems]="data.menu || []"
-      [isLoggedIn]="isLoggedIn"
-      [cartCount]="cartCount"
-      [wishlistCount]="wishlistCount"
-      [showSearch]="showSearch"
-      [hideItemSearch]="hideItemSearch"
-      [smallDevice]="smallDevice"
-      [showCart]="showCart"
-      (actionPerformed)="handleAction($event)"
-    ></app-header-one>
-    <app-header-two
-      *ngSwitchCase="'header2'"
-      [data]="data"
-      [logo]="data.logo"
-      [menuItems]="data.menu || []"
-      [isLoggedIn]="isLoggedIn"
-      [showSearch]="showSearch"
-      (actionPerformed)="handleAction($event)"
-    ></app-header-two>
-    <app-header-three
-      *ngSwitchCase="'header3'"
-      [data]="data"
-      [logo]="data.logo"
-      [menuItems]="data.menu || []"
-      [isLoggedIn]="isLoggedIn"
-      [cartCount]="cartCount"
-      [showSearch]="showSearch"
-      (actionPerformed)="handleAction($event)"
-    ></app-header-three>
-    <app-header-four
-      *ngSwitchCase="'header4'"
-      [data]="data"
-      [logo]="data.logo"
-      [menuItems]="data.menu || []"
-      [isLoggedIn]="isLoggedIn"
-      [cartCount]="cartCount"
-      [showCart]="showCart"
-      (actionPerformed)="handleAction($event)"
-    ></app-header-four>
-    <app-header-fashion
-      *ngSwitchCase="'fashion'"
-      [data]="data"
-      [isLoggedIn]="isLoggedIn"
-      [userName]="userName"
-      (actionPerformed)="handleAction($event)"
-    ></app-header-fashion>
-    <app-header-minimal
-      *ngSwitchDefault
-      [data]="data"
-      [isLoggedIn]="isLoggedIn"
-      [userName]="userName"
-      (actionPerformed)="handleAction($event)"
-    ></app-header-minimal>
+    <app-header-one *ngSwitchCase="'header1'" [data]="data" [logo]="logo || data.logo"
+      [aspectRatio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" [menuItems]="data.menu || []"
+      [isLoggedIn]="isLoggedIn" [cartCount]="cartCount" [wishlistCount]="wishlistCount" [showSearch]="showSearch"
+      [hideItemSearch]="hideItemSearch" [smallDevice]="smallDevice" [showCart]="showCart"
+      (actionPerformed)="handleAction($event)"></app-header-one>
+    <app-header-two *ngSwitchCase="'header2'" [data]="data" [logo]="logo || data.logo"
+      [aspectRatio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" [menuItems]="data.menu || []"
+      [isLoggedIn]="isLoggedIn" [smallDevice]="smallDevice" [showSearch]="showSearch"
+      (actionPerformed)="handleAction($event)"></app-header-two>
+    <app-header-three *ngSwitchCase="'header3'" [data]="data" [logo]="logo || data.logo"
+      [aspectRatio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" [menuItems]="data.menu || []"
+      [isLoggedIn]="isLoggedIn" [cartCount]="cartCount" [smallDevice]="smallDevice" [showSearch]="showSearch"
+      (actionPerformed)="handleAction($event)"></app-header-three>
+    <app-header-four *ngSwitchCase="'header4'" [data]="data" [logo]="logo || data.logo"
+      [aspectRatio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" [menuItems]="data.menu || []"
+      [isLoggedIn]="isLoggedIn" [cartCount]="cartCount" [showCart]="showCart"
+      (actionPerformed)="handleAction($event)"></app-header-four>
+    <app-header-fashion *ngSwitchCase="'fashion'" [data]="data" [logo]="logo || data.logo"
+      [aspectRatio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" [smallDevice]="smallDevice"
+      [isLoggedIn]="isLoggedIn" [userName]="userName"
+      (actionPerformed)="handleAction($event)"></app-header-fashion>
+    <app-header-minimal *ngSwitchDefault [data]="data" [logo]="logo || data.logo"
+      [aspectRatio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" [smallDevice]="smallDevice"
+      [isLoggedIn]="isLoggedIn" [userName]="userName"
+      (actionPerformed)="handleAction($event)"></app-header-minimal>
   </ng-container>
 </ng-container>

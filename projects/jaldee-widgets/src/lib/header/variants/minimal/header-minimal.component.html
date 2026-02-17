@@ -1,9 +1,23 @@
 <header class="header-minimal" *ngIf="data" [ngStyle]="headerStyles">
   <div class="header-top">
     <div class="brand" (click)="emit({ type: 'home' })">
-      <img [src]="logoSrc" alt="logo" />
+      <button
+        *ngIf="smallDevice && visibleMenu.length"
+        type="button"
+        class="hamburger-btn"
+        (click)="toggleMenu(); $event.stopPropagation()"
+        [attr.aria-label]="menuOpen ? 'Close menu' : 'Open menu'"
+      >
+        <svg *ngIf="!menuOpen" class="hamburger-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+        </svg>
+        <svg *ngIf="menuOpen" class="hamburger-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+        </svg>
+      </button>
+      <img [src]="logoSrc" [style.aspect-ratio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" alt="logo" />
     </div>
-    <div class="search-box" *ngIf="showSearch">
+    <div class="search-box" *ngIf="showSearch && !smallDevice">
       <input
         type="text"
         placeholder="Search"
@@ -15,28 +29,81 @@
       </button>
     </div>
     <div class="actions">
-      <button type="button" (click)="emit({ type: 'help' })">
+      <button *ngIf="showSearch && smallDevice" type="button" (click)="toggleSearch()" [attr.aria-label]="searchOpen ? 'Close search' : 'Open search'">
+        <i class="fa fa-search"></i>
+      </button>
+      <button type="button" (click)="emit({ type: 'help' })" aria-label="Help">
         <i [class]="getActionIcon('help')"></i>
-        <span>Help</span>
+        <span *ngIf="!smallDevice">Help</span>
       </button>
       <span class="divider">|</span>
-      <button type="button" (click)="emit({ type: 'wishlist' })">
+      <button type="button" (click)="emit({ type: 'wishlist' })" aria-label="Wishlist">
         <i [class]="getActionIcon('wishlist')"></i>
-        <span>Wishlist</span>
+        <span *ngIf="!smallDevice">Wishlist</span>
       </button>
       <span class="divider">|</span>
-      <button *ngIf="showCart" type="button" (click)="emit({ type: 'cart' })">
+      <button *ngIf="showCart" type="button" (click)="emit({ type: 'cart' })" aria-label="Bag">
         <i [class]="getActionIcon('cart')"></i>
-        <span>Bag</span>
+        <span *ngIf="!smallDevice">Bag</span>
       </button>
       <span class="divider">|</span>
-      <button type="button" (click)="emit({ type: isLoggedIn ? 'account' : 'login' })">
-        <i [class]="getActionIcon(isLoggedIn ? 'account' : 'login')"></i>
-        <span>{{ isLoggedIn ? 'Account' : 'Login' }}</span>
+      <div class="account-menu-wrap">
+        <button type="button" (click)="onAccountClick($event)" [attr.aria-label]="isLoggedIn ? 'Account' : 'Login'">
+          <i [class]="getActionIcon(isLoggedIn ? 'account' : 'login')"></i>
+          <span *ngIf="!smallDevice">{{ isLoggedIn ? 'Account' : 'Login' }}</span>
+        </button>
+        <div
+          class="account-menu"
+          *ngIf="isLoggedIn && accountMenuOpen && resolvedLoginMenu.length"
+        >
+          <button
+            type="button"
+            class="account-menu-item"
+            *ngFor="let item of resolvedLoginMenu"
+            (click)="onLoginMenuClick(item, $event)"
+          >
+            <i *ngIf="item.icon" [class]="item.icon"></i>
+            <span>{{ item.title }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-search-row" *ngIf="showSearch && smallDevice && searchOpen">
+    <div class="search-box">
+      <input
+        type="text"
+        placeholder="Search"
+        (keyup.enter)="emit({ type: 'search', payload: searchValue })"
+        [(ngModel)]="searchValue"
+      />
+      <button type="button" (click)="emit({ type: 'search', payload: searchValue })">
+        <i class="fa fa-search"></i>
       </button>
     </div>
   </div>
-  <nav class="nav" [ngStyle]="{ color: headerStyles['color'] }">
+  <div
+    *ngIf="smallDevice && menuOpen"
+    class="menu-backdrop"
+    (click)="closeMenu()"
+  ></div>
+  <nav
+    class="nav"
+    [class.mobile-drawer]="smallDevice"
+    [class.mobile-open]="smallDevice && menuOpen"
+    [ngStyle]="{ color: headerStyles['color'] }"
+  >
+    <button
+      *ngIf="smallDevice"
+      type="button"
+      class="drawer-close-btn"
+      (click)="closeMenu()"
+      aria-label="Close menu"
+    >
+      <svg class="hamburger-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+      </svg>
+    </button>
     <a
       *ngFor="let item of visibleMenu"
       class="nav-item"

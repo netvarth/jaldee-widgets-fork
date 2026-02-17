@@ -8,6 +8,15 @@ export interface HeaderMenuItem {
   [key: string]: unknown;
 }
 
+export interface HeaderAccountMenuItem {
+  title?: string;
+  actionType?: string;
+  link?: string;
+  icon?: string;
+  visible?: boolean;
+  [key: string]: unknown;
+}
+
 export interface HeaderData {
   title?: string;
   description?: string;
@@ -20,5 +29,9 @@ export interface HeaderData {
   backgroundColor?: string;
   foregroundColor?: string;
   logo?: string;
+  logoAspectRatio?: string | null;
+  aspectRatio?: string | null;
+  accountMenuItems?: HeaderAccountMenuItem[];
+  loginMenu?: HeaderAccountMenuItem[];
   [key: string]: unknown;
 }

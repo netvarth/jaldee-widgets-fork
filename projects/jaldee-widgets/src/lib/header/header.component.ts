@@ -25,6 +25,8 @@ import { HeaderMinimalComponent } from './variants/minimal/header-minimal.compon
 export class PreviewHeaderComponent {
   @Input() data?: HeaderData;
   @Input() variant?: string;
+  @Input() logo?: string;
+  @Input() aspectRatio?: string | null;
   @Input() isLoggedIn?: boolean;
   @Input() userName?: string;
   @Input() cartCount?: number;

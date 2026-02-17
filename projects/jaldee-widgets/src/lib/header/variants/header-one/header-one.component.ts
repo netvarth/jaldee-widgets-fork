@@ -13,6 +13,7 @@ import { HeaderData, HeaderMenuItem } from '../../header.model';
 export class HeaderOneComponent {
   @Input() data?: HeaderData;
   @Input() logo?: string;
+  @Input() aspectRatio?: string | null;
   @Input() menuItems: HeaderMenuItem[] = [];
   @Input() isLoggedIn?: boolean;
   @Input() cartCount?: number;

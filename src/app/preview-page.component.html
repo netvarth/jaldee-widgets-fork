@@ -12,8 +12,10 @@
   <lib-preview-header
     *ngIf="headerData"
     [data]="headerData"
+    [logo]="headerLogo"
+    [aspectRatio]="headerLogoAspectRatio"
     [variant]="headerData.name"
-    [isLoggedIn]="headerLoggedIn"
+    [isLoggedIn]="true"
     [cartCount]="headerCartCount"
     [wishlistCount]="headerWishlistCount"
     [showSearch]="headerShowSearch"

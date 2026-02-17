@@ -168,10 +168,30 @@ export class PreviewPageComponent implements OnInit {
     if (!header) {
       return undefined;
     }
+    const headerAspectRatio =
+      (header.logoAspectRatio as string | null | undefined) ||
+      (header.aspectRatio as string | null | undefined) ||
+      (this.previewConfig['logoAspectRatio'] as string | null | undefined) ||
+      (this.previewConfig['aspectRatio'] as string | null | undefined) ||
+      null;
     return {
       ...header,
-      logo: header.logo || this.previewConfig.logo
+      logo: header.logo || this.previewConfig.logo,
+      logoAspectRatio: headerAspectRatio
     };
+  }
+
+  get headerLogo(): string | undefined {
+    return this.headerData?.logo || this.previewConfig.logo;
+  }
+
+  get headerLogoAspectRatio(): string | null | undefined {
+    return (
+      this.headerData?.logoAspectRatio ||
+      this.headerData?.aspectRatio ||
+      (this.previewConfig['logoAspectRatio'] as string | null | undefined) ||
+      (this.previewConfig['aspectRatio'] as string | null | undefined)
+    );
   }
 
   get headerVariant(): HeaderVariant {

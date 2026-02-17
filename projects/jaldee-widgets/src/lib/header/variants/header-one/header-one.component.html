@@ -1,7 +1,7 @@
 <header class="header-one" *ngIf="data">
   <div class="top-row">
     <div class="brand" (click)="emit({ type: 'home' })">
-      <img *ngIf="logo || data.logo" [src]="logo || data.logo" alt="Logo" />
+      <img *ngIf="logo || data.logo" [src]="logo || data.logo" [style.aspect-ratio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" alt="Logo" />
     </div>
     <div class="mobile-menu" *ngIf="smallDevice && menuItems.length">
       <button type="button" (click)="emit({ type: 'menu-open' })">

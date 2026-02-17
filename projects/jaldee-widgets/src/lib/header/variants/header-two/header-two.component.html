@@ -11,7 +11,7 @@
       </button>
     </nav>
     <div class="brand" (click)="emit({ type: 'home' })">
-      <img *ngIf="logo || data.logo" [src]="logo || data.logo" alt="Logo" />
+      <img *ngIf="logo || data.logo" [src]="logo || data.logo" [style.aspect-ratio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" alt="Logo" />
     </div>
     <div class="actions">
       <button type="button" (click)="isLoggedIn ? emit({ type: 'user' }) : doLogin()">
