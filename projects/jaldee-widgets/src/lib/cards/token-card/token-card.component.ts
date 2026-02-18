@@ -12,6 +12,7 @@ export class TokenCardComponent implements OnInit {
   @Input() token: Record<string, any> | null = null;
   @Input() pdf = false;
   @Input() png = false;
+  @Input() fullScreen = false;
 
   @ViewChild('tokenCard', { static: false }) tokenCardRef?: ElementRef<HTMLElement>;
 
@@ -61,10 +62,16 @@ export class TokenCardComponent implements OnInit {
     const pdfDoc = new jsPdfCtor('p', 'mm', 'a4');
     const pageWidth = pdfDoc.internal.pageSize.getWidth();
     const pageHeight = pdfDoc.internal.pageSize.getHeight();
-    const imgWidth = pageWidth - 20;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    const y = Math.max(10, (pageHeight - imgHeight) / 2);
-    pdfDoc.addImage(imgData, 'PNG', 10, y, imgWidth, imgHeight);
+    const maxWidth = pageWidth - 20;
+    const maxHeight = pageHeight - 20;
+    const widthScale = maxWidth / canvas.width;
+    const heightScale = maxHeight / canvas.height;
+    const scale = Math.min(widthScale, heightScale);
+    const imgWidth = canvas.width * scale;
+    const imgHeight = canvas.height * scale;
+    const x = (pageWidth - imgWidth) / 2;
+    const y = (pageHeight - imgHeight) / 2;
+    pdfDoc.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
     pdfDoc.save('token-card.pdf');
   }
 
@@ -103,14 +110,20 @@ export class TokenCardComponent implements OnInit {
   }
 
   get visitorName(): string {
-    const first = this.stringValue(this.token?.['consumer']?.['firstName']);
-    const last = this.stringValue(this.token?.['consumer']?.['lastName']);
-    return `${first} ${last}`.trim() || 'Visitor Name';
+    const person = this.primaryPerson;
+    const title = this.stringValue(person?.['title']);
+    const first = this.stringValue(person?.['firstName']);
+    const last = this.stringValue(person?.['lastName']);
+    return `${title} ${first} ${last}`.replace(/\s+/g, ' ').trim() || 'Visitor Name';
   }
 
   get visitorPhone(): string {
-    const code = this.stringValue(this.token?.['consumer']?.['countryCode']);
-    const phone = this.stringValue(this.token?.['consumer']?.['phoneNo']);
+    const person = this.primaryPerson;
+    const code =
+      this.stringValue(person?.['countryCode']) ||
+      this.stringValue(this.token?.['countryCode']) ||
+      this.stringValue(this.token?.['consumer']?.['countryCode']);
+    const phone = this.stringValue(person?.['phoneNo']) || this.stringValue(this.token?.['consumer']?.['phoneNo']);
     return `${code} ${phone}`.trim();
   }
 
@@ -233,5 +246,13 @@ export class TokenCardComponent implements OnInit {
     if (last === 2) return 'nd';
     if (last === 3) return 'rd';
     return 'th';
+  }
+
+  private get primaryPerson(): Record<string, any> | null {
+    const waitlisted = this.token?.['waitlistingFor'];
+    if (Array.isArray(waitlisted) && waitlisted.length > 0 && waitlisted[0]) {
+      return waitlisted[0] as Record<string, any>;
+    }
+    return (this.token?.['consumer'] as Record<string, any>) || null;
   }
 }

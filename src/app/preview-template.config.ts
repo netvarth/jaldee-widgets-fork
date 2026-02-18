@@ -31,8 +31,8 @@ export interface PreviewTemplateConfig extends TemplateConfig {
 }
 
 export const tokenTemplate = {
-  "token": 600,
-  "checkinEncId": "c-6101458-s9",
+  "token": 610,
+  "checkinEncId": "c-6101458-sk",
   "date": "2026-02-18",
   "providerAccount": {
     "id": 46806,
@@ -74,7 +74,7 @@ export const tokenTemplate = {
         "caption": "",
         "fileType": "png",
         "order": 0,
-        "s3path": "https://jaldeescale.s3.ap-south-1.amazonaws.com/46805/provider/BusinessLogo/669/17235242679470194-1949465_art-graphic-design-joint-yoga-art-png-transparent.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCmFwLXNvdXRoLTEiSDBGAiEA%2B%2FMdzNrnyRUbkvRqOFfIc9L27b7C2KvE0Sj0ugSiBXgCIQCauc%2FBJ3biUScet2jCcsTN6wQuo%2Fd0JRaozsX0Hctm%2Byq%2FBQhfEAIaDDkxMzYzNTE2NTQ2NSIMFryLDDB1i2QB1qLgKpwF%2FqGNupr1Bttz0MmnrAfSIKBSk3yKHAn8vtqTZ2RpwFJ1Fui2FajxCiWYdEQOVWocbl0sMhkJgv3eCtwlOQczajHmqnFNVNY4V8KVq7Q%2BeEDjL78bBKHgv1gWBYBoQA1gj8N8BEIY87zpCr7LPrnWkemhm3jtBbjbNY1hCsh687J7u7RFbnnxGy%2BDFxguiHkIwMXCOpihqax5IN1V%2BVX2wvLBk8hmmifKcLCCrvxRbxSEOLDfJCkNCnvfp%2BudeuZcu57G82GYSmf%2BV%2FuyFC2Y8DzUuC6CCgU0h%2B5k6bkWpwuAkGulBNWkjiS1ii1uF3G1gF541bsHd3FnaSEMPxTImPc1qP7RUdWITPEquaNrLmWUm0Rz9sY3VdWSFgbv%2FeHFxByJ46T%2FIRjuro%2BGjYYw%2BJM81%2BmO6ZjHtz94e7ezQl6Qv90Dc%2FQXYfQkDgR7%2BNqbuRmIsaSqjLmE63%2FUyViG30kWotvPz30gFQ309Nu7lmG9fo89u94KVcoxGrcmlC6UYdA26wJoXrnE93upqlKQo%2FBoGeGAxDdm35On2gy2AGplMf1rMXpd1dESbZmSmQqSafacWqe89PgfQYgpYCQ9B34gb%2FMnnpHjv1W%2B1b5cRyIZBnsWot5DfXk8enNx%2FQtRW8SU8gZ18SWv6X4IaxUHZHyMxLc4lFkbxvz1%2FOmU3aQCqVj72nAUdpn%2FIe3SqFlMV9l9c1OsZwXDqgLJv3ToQOVEOFc6dLOKhxBMor7Zp1lR3onuwmzM8k5wCJJdke8eS4c1p4LEkG7C5BPTAXcDx7ifNKCd90CzprGTabmIRGyLKQO1lM75nTAuMJuX28dj%2B8oZPiRQCuHYBoGGyb%2FQb6Z6T1lxJ0QC08pmalOTPDwOX0iSSVKphFiTsSAw0qrVzAY6sAEOCoSBHzP8ZYDwkqQoANYeqAHRT9el%2F4MTVPKcdARoJdpRhQfH98gePpoD%2FpTvbH8Qnn2M129Y1RYeO%2F4MLtmKW5%2BRDj5eLuUDgMdizPbBADOSucFqpcOcDmsk03QsfaK%2BhaRkEPNzaYOQg6uFYQ2BLc4TeiKn9q6Ew%2BIR8BDn10P6%2FgnsG7474HPzUirCr7BIwATop4SaxxJZq%2F7lSCI8MM3BkL2j6haGdmr3t%2F8ziw%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260218T064144Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIA5JOHGIUMRFNTSBS3%2F20260218%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Signature=5e723afe4f6902d2029614c18ed30a84465157629b1a295e0142d695d84859c8",
+        "s3path": "https://jaldeescale.s3.ap-south-1.amazonaws.com/46805/provider/BusinessLogo/669/17235242679470194-1949465_art-graphic-design-joint-yoga-art-png-transparent.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCmFwLXNvdXRoLTEiRzBFAiEA7LmIapYs2xXnjST6EjKAlZOK37ZKp1AV4Na3xWahlQICICk340sz6hP34Bgy2IEMw1xMeB%2FE9C28sqDWuLuhRJOnKr8FCGIQAhoMOTEzNjM1MTY1NDY1IgwZSCxSHNcjt4YKIycqnAV5oF1TQUQnQ4VnZWhjzkLNLP2plByF9tDIx%2BxnrdSEERc0qHD8sc7cP%2FsD%2Blpl8N0erH40xFLLLq4vLEvZPa8PhWEQ4lHGHccnRu2gPBDLqL1Vf2szCh%2BN6VUIch%2BZbuErAQCJ2kUMjiKIVqjkMCM2MzJQ%2Br%2F%2FVe2WkRqVaVLU9HR4Qv2vcqZ0eQAFJfVJWMQRNpHmunTk2%2FSkLtcjGu%2FVBqcdZ0q1lXUgpif0GwMTtGgLNPL9A2P2DbDh3puYPR3aHkKY0ZE0dmmx9XSitk5e0ICSzrhk449dhlYsWKdCrWsDWHOyaoJ9P3uTQfRUqgPpVMn9L2dYB6Bfj1QZZxVre99lN55L%2FK77k7AR%2BK8lp2oKTWyCZHTUu0ncwcEx8d7JsmRM2hbZq2IFEFwfO2oP7MyVP5rGMmWh7zaEd26OlLcdeQar7Q6ibpwz13Bf0oOxAhoUvDCssKtexQyHDwDTml6Bj8T%2FRlFqLwq9RB8AtoWn1dZYna4dKZQTXVrS8HBsopoHtoFWXRdD7YTJYMMjwwUFllbwlHGX1KV0Vzeu5EkYkJw5Ac%2BdYBHwPURVCiokTM6Lh0cb1B2CMuggnO%2BWdgMb5JZg9obY1jIr4xhZlNJMvHGqIbSbf71INwH%2FmLSsTXMfHn9qsSDsRMO2Vs5j3KM5eV3bKREXIiGRXpfyjhNCiksfKHXMxclK5NWJf7m%2FgJyj1Dx%2Fh7dxxRb7b61gCeGj9IItWBCIcJ5Com%2Be2Eh0H%2B%2FjX7PHzISHDcRf20yAGj41XVtHgJK2TzCeIrZu%2FMFJAd9%2FKovNIcRJoTMFv%2F0nZK2FGa%2Bc37zANow%2B8SHsL%2Fy7SzVQDRZrnG%2F%2BKuanmYlFrG5Xzh3GoDQN19wdL7HReqr4QhShc%2FRPXzDUiNbMBjqxAdZ%2B04Ph5mzcD13PlnJz8To1SsyATMezp%2BI3wSUlELGCl%2FTen5qomlJhhv31BD87jQb8N9qKiIosay1vmAJk8p6zZxMpyM2p9kYJqyjmcm5OlwbMRMqJa21sZXOBbCcxjnfkegqak6gDUJiRkAwvL9FYUgyHTJzwS3UfiKpKATInK8WOkprUsmyolmXrht5fze5aCkS7vts%2FxQ0rGmerDENruSiB5NHJIs5EcShSnHvgaw%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260218T100518Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3599&X-Amz-Credential=ASIA5JOHGIUMVUJC4VTS%2F20260218%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Signature=5892128879b0fcee7724516548ccf85910f5f9977138b31d2db0c36769552313",
         "action": "add",
         "uid": "",
         "driveId": 47048
@@ -128,14 +128,23 @@ export const tokenTemplate = {
     "consumerPhoto": []
   },
   "service": {
-    "id": 429,
-    "name": "Xray",
+    "id": 37674,
+    "name": "Jaldee Video Consultation Online via Twilio",
+    "minPrePaymentAmount": 10,
     "totalAmount": 100,
-    "serviceType": "physicalService",
+    "serviceType": "virtualService",
     "multiples": 1,
+    "virtualServiceType": "videoService",
     "livetrack": false,
-    "consumerNoteMandatory": true,
-    "consumerNoteTitle": "X-ray for",
+    "virtualCallingModes": [
+      {
+        "callingMode": "VideoCall",
+        "status": "ACTIVE",
+        "instructions": ""
+      }
+    ],
+    "consumerNoteMandatory": false,
+    "consumerNoteTitle": "Notes",
     "preInfoEnabled": false,
     "preInfoTitle": "",
     "preInfoText": "",
@@ -160,12 +169,12 @@ export const tokenTemplate = {
     "individualScheduleId": 0
   },
   "waitlistStatus": "checkedIn",
-  "statusUpdatedTime": "2026-02-18 12:11 PM",
+  "statusUpdatedTime": "2026-02-18 02:58 PM",
   "partySize": 1,
-  "consumerNote": "X-ray",
+  "consumerNote": "",
   "recalculatedTime": "2026-02-18",
   "lastVisitedDate": "2024-05-07",
-  "appxWaitingTime": 0,
+  "appxWaitingTime": 53,
   "queue": {
     "id": 664,
     "name": "Time Window 1",
@@ -201,12 +210,12 @@ export const tokenTemplate = {
     "availabilityQueue": false
   },
   "waitlistedBy": "PROVIDER_CONSUMER",
-  "personsAhead": 0,
+  "personsAhead": 9,
   "waitlistingFor": [
     {
       "id": 1515,
-      "firstName": "Dhyan Krishna",
-      "lastName": "EM",
+      "firstName": "Manikandan Edathala",
+      "lastName": "Velayudhan",
       "phoneNo": "5555000015",
       "email": "manikandan@jaldee.com",
       "gender": "male",
@@ -224,15 +233,15 @@ export const tokenTemplate = {
       }
     }
   ],
-  "ynwUuid": "8dce7ce4-6369-441a-a35e-0f04b8071460_wl",
-  "paymentStatus": "NotPaid",
+  "ynwUuid": "3e0d9611-d679-4e6e-a050-ef5edc4dba0e_wl",
+  "paymentStatus": "PartiallyPaid",
   "billStatus": "New",
   "calculationMode": "Conventional",
   "checkInTime": "09:00",
   "coupons": [],
   "billViewStatus": "Notshow",
-  "amountPaid": 0,
-  "amountDue": 118,
+  "amountPaid": 10,
+  "amountDue": 108,
   "billId": 0,
   "label": {},
   "waitlistPhoneNumber": "5555000015",
@@ -242,6 +251,7 @@ export const tokenTemplate = {
   "firstCheckIn": false,
   "active": false,
   "accessScope": 1,
+  "virtualService": {},
   "waitlistMode": "ONLINE_CHECKIN",
   "consumerStarted": false,
   "callingStatus": false,
@@ -254,6 +264,8 @@ export const tokenTemplate = {
   "selfAssign": false,
   "isRescheduled": false,
   "countryCode": "+91",
+  "videoCallButton": "ENABLED",
+  "videoCallMessage": "You will be contacted by your provider soon",
   "useCredit": false,
   "useJcash": false,
   "jCashUsedAmt": 0,
@@ -285,16 +297,19 @@ export const tokenTemplate = {
     "ipAddress": "49.47.192.5",
     "bookingReqFrom": "WEB_LINK"
   },
+  "customerPaidCharges": 0.24000001,
+  "convenientFee": 0.2,
+  "convenientFeeTax": 0.04,
   "serviceOptions": [],
-  "serviceName": "Xray",
+  "serviceName": "Jaldee Video Consultation Online via Twilio",
   "qnrmap": {},
-  "serviceDuration": 15,
-  "serviceType": "physicalService",
+  "serviceDuration": 10,
+  "serviceType": "virtualService",
   "serviceTaxable": true,
   "locationUrl": "https://www.google.com/maps/place/10.5276416,76.21443490000001/@10.5276416,76.21443490000001,15z",
   "serviceData": {
-    "id": "429",
-    "name": "Xray"
+    "id": "37674",
+    "name": "Jaldee Video Consultation Online via Twilio"
   },
   "createdDate": "2026-02-18",
   "jCouponAppliedAmt": 0,
@@ -322,8 +337,26 @@ export const tokenTemplate = {
     "nameAsInGst": "dhyans",
     "address": "jaldee thrissur"
   },
+  "payInOutReference": [
+    {
+      "payInOutUuid": "ec5f84dd-4f42-4b6d-b678-be736b6a52c4_payi",
+      "recieptId": "609",
+      "amount": 10,
+      "paymentMode": "NB",
+      "paymentGateway": "RAZORPAY",
+      "paymentdate": "2026-02-18",
+      "isRefund": false,
+      "paymentPurpose": "prePayment",
+      "paymentRefId": "order_SHYiiwPGFav9pV",
+      "transactionId": "pay_SHYirObs7QIlbm",
+      "acceptPaymentBy": "self_pay",
+      "paymentDateString": "18/02/2026 09:28 AM",
+      "paymentStatus": "SUCCESS"
+    }
+  ],
   "isAssigned": false,
   "invoiceCreated": true,
+  "virtualCallingModeEnum": "VideoCall",
   "temporaryTotalAmount": 0
 }
 

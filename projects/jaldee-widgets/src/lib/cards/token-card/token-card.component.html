@@ -1,9 +1,9 @@
-<div class="token-card-shell" *ngIf="token">
+<div class="token-card-shell" *ngIf="token" [class.full-screen]="fullScreen">
   <div class="token-actions" *ngIf="isDownloadMode">
     <button type="button" class="btn" (click)="downloadEToken()">Download E-Token</button>
   </div>
 
-  <section class="token-card" #tokenCard [class.export-only]="isDownloadMode">
+  <section class="token-card" #tokenCard [class.export-only]="isDownloadMode" [class.full-screen]="fullScreen">
     <div class="bg-mark" *ngIf="tokenWatermark" [style.background-image]="'url(' + tokenWatermark + ')'"></div>
 
     <div class="top-star"><i class="fa fa-star"></i></div>

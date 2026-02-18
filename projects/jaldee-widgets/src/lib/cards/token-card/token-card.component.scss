@@ -2,6 +2,12 @@
   width: 100%;
 }
 
+.token-card-shell.full-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+}
+
 .token-actions {
   display: flex;
   justify-content: flex-start;
@@ -35,6 +41,14 @@
   border-bottom: 4px solid #b78f51;
   padding: 2px 18px 20px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.token-card.full-screen {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  border-radius: 0;
 }
 
 .token-card.export-only {
