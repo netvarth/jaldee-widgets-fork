@@ -3,5 +3,24 @@
     <button routerLink="/" class="btn secondary">Back to Home</button>
   </header>
 
-  <app-token-card [token]="tokenData" [pdf]="downloadMode" [png]="false"></app-token-card>
+  <ng-container *ngIf="downloadMode; else previewCombos">
+    <app-token-card [token]="tokenData" [pdf]="true" [png]="false"></app-token-card>
+  </ng-container>
+
+  <ng-template #previewCombos>
+    <div class="combo-grid">
+      <div class="combo-item" *ngFor="let combo of themeCombos">
+        <p class="combo-name">{{ combo.name }}</p>
+        <app-token-card
+          [token]="tokenData"
+          [pdf]="false"
+          [png]="false"
+          [primaryColor]="combo.primaryColor"
+          [accentColor]="combo.accentColor"
+          [backgroundColor]="combo.backgroundColor"
+          [surfaceColor]="combo.surfaceColor"
+        ></app-token-card>
+      </div>
+    </div>
+  </ng-template>
 </div>

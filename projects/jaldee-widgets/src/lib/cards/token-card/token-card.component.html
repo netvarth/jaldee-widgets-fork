@@ -1,4 +1,4 @@
-<div class="token-card-shell" *ngIf="token" [class.full-screen]="fullScreen">
+<div class="token-card-shell" *ngIf="token" [class.full-screen]="fullScreen" [ngStyle]="themeVars">
   <div class="token-actions" *ngIf="isDownloadMode">
     <button type="button" class="btn" (click)="downloadEToken()">Download E-Token</button>
   </div>

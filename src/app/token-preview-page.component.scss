@@ -23,3 +23,26 @@
   letter-spacing: 0.03em;
   cursor: pointer;
 }
+
+.combo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.combo-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.combo-name {
+  margin: 0;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6d5e4a;
+  text-align: center;
+}

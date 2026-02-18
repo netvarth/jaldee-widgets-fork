@@ -13,6 +13,10 @@ export class TokenCardComponent implements OnInit {
   @Input() pdf = false;
   @Input() png = false;
   @Input() fullScreen = false;
+  @Input() primaryColor = '#6b373b';
+  @Input() accentColor = '#b78f51';
+  @Input() backgroundColor = '#f8f5ef';
+  @Input() surfaceColor = '#fbfaf8';
 
   @ViewChild('tokenCard', { static: false }) tokenCardRef?: ElementRef<HTMLElement>;
 
@@ -22,6 +26,15 @@ export class TokenCardComponent implements OnInit {
 
   get isDownloadMode(): boolean {
     return this.pdf || this.png;
+  }
+
+  get themeVars(): Record<string, string> {
+    return {
+      '--token-primary': this.primaryColor,
+      '--token-accent': this.accentColor,
+      '--token-bg': this.backgroundColor,
+      '--token-surface': this.surfaceColor
+    };
   }
 
   async downloadEToken(): Promise<void> {
