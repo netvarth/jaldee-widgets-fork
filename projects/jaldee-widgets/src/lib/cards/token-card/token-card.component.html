@@ -1,0 +1,48 @@
+<div class="token-card-shell" *ngIf="token">
+  <div class="token-actions" *ngIf="isDownloadMode">
+    <button type="button" class="btn" (click)="downloadEToken()">Download E-Token</button>
+  </div>
+
+  <section class="token-card" #tokenCard [class.export-only]="isDownloadMode">
+    <div class="bg-mark" *ngIf="tokenWatermark" [style.background-image]="'url(' + tokenWatermark + ')'"></div>
+
+    <div class="top-star"><i class="fa fa-star"></i></div>
+    <div class="top-logo" *ngIf="tokenWatermark">
+      <img [src]="tokenWatermark" alt="brand logo" />
+    </div>
+
+    <div class="title-wrap">
+      <h2>{{ titleLineTwo }}</h2>
+    </div>
+    <div class="title-separator" aria-hidden="true">
+      <span class="line"></span>
+      <span class="diamond"></span>
+      <span class="line"></span>
+    </div>
+
+    <div class="meta">
+      <p *ngIf="dateLabel"><i class="fa fa-calendar-o"></i><span>{{ dateLabel }}</span></p>
+      <p *ngIf="timeLabel"><i class="fa fa-clock-o"></i><span>{{ timeLabel }}</span></p>
+      <p *ngIf="locationLabel"><i class="fa fa-map-marker"></i><span>{{ locationLabel }}</span></p>
+    </div>
+    <div class="dot-divider">
+      <span></span><span></span><span></span>
+    </div>
+
+    <div class="person-card">
+      <div class="field">
+        <label>Visitor Name</label>
+        <div class="value">{{ visitorName }}</div>
+      </div>
+      <div class="field" *ngIf="visitorPhone">
+        <label>Phone Number</label>
+        <div class="value phone">{{ visitorPhone }}</div>
+      </div>
+    </div>
+
+    <div class="token-row">
+      <span>Token Number</span>
+      <strong>{{ tokenNumber }}</strong>
+    </div>
+  </section>
+</div>

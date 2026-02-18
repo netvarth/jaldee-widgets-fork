@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import {
   AboutCardComponent,
@@ -25,9 +25,11 @@ import {
   ServiceCard5Component,
   ItemCardComponent,
   ItemZoomCardComponent,
-  TestimonialCardComponent
+  TestimonialCardComponent,
+  TokenCardComponent
 } from 'jaldee-widgets';
 import { filter } from 'rxjs';
+import { tokenTemplate } from './preview-template.config';
 
 @Component({
   standalone: true,
@@ -58,23 +60,35 @@ import { filter } from 'rxjs';
     AnimatedCard1Component,
     ItemCardComponent,
     ItemZoomCardComponent,
-    TestimonialCardComponent
+    TestimonialCardComponent,
+    TokenCardComponent
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
 export class App {
+  @ViewChild('homeTokenCard') homeTokenCard?: TokenCardComponent;
   isPreviewRoute = false;
+  tokenData = tokenTemplate as Record<string, any>;
 
   constructor(private router: Router) {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event) => {
       const nav = event as NavigationEnd;
-      this.isPreviewRoute = nav.urlAfterRedirects?.startsWith('/preview') ?? false;
+      const url = nav.urlAfterRedirects || '';
+      this.isPreviewRoute = url.startsWith('/preview') || url.startsWith('/token-preview');
     });
   }
 
   openPreview() {
     this.router.navigate(['/preview']);
+  }
+
+  openTokenPreview() {
+    this.router.navigate(['/token-preview']);
+  }
+
+  async downloadETokenDirect() {
+    await this.homeTokenCard?.downloadPdf();
   }
 
   cardTypeImages: Record<string, string> = {

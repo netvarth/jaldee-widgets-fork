@@ -124,4 +124,12 @@ export class HeaderMinimalComponent {
   getMenuIcon(item: HeaderMenuItem): string {
     return item.icon || 'fa fa-long-arrow-right';
   }
+
+  getAccountMenuIcon(item: HeaderAccountMenuItem): string {
+    const raw = `${item.icon ?? ''}`.trim();
+    if (!raw) {
+      return 'fa fa-circle-o';
+    }
+    return raw.includes('fa ') || raw.startsWith('fa-') ? `fa ${raw.replace(/^fa\s+/, '')}` : raw;
+  }
 }

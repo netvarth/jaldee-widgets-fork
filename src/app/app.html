@@ -3,6 +3,11 @@
 <div class="demo-shell" *ngIf="!isPreviewRoute">
   <div class="preview-control">
     <button class="preview-btn" type="button" (click)="openPreview()">Open JSON preview</button>
+    <button class="preview-btn secondary" type="button" (click)="openTokenPreview()">Open Token preview</button>
+    <button class="preview-btn secondary" type="button" (click)="downloadETokenDirect()">Download E-Token</button>
+  </div>
+  <div class="download-host">
+    <app-token-card #homeTokenCard [token]="tokenData" [pdf]="false" [png]="false"></app-token-card>
   </div>
   <app-pre-header [header]="demoHeader"></app-pre-header>
   <app-quick-access [section]="quickAccess"></app-quick-access>

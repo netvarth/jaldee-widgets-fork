@@ -30,6 +30,303 @@ export interface PreviewTemplateConfig extends TemplateConfig {
   [key: string]: unknown;
 }
 
+export const tokenTemplate = {
+  "token": 600,
+  "checkinEncId": "c-6101458-s9",
+  "date": "2026-02-18",
+  "providerAccount": {
+    "id": 46806,
+    "businessName": "Dhyan Clinic",
+    "serviceSector": {
+      "id": 1,
+      "domain": "healthCare",
+      "displayName": "Healthcare",
+      "multipleSubDomain": false,
+      "multipleLocation": false,
+      "lms": false,
+      "cdl": false,
+      "medicalRecord": false,
+      "dentalChart": false,
+      "mrAllowedEditTimeInHrs": 0
+    },
+    "serviceSubSector": {
+      "id": 2,
+      "subDomain": "dentists",
+      "displayName": "Dentist / Dental Clinic",
+      "menu": false,
+      "addFamilyMembers": false,
+      "serviceBillable": false,
+      "multipleLocation": false
+    },
+    "licensePkgID": 0,
+    "uniqueId": 46805,
+    "corpId": 0,
+    "branchId": 0,
+    "userSubdomain": 0,
+    "profileId": 0,
+    "accEncUid": "6101458",
+    "minimumCompleteness": false,
+    "businessLogo": [
+      {
+        "owner": 669,
+        "fileName": "194-1949465_art-graphic-design-joint-yoga-art-png-transparent.png",
+        "fileSize": 0.08080577850341797,
+        "caption": "",
+        "fileType": "png",
+        "order": 0,
+        "s3path": "https://jaldeescale.s3.ap-south-1.amazonaws.com/46805/provider/BusinessLogo/669/17235242679470194-1949465_art-graphic-design-joint-yoga-art-png-transparent.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCmFwLXNvdXRoLTEiSDBGAiEA%2B%2FMdzNrnyRUbkvRqOFfIc9L27b7C2KvE0Sj0ugSiBXgCIQCauc%2FBJ3biUScet2jCcsTN6wQuo%2Fd0JRaozsX0Hctm%2Byq%2FBQhfEAIaDDkxMzYzNTE2NTQ2NSIMFryLDDB1i2QB1qLgKpwF%2FqGNupr1Bttz0MmnrAfSIKBSk3yKHAn8vtqTZ2RpwFJ1Fui2FajxCiWYdEQOVWocbl0sMhkJgv3eCtwlOQczajHmqnFNVNY4V8KVq7Q%2BeEDjL78bBKHgv1gWBYBoQA1gj8N8BEIY87zpCr7LPrnWkemhm3jtBbjbNY1hCsh687J7u7RFbnnxGy%2BDFxguiHkIwMXCOpihqax5IN1V%2BVX2wvLBk8hmmifKcLCCrvxRbxSEOLDfJCkNCnvfp%2BudeuZcu57G82GYSmf%2BV%2FuyFC2Y8DzUuC6CCgU0h%2B5k6bkWpwuAkGulBNWkjiS1ii1uF3G1gF541bsHd3FnaSEMPxTImPc1qP7RUdWITPEquaNrLmWUm0Rz9sY3VdWSFgbv%2FeHFxByJ46T%2FIRjuro%2BGjYYw%2BJM81%2BmO6ZjHtz94e7ezQl6Qv90Dc%2FQXYfQkDgR7%2BNqbuRmIsaSqjLmE63%2FUyViG30kWotvPz30gFQ309Nu7lmG9fo89u94KVcoxGrcmlC6UYdA26wJoXrnE93upqlKQo%2FBoGeGAxDdm35On2gy2AGplMf1rMXpd1dESbZmSmQqSafacWqe89PgfQYgpYCQ9B34gb%2FMnnpHjv1W%2B1b5cRyIZBnsWot5DfXk8enNx%2FQtRW8SU8gZ18SWv6X4IaxUHZHyMxLc4lFkbxvz1%2FOmU3aQCqVj72nAUdpn%2FIe3SqFlMV9l9c1OsZwXDqgLJv3ToQOVEOFc6dLOKhxBMor7Zp1lR3onuwmzM8k5wCJJdke8eS4c1p4LEkG7C5BPTAXcDx7ifNKCd90CzprGTabmIRGyLKQO1lM75nTAuMJuX28dj%2B8oZPiRQCuHYBoGGyb%2FQb6Z6T1lxJ0QC08pmalOTPDwOX0iSSVKphFiTsSAw0qrVzAY6sAEOCoSBHzP8ZYDwkqQoANYeqAHRT9el%2F4MTVPKcdARoJdpRhQfH98gePpoD%2FpTvbH8Qnn2M129Y1RYeO%2F4MLtmKW5%2BRDj5eLuUDgMdizPbBADOSucFqpcOcDmsk03QsfaK%2BhaRkEPNzaYOQg6uFYQ2BLc4TeiKn9q6Ew%2BIR8BDn10P6%2FgnsG7474HPzUirCr7BIwATop4SaxxJZq%2F7lSCI8MM3BkL2j6haGdmr3t%2F8ziw%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260218T064144Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=ASIA5JOHGIUMRFNTSBS3%2F20260218%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Signature=5e723afe4f6902d2029614c18ed30a84465157629b1a295e0142d695d84859c8",
+        "action": "add",
+        "uid": "",
+        "driveId": 47048
+      }
+    ]
+  },
+  "consumer": {
+    "id": 1515,
+    "firstName": "Dhyan Krishna",
+    "lastName": "EM",
+    "gender": "male",
+    "dob": "2018-02-27",
+    "systemGeneratedDoB": false,
+    "phoneNo": "5555000015",
+    "favourite": true,
+    "phone_verified": false,
+    "email_verified": true,
+    "jaldeeConsumer": 0,
+    "countryCode": "+91",
+    "jaldeeId": "temp#220",
+    "whatsAppNum": {
+      "countryCode": "+91",
+      "number": "9605551784"
+    },
+    "telegramNum": {
+      "countryCode": "+91",
+      "number": "5555000015"
+    },
+    "totalCheckedInCount": 0,
+    "age": {
+      "year": 7,
+      "month": 11,
+      "day": 22
+    },
+    "isSignUpCustomer": false,
+    "account": 0,
+    "consumerPhoto": [],
+    "visitCount": 0,
+    "migrated": false,
+    "allowLogin": false,
+    "internationalConsumer": false,
+    "inActivatedBySelf": false,
+    "creditSystemGenerated": false
+  },
+  "jaldeeConsumer": {
+    "id": 669,
+    "favourite": false,
+    "SignedUp": false,
+    "prodAccount": false,
+    "accountId": 0,
+    "consumerPhoto": []
+  },
+  "service": {
+    "id": 429,
+    "name": "Xray",
+    "totalAmount": 100,
+    "serviceType": "physicalService",
+    "multiples": 1,
+    "livetrack": false,
+    "consumerNoteMandatory": true,
+    "consumerNoteTitle": "X-ray for",
+    "preInfoEnabled": false,
+    "preInfoTitle": "",
+    "preInfoText": "",
+    "postInfoEnabled": false,
+    "postInfoTitle": "",
+    "postInfoText": "",
+    "questionnaireIds": [],
+    "maxBookingsAllowed": 0,
+    "resoucesRequired": 0,
+    "internationalCard": false,
+    "bankId": 0,
+    "serviceDurationEnabled": false,
+    "showPrice": false,
+    "serviceOptionIds": [],
+    "showOnlyAvailableSlots": false,
+    "consumerGroupId": [],
+    "date": false,
+    "dateTime": false,
+    "noDateTime": false,
+    "channelRestricted": false,
+    "automaticInvoiceGeneration": true,
+    "individualScheduleId": 0
+  },
+  "waitlistStatus": "checkedIn",
+  "statusUpdatedTime": "2026-02-18 12:11 PM",
+  "partySize": 1,
+  "consumerNote": "X-ray",
+  "recalculatedTime": "2026-02-18",
+  "lastVisitedDate": "2024-05-07",
+  "appxWaitingTime": 0,
+  "queue": {
+    "id": 664,
+    "name": "Time Window 1",
+    "location": {
+      "id": 46763,
+      "place": "Thekkinkadu Maidan, Thrissur",
+      "address": "Thrissur, Kuruppams, Thekkinkadu Maidan, Thrissur, Kerala 680020, India",
+      "longitude": "76.21443490000001",
+      "lattitude": "10.5276416",
+      "googleMapUrl": "https://www.google.com/maps/place/10.5276416,76.21443490000001/@10.5276416,76.21443490000001,15z",
+      "searchable": true,
+      "notificationsEnabled": false,
+      "walkinNotificationsEnabled": false,
+      "OnlineNotificationsEnabled": false,
+      "smsEnabled": false,
+      "whatsAppEnabled": false,
+      "locationType": "googleMap"
+    },
+    "queueStartTime": "09:00 AM",
+    "queueEndTime": "09:00 PM",
+    "personAhead": 0,
+    "provider": {
+      "id": 0,
+      "whatsAppNum": {
+        "countryCode": "",
+        "number": ""
+      },
+      "telegramNum": {
+        "countryCode": "",
+        "number": ""
+      }
+    },
+    "availabilityQueue": false
+  },
+  "waitlistedBy": "PROVIDER_CONSUMER",
+  "personsAhead": 0,
+  "waitlistingFor": [
+    {
+      "id": 1515,
+      "firstName": "Dhyan Krishna",
+      "lastName": "EM",
+      "phoneNo": "5555000015",
+      "email": "manikandan@jaldee.com",
+      "gender": "male",
+      "dob": "2018-02-27",
+      "memberJaldeeId": "temp#220",
+      "age": "7",
+      "title": "Mr.",
+      "whatsAppNum": {
+        "countryCode": "+91",
+        "number": "9605551784"
+      },
+      "telegramNum": {
+        "countryCode": "+91",
+        "number": "5555000015"
+      }
+    }
+  ],
+  "ynwUuid": "8dce7ce4-6369-441a-a35e-0f04b8071460_wl",
+  "paymentStatus": "NotPaid",
+  "billStatus": "New",
+  "calculationMode": "Conventional",
+  "checkInTime": "09:00",
+  "coupons": [],
+  "billViewStatus": "Notshow",
+  "amountPaid": 0,
+  "amountDue": 118,
+  "billId": 0,
+  "label": {},
+  "waitlistPhoneNumber": "5555000015",
+  "account": 46806,
+  "onlineRequest": false,
+  "kioskRequest": false,
+  "firstCheckIn": false,
+  "active": false,
+  "accessScope": 1,
+  "waitlistMode": "ONLINE_CHECKIN",
+  "consumerStarted": false,
+  "callingStatus": false,
+  "showToken": true,
+  "hasAttachment": false,
+  "mrId": 0,
+  "prescriptionCreated": false,
+  "prescShared": false,
+  "consLastVisitedDate": "18-02-2026 09:00 AM",
+  "selfAssign": false,
+  "isRescheduled": false,
+  "countryCode": "+91",
+  "useCredit": false,
+  "useJcash": false,
+  "jCashUsedAmt": 0,
+  "creditUsedAmt": 0,
+  "prevAssignedProvider": 0,
+  "teamId": 0,
+  "questionnaires": [],
+  "deptId": 0,
+  "location": {
+    "id": 46763,
+    "place": "Thekkinkadu Maidan, Thrissur",
+    "address": "Thrissur, Kuruppams, Thekkinkadu Maidan, Thrissur, Kerala 680020, India",
+    "longitude": "76.21443490000001",
+    "lattitude": "10.5276416",
+    "googleMapUrl": "https://www.google.com/maps/place/10.5276416,76.21443490000001/@10.5276416,76.21443490000001,15z",
+    "searchable": true,
+    "notificationsEnabled": false,
+    "walkinNotificationsEnabled": false,
+    "OnlineNotificationsEnabled": false,
+    "smsEnabled": false,
+    "whatsAppEnabled": false,
+    "locationType": "googleMap"
+  },
+  "fullAmt": 100,
+  "prePayment": 0,
+  "requestInfo": {
+    "agent": "BROWSER",
+    "ui": "WEB_UI",
+    "ipAddress": "49.47.192.5",
+    "bookingReqFrom": "WEB_LINK"
+  },
+  "serviceOptions": [],
+  "serviceName": "Xray",
+  "qnrmap": {},
+  "serviceDuration": 15,
+  "serviceType": "physicalService",
+  "serviceTaxable": true,
+  "locationUrl": "https://www.google.com/maps/place/10.5276416,76.21443490000001/@10.5276416,76.21443490000001,15z",
+  "serviceData": {
+    "id": "429",
+    "name": "Xray"
+  },
+  "createdDate": "2026-02-18",
+  "jCouponAppliedAmt": 0,
+  "couponAppliedAmt": 0,
+  "timezone": "Asia/Kolkata",
+  "localdate": "18-02-2026",
+  "ipRegistrationCreated": false,
+  "attachments": [],
+  "userSpecificService": false,
+  "taxPercentage": 18,
+  "netTaxAmount": 18,
+  "taxableTotal": 100,
+  "nonTaxableTotal": 0,
+  "netRate": 118,
+  "discounts": [],
+  "discountTotal": 0,
+  "jaldeeCoupons": [],
+  "providerCoupons": [],
+  "refundedAmount": 0,
+  "taxSettings": {
+    "id": 46806,
+    "enableTax": true,
+    "taxPercentage": 18,
+    "gstNumber": "19AABCU9603R1ZK",
+    "nameAsInGst": "dhyans",
+    "address": "jaldee thrissur"
+  },
+  "isAssigned": false,
+  "invoiceCreated": true,
+  "temporaryTotalAmount": 0
+}
+
 export const previewTemplateConfig: PreviewTemplateConfig = {
   "accountID": 128609,
   "template": "mixed-template1",
@@ -165,19 +462,19 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
         "title": "Dashboard",
         "link": "dashboard",
         "linkType": "internal",
-        "icon": "fa-tachometer"
+        "icon": "fa fa-tachometer"
       },
       {
         "title": "Family Members",
         "link": "members",
         "linkType": "internal",
-        "icon": "fa-users"
+        "icon": "fa fa-users"
       },
       {
         "title": "Logout",
         "link": "logout",
         "linkType": "internal",
-        "icon": "fa-sign-out"
+        "icon": "fa fa-sign-out"
       }
     ],
     "announcements": [

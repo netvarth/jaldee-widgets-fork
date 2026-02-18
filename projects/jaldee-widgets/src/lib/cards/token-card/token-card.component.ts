@@ -1,0 +1,237 @@
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+
+@Component({
+  selector: 'app-token-card',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './token-card.component.html',
+  styleUrls: ['./token-card.component.scss']
+})
+export class TokenCardComponent implements OnInit {
+  @Input() token: Record<string, any> | null = null;
+  @Input() pdf = false;
+  @Input() png = false;
+
+  @ViewChild('tokenCard', { static: false }) tokenCardRef?: ElementRef<HTMLElement>;
+
+  ngOnInit(): void {
+    this.loadFontAwesome();
+  }
+
+  get isDownloadMode(): boolean {
+    return this.pdf || this.png;
+  }
+
+  async downloadEToken(): Promise<void> {
+    if (this.pdf) {
+      await this.downloadPdf();
+      return;
+    }
+    if (this.png) {
+      await this.downloadImage();
+    }
+  }
+
+  async downloadImage(): Promise<void> {
+    const canvas = await this.captureTokenCard();
+    if (!canvas || typeof document === 'undefined') {
+      return;
+    }
+    const url = canvas.toDataURL('image/png');
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = 'token-card.png';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+  }
+
+  async downloadPdf(): Promise<void> {
+    const canvas = await this.captureTokenCard();
+    if (!canvas) {
+      return;
+    }
+    await this.ensureJsPdf();
+    const jsPdfCtor = (window as any)?.jspdf?.jsPDF;
+    if (!jsPdfCtor) {
+      return;
+    }
+    const imgData = canvas.toDataURL('image/png');
+    const pdfDoc = new jsPdfCtor('p', 'mm', 'a4');
+    const pageWidth = pdfDoc.internal.pageSize.getWidth();
+    const pageHeight = pdfDoc.internal.pageSize.getHeight();
+    const imgWidth = pageWidth - 20;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const y = Math.max(10, (pageHeight - imgHeight) / 2);
+    pdfDoc.addImage(imgData, 'PNG', 10, y, imgWidth, imgHeight);
+    pdfDoc.save('token-card.pdf');
+  }
+
+  get tokenWatermark(): string {
+    return this.stringValue(this.token?.['providerAccount']?.['businessLogo']?.[0]?.['s3path']);
+  }
+
+  get titleLineTwo(): string {
+    return this.stringValue(this.token?.['serviceName']) || 'Token';
+  }
+
+  get dateLabel(): string {
+    const localDate = this.stringValue(this.token?.['localdate']);
+    if (localDate) {
+      const parsedLocal = this.parseDate(localDate);
+      if (parsedLocal) {
+        return this.formatDisplayDate(parsedLocal);
+      }
+    }
+    const date = this.stringValue(this.token?.['date']);
+    const parsedDate = this.parseDate(date);
+    return parsedDate ? this.formatDisplayDate(parsedDate) : date;
+  }
+
+  get timeLabel(): string {
+    const startTime = this.stringValue(this.token?.['queue']?.['queueStartTime']);
+    return startTime ? `${startTime} onwards` : '';
+  }
+
+  get locationLabel(): string {
+    return (
+      this.stringValue(this.token?.['queue']?.['location']?.['place']) ||
+      this.stringValue(this.token?.['location']?.['place']) ||
+      this.stringValue(this.token?.['queue']?.['location']?.['address'])
+    );
+  }
+
+  get visitorName(): string {
+    const first = this.stringValue(this.token?.['consumer']?.['firstName']);
+    const last = this.stringValue(this.token?.['consumer']?.['lastName']);
+    return `${first} ${last}`.trim() || 'Visitor Name';
+  }
+
+  get visitorPhone(): string {
+    const code = this.stringValue(this.token?.['consumer']?.['countryCode']);
+    const phone = this.stringValue(this.token?.['consumer']?.['phoneNo']);
+    return `${code} ${phone}`.trim();
+  }
+
+  get tokenNumber(): string {
+    const value = this.token?.['token'];
+    if (value === null || value === undefined || value === '') {
+      return '#000';
+    }
+    return `#${String(value).padStart(3, '0')}`;
+  }
+
+  private loadFontAwesome(): void {
+    if (typeof document === 'undefined') {
+      return;
+    }
+    const existing = document.querySelector('link[data-font-awesome="token-card"]');
+    if (existing) {
+      return;
+    }
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
+    link.setAttribute('data-font-awesome', 'token-card');
+    document.head.appendChild(link);
+  }
+
+  private async captureTokenCard(): Promise<HTMLCanvasElement | null> {
+    const card = this.tokenCardRef?.nativeElement;
+    if (!card) {
+      return null;
+    }
+    await this.ensureHtml2Canvas();
+    const html2canvas = (window as any)?.html2canvas;
+    if (!html2canvas) {
+      return null;
+    }
+    return html2canvas(card, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#f8f5ef'
+    });
+  }
+
+  private async ensureHtml2Canvas(): Promise<void> {
+    const html2canvas = (window as any)?.html2canvas;
+    if (html2canvas || typeof document === 'undefined') {
+      return;
+    }
+    await this.loadScript(
+      'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
+      'html2canvas-lib'
+    );
+  }
+
+  private async ensureJsPdf(): Promise<void> {
+    const jsPdf = (window as any)?.jspdf?.jsPDF;
+    if (jsPdf || typeof document === 'undefined') {
+      return;
+    }
+    await this.loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js', 'jspdf-lib');
+  }
+
+  private loadScript(src: string, id: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const existing = document.getElementById(id) as HTMLScriptElement | null;
+      if (existing) {
+        resolve();
+        return;
+      }
+      const script = document.createElement('script');
+      script.id = id;
+      script.src = src;
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error(`Failed to load ${src}`));
+      document.head.appendChild(script);
+    });
+  }
+
+  private stringValue(value: unknown): string {
+    return typeof value === 'string' ? value : '';
+  }
+
+  private parseDate(value: string): Date | null {
+    if (!value) {
+      return null;
+    }
+    const ddmmyyyy = /^(\d{2})-(\d{2})-(\d{4})$/.exec(value);
+    if (ddmmyyyy) {
+      const day = Number(ddmmyyyy[1]);
+      const month = Number(ddmmyyyy[2]) - 1;
+      const year = Number(ddmmyyyy[3]);
+      return new Date(year, month, day);
+    }
+    const yyyymmdd = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+    if (yyyymmdd) {
+      const year = Number(yyyymmdd[1]);
+      const month = Number(yyyymmdd[2]) - 1;
+      const day = Number(yyyymmdd[3]);
+      return new Date(year, month, day);
+    }
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  private formatDisplayDate(date: Date): string {
+    const weekday = date.toLocaleDateString('en-IN', { weekday: 'long' });
+    const month = date.toLocaleDateString('en-IN', { month: 'long' });
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `${weekday}, ${day}${this.daySuffix(day)} ${month} ${year}`;
+  }
+
+  private daySuffix(day: number): string {
+    if (day >= 11 && day <= 13) {
+      return 'th';
+    }
+    const last = day % 10;
+    if (last === 1) return 'st';
+    if (last === 2) return 'nd';
+    if (last === 3) return 'rd';
+    return 'th';
+  }
+}

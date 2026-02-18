@@ -42,6 +42,8 @@
 .preview-control {
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
   padding: 16px;
 }
 
@@ -54,6 +56,18 @@
   cursor: pointer;
   font-size: 14px;
   text-transform: uppercase;
+}
+
+.preview-btn.secondary {
+  background: #6b7280;
+}
+
+.download-host {
+  position: fixed;
+  left: -10000px;
+  top: 0;
+  width: 420px;
+  pointer-events: none;
 }
 
 .section-title {

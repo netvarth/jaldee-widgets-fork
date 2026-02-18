@@ -64,6 +64,7 @@ export class PreviewPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateDeviceFlags(this.getWindowWidth());
+    this.loadFontAwesome();
     this.loadFontFromConfig(
       this.resolveString(this.config['primaryCustomFontUrl']) ||
         this.extractFontName(this.resolveString(this.config['primaryFont']))
@@ -192,6 +193,21 @@ export class PreviewPageComponent implements OnInit {
       (this.previewConfig['logoAspectRatio'] as string | null | undefined) ||
       (this.previewConfig['aspectRatio'] as string | null | undefined)
     );
+  }
+
+  private loadFontAwesome(): void {
+    if (typeof document === 'undefined') {
+      return;
+    }
+    const existing = document.querySelector('link[data-font-awesome="preview"]');
+    if (existing) {
+      return;
+    }
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
+    link.setAttribute('data-font-awesome', 'preview');
+    document.head.appendChild(link);
   }
 
   get headerVariant(): HeaderVariant {

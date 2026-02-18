@@ -26,6 +26,7 @@ export * from './lib/cards/service-card5/service-card5.component';
 export * from './lib/cards/testimonial-card/testimonial-card.component';
 export * from './lib/cards/text-card/text-card.component';
 export * from './lib/cards/item/item-card2/item-card2.component';
+export * from './lib/cards/token-card/token-card.component';
 export * from './lib/layouts/about-us/about-us.component';
 export * from './lib/layouts/animations/animations';
 export * from './lib/layouts/banner-with-content/banner-with-content.component';

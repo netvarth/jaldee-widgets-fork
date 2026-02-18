@@ -1,0 +1,246 @@
+.token-card-shell {
+  width: 100%;
+}
+
+.token-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 420px;
+  margin: 0 auto 16px;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: #8f6b2c;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+
+.token-card {
+  position: relative;
+  overflow: hidden;
+  max-width: 410px;
+  margin: 0 auto;
+  border-radius: 10px;
+  background: #f8f5ef;
+  border-left: 1px solid #d6c9b5;
+  border-right: 1px solid #d6c9b5;
+  border-top: 4px solid #b78f51;
+  border-bottom: 4px solid #b78f51;
+  padding: 2px 18px 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.token-card.export-only {
+  position: fixed;
+  left: -10000px;
+  top: 0;
+}
+
+.bg-mark {
+  position: absolute;
+  inset: 0;
+  background-position: center 26%;
+  background-repeat: no-repeat;
+  background-size: 72% auto;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.top-star {
+  text-align: center;
+  color: #c3a24f;
+  margin: 0 0 12px;
+  font-size: 16px;
+  opacity: 0.6;
+}
+
+.top-logo {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 12px;
+}
+
+.top-logo img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(183, 143, 81, 0.45);
+  background: #f8f5ef;
+}
+
+.title-wrap {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.title-wrap h2 {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #6b373b;
+  line-height: 1.2;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.title-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 18px 0 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.title-separator .line {
+  width: 46px;
+  height: 1px;
+  background: #d6c49a;
+}
+
+.title-separator .diamond {
+  width: 7px;
+  height: 7px;
+  border: 1px solid #c7a856;
+  transform: rotate(45deg);
+  background: #f8f5ef;
+}
+
+.meta {
+  margin: 14px auto 10px;
+  max-width: 360px;
+  position: relative;
+  z-index: 1;
+}
+
+.meta p {
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #715f4a;
+  font-size: 14px;
+}
+
+.meta i {
+  width: 14px;
+  text-align: center;
+  color: #9a7a46;
+}
+
+.dot-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0 22px;
+  position: relative;
+}
+
+.dot-divider span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c4a451;
+}
+
+.dot-divider::before,
+.dot-divider::after {
+  content: '';
+  width: 54px;
+  height: 1px;
+  background: #d6c49a;
+}
+
+.person-card {
+  background: #fbfaf8;
+  border: 1px solid #dfd4c5;
+  border-radius: 10px;
+  padding: 12px 14px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 1;
+}
+
+.field {
+  padding: 10px 0;
+  border-bottom: 1px solid #ebe3d8;
+  text-align: center;
+}
+
+.field:last-child {
+  border-bottom: none;
+}
+
+.field label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  color: #9f8359;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.field .value {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #6a3539;
+  line-height: 1.25;
+}
+
+.field .value.phone {
+  font-size: 18px;
+}
+
+.token-row {
+  margin-top: 12px;
+  margin-bottom: 8px;
+  background: #f8f5ef;
+  border: 1px solid #dfd4c5;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.token-row span {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  color: #9b7f56;
+}
+
+.token-row strong {
+  color: #5f4c38;
+  font-size: 20px;
+}
+
+@media (max-width: 480px) {
+  .title-wrap h2 {
+    font-size: 26px;
+  }
+
+  .field .value {
+    font-size: 24px;
+  }
+
+  .field .value.phone {
+    font-size: 16px;
+  }
+
+  .token-row strong {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,25 @@
+.token-page {
+  min-height: 100vh;
+  padding: 18px 14px 30px;
+  background: #f3f0ea;
+}
+
+.token-toolbar {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 420px;
+  margin: 0 auto 16px;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: #6d5e4a;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}

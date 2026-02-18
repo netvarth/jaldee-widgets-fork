@@ -62,7 +62,7 @@
             *ngFor="let item of resolvedLoginMenu"
             (click)="onLoginMenuClick(item, $event)"
           >
-            <i *ngIf="item.icon" [class]="item.icon"></i>
+            <i [class]="getAccountMenuIcon(item)"></i>
             <span>{{ item.title }}</span>
           </button>
         </div>
