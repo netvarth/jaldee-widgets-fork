@@ -2,6 +2,8 @@
   width: 100%;
   --token-primary: #6b373b;
   --token-accent: #b78f51;
+  --token-accent-soft: #d6c49a;
+  --token-muted: #9b7f56;
   --token-bg: #f8f5ef;
   --token-surface: #fbfaf8;
 }
@@ -122,7 +124,7 @@
 .title-separator .line {
   width: 46px;
   height: 1px;
-  background: color-mix(in srgb, var(--token-accent) 45%, #ffffff 55%);
+  background: var(--token-accent-soft);
 }
 
 .title-separator .diamond {
@@ -177,7 +179,7 @@
   content: '';
   width: 54px;
   height: 1px;
-  background: color-mix(in srgb, var(--token-accent) 45%, #ffffff 55%);
+  background: var(--token-accent-soft);
 }
 
 .person-card {
@@ -237,7 +239,7 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 12px;
-  color: color-mix(in srgb, var(--token-accent) 70%, #3b3b3b 30%);
+  color: var(--token-muted);
 }
 
 .token-row strong {
