@@ -4,11 +4,11 @@
   </div>
 
   <section class="token-card" #tokenCard [class.export-only]="isDownloadMode" [class.full-screen]="fullScreen">
-    <div class="bg-mark" *ngIf="tokenWatermark" [style.background-image]="'url(' + tokenWatermark + ')'"></div>
+    <img class="bg-mark" *ngIf="tokenWatermark" [src]="tokenWatermark" alt="" aria-hidden="true" crossorigin="anonymous" />
 
     <div class="top-star"><i class="fa fa-star"></i></div>
     <div class="top-logo" *ngIf="tokenWatermark">
-      <img [src]="tokenWatermark" alt="brand logo" />
+      <img [src]="tokenWatermark" alt="brand logo" crossorigin="anonymous" />
     </div>
 
     <div class="title-wrap">

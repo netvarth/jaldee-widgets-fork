@@ -169,6 +169,7 @@ export class TokenCardComponent implements OnInit {
       return null;
     }
     await this.ensureHtml2Canvas();
+    await this.waitForImages(card);
     const html2canvas = (window as any)?.html2canvas;
     if (!html2canvas) {
       return null;
@@ -176,8 +177,29 @@ export class TokenCardComponent implements OnInit {
     return html2canvas(card, {
       scale: 2,
       useCORS: true,
+      imageTimeout: 15000,
       backgroundColor: '#f8f5ef'
     });
+  }
+
+  private waitForImages(root: HTMLElement): Promise<void> {
+    const images = Array.from(root.querySelectorAll('img'));
+    if (images.length === 0) {
+      return Promise.resolve();
+    }
+
+    return Promise.all(
+      images.map((img) => {
+        if (img.complete && img.naturalWidth > 0) {
+          return Promise.resolve();
+        }
+        return new Promise<void>((resolve) => {
+          const done = () => resolve();
+          img.addEventListener('load', done, { once: true });
+          img.addEventListener('error', done, { once: true });
+        });
+      })
+    ).then(() => undefined);
   }
 
   private async ensureHtml2Canvas(): Promise<void> {
