@@ -89,7 +89,7 @@ export class TokenCardComponent implements OnInit {
   }
 
   get tokenWatermark(): string {
-    return this.stringValue(this.token?.['providerAccount']?.['businessLogo']?.[0]?.['s3path']);
+    return this.normalizeImageUrl(this.stringValue(this.token?.['providerAccount']?.['businessLogo']?.[0]?.['s3path']));
   }
 
   get titleLineTwo(): string {
@@ -169,17 +169,23 @@ export class TokenCardComponent implements OnInit {
       return null;
     }
     await this.ensureHtml2Canvas();
+    const restoreImages = await this.prepareImagesForCapture(card);
     await this.waitForImages(card);
     const html2canvas = (window as any)?.html2canvas;
     if (!html2canvas) {
+      restoreImages();
       return null;
     }
-    return html2canvas(card, {
-      scale: 2,
-      useCORS: true,
-      imageTimeout: 15000,
-      backgroundColor: '#f8f5ef'
-    });
+    try {
+      return await html2canvas(card, {
+        scale: 2,
+        useCORS: true,
+        imageTimeout: 15000,
+        backgroundColor: '#f8f5ef'
+      });
+    } finally {
+      restoreImages();
+    }
   }
 
   private waitForImages(root: HTMLElement): Promise<void> {
@@ -196,7 +202,14 @@ export class TokenCardComponent implements OnInit {
         return new Promise<void>((resolve) => {
           const done = () => resolve();
           img.addEventListener('load', done, { once: true });
-          img.addEventListener('error', done, { once: true });
+          img.addEventListener(
+            'error',
+            () => {
+              console.warn('[token-card] Image failed to load before capture:', img.currentSrc || img.src);
+              done();
+            },
+            { once: true }
+          );
         });
       })
     ).then(() => undefined);
@@ -240,6 +253,110 @@ export class TokenCardComponent implements OnInit {
 
   private stringValue(value: unknown): string {
     return typeof value === 'string' ? value : '';
+  }
+
+  private normalizeImageUrl(value: string): string {
+    if (!value) {
+      return '';
+    }
+    if (value.startsWith('//')) {
+      return `https:${value}`;
+    }
+    if (value.startsWith('http://')) {
+      return `https://${value.slice('http://'.length)}`;
+    }
+    return value;
+  }
+
+  private async prepareImagesForCapture(root: HTMLElement): Promise<() => void> {
+    if (typeof window === 'undefined') {
+      return () => undefined;
+    }
+    const images = Array.from(root.querySelectorAll('img'));
+    if (images.length === 0) {
+      return () => undefined;
+    }
+
+    const restored: Array<() => void> = [];
+    await Promise.all(
+      images.map(async (img) => {
+        const element = img as HTMLImageElement;
+        const source = this.normalizeImageUrl(element.currentSrc || element.src);
+        if (!source || !this.isCrossOrigin(source)) {
+          return;
+        }
+        const dataUrl = await this.fetchAsDataUrl(source);
+        if (!dataUrl) {
+          console.warn('[token-card] Could not inline image for capture:', source);
+          return;
+        }
+        const originalSrc = element.src;
+        const originalCrossOrigin = element.getAttribute('crossorigin');
+        element.setAttribute('crossorigin', 'anonymous');
+        element.src = dataUrl;
+        restored.push(() => {
+          if (originalCrossOrigin === null) {
+            element.removeAttribute('crossorigin');
+          } else {
+            element.setAttribute('crossorigin', originalCrossOrigin);
+          }
+          element.src = originalSrc;
+        });
+      })
+    );
+
+    return () => {
+      restored.forEach((restore) => restore());
+    };
+  }
+
+  private isCrossOrigin(url: string): boolean {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+    try {
+      const parsed = new URL(url, window.location.href);
+      return parsed.origin !== window.location.origin;
+    } catch {
+      return false;
+    }
+  }
+
+  private async fetchAsDataUrl(url: string): Promise<string | null> {
+    if (typeof fetch === 'undefined') {
+      return null;
+    }
+    try {
+      const response = await fetch(url, {
+        mode: 'cors',
+        credentials: 'omit',
+        cache: 'no-store'
+      });
+      if (!response.ok) {
+        console.warn('[token-card] Image fetch failed for capture:', url, 'status:', response.status);
+        return null;
+      }
+      const blob = await response.blob();
+      return await this.blobToDataUrl(blob);
+    } catch {
+      console.warn('[token-card] Image fetch blocked/failed for capture:', url);
+      return null;
+    }
+  }
+
+  private blobToDataUrl(blob: Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (typeof reader.result === 'string') {
+          resolve(reader.result);
+          return;
+        }
+        reject(new Error('Failed to convert blob to data URL'));
+      };
+      reader.onerror = () => reject(new Error('Failed to read blob'));
+      reader.readAsDataURL(blob);
+    });
   }
 
   private parseDate(value: string): Date | null {
