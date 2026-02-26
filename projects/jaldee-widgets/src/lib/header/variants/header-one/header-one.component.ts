@@ -24,12 +24,33 @@ export class HeaderOneComponent {
   @Input() showSearch?: boolean;
   @Input() showCart?: boolean;
   @Input() showWishlist?: boolean;
+  @Input() searchSuggestions: any[] = [];
   @Output() actionPerformed = new EventEmitter<{ type: string; payload?: any }>();
 
   searchValue = '';
+  showSuggestions = false;
 
   emit(action: { type: string; payload?: any }) {
     this.actionPerformed.emit(action);
+  }
+
+  onSearchFocus() {
+    this.showSuggestions = true;
+  }
+
+  onSearchBlur() {
+    setTimeout(() => {
+      this.showSuggestions = false;
+    }, 120);
+  }
+
+  selectSuggestion(item: any) {
+    if (!item) {
+      return;
+    }
+    this.searchValue = `${item?.name ?? ''}`.trim();
+    this.showSuggestions = false;
+    this.emit({ type: 'searchSelect', payload: item });
   }
 
   menuClick(item: HeaderMenuItem) {
@@ -39,7 +60,8 @@ export class HeaderOneComponent {
   triggerSearch() {
     const query = this.searchValue?.trim();
     if (query) {
-      this.emit({ type: 'search', payload: query });
+      this.showSuggestions = false;
+      this.emit({ type: 'searchSubmit', payload: query });
     }
   }
 

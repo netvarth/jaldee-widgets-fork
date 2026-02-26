@@ -18,30 +18,34 @@
       <img [src]="logoSrc" [style.aspect-ratio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" alt="logo" />
     </div>
 
-    <div class="search-wrapper" *ngIf="showSearch && !smallDevice">
+    <div class="search-wrapper" *ngIf="resolvedShowSearch && !smallDevice">
       <input
         type="text"
         placeholder="Search"
+        (ngModelChange)="emit({ type: 'search', payload: $event })"
         [(ngModel)]="searchValue"
-        (keyup.enter)="emit({ type: 'search', payload: searchValue })"
+        (keyup.enter)="triggerSearchSubmit()"
+        (focus)="onSearchFocus()"
+        (blur)="onSearchBlur()"
       />
-      <button type="button" (click)="emit({ type: 'search', payload: searchValue })">
-        <svg
+      <button type="button" (click)="triggerSearchSubmit()">
+        <img
           class="search-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M15.5 14h-.79l-.28-.27A6 6 0 1 0 14 15.5l.27.28v.79L20 21.5 21.5 20ZM6.5 11a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0Z"
-            fill="currentColor"
-          />
-        </svg>
+          alt="Search"
+          src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%232b2b2b%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Ccircle cx=%2711%27 cy=%2711%27 r=%277%27/%3E%3Cline x1=%2716.65%27 y1=%2716.65%27 x2=%2721%27 y2=%2721%27/%3E%3C/svg%3E"
+        />
       </button>
+      <ul class="search-suggestions" *ngIf="showSuggestions && searchSuggestions?.length">
+        <li *ngFor="let item of searchSuggestions" (mousedown)="selectSuggestion(item)">
+          <div class="suggestion-title">{{ item?.name }}</div>
+          <div class="suggestion-subtitle" *ngIf="item?.sOrderCatalogName">{{ item?.sOrderCatalogName }}</div>
+        </li>
+      </ul>
     </div>
 
     <div class="quick-actions">
       <button
-        *ngIf="showSearch && smallDevice"
+        *ngIf="resolvedShowSearch && smallDevice"
         type="button"
         (click)="toggleSearch()"
         [attr.aria-label]="searchOpen ? 'Close search' : 'Open search'"
@@ -53,14 +57,16 @@
         <span *ngIf="!smallDevice">Help</span>
       </button>
       <span class="divider"></span>
-      <button type="button" (click)="emit({ type: 'wishlist' })" aria-label="Wishlist">
+      <button *ngIf="resolvedShowWishlist" type="button" (click)="emit({ type: 'wishlist' })" aria-label="Wishlist">
         <i [class]="getActionIcon('wishlist')"></i>
         <span *ngIf="!smallDevice">Wishlist</span>
+        <span class="count-badge" *ngIf="wishlistCount">{{ wishlistCount }}</span>
       </button>
       <span class="divider"></span>
-      <button *ngIf="showCart" type="button" (click)="emit({ type: 'cart' })" aria-label="Bag">
+      <button *ngIf="resolvedShowCart" type="button" (click)="emit({ type: 'cart' })" aria-label="Bag">
         <i [class]="getActionIcon('cart')"></i>
         <span *ngIf="!smallDevice">Bag</span>
+        <span class="count-badge" *ngIf="cartCount">{{ cartCount }}</span>
       </button>
       <span class="divider"></span>
       <div class="account-menu-wrap" *ngIf="showLogin">
@@ -89,26 +95,30 @@
       </div>
     </div>
   </div>
-  <div class="mobile-search-row" *ngIf="showSearch && smallDevice && searchOpen">
+  <div class="mobile-search-row" *ngIf="resolvedShowSearch && smallDevice && searchOpen">
     <div class="search-wrapper">
       <input
         type="text"
         placeholder="Search"
+        (ngModelChange)="emit({ type: 'search', payload: $event })"
         [(ngModel)]="searchValue"
-        (keyup.enter)="emit({ type: 'search', payload: searchValue })"
+        (keyup.enter)="triggerSearchSubmit()"
+        (focus)="onSearchFocus()"
+        (blur)="onSearchBlur()"
       />
-      <button type="button" (click)="emit({ type: 'search', payload: searchValue })">
-        <svg
+      <button type="button" (click)="triggerSearchSubmit()">
+        <img
           class="search-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M15.5 14h-.79l-.28-.27A6 6 0 1 0 14 15.5l.27.28v.79L20 21.5 21.5 20ZM6.5 11a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0Z"
-            fill="currentColor"
-          />
-        </svg>
+          alt="Search"
+          src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%232b2b2b%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Ccircle cx=%2711%27 cy=%2711%27 r=%277%27/%3E%3Cline x1=%2716.65%27 y1=%2716.65%27 x2=%2721%27 y2=%2721%27/%3E%3C/svg%3E"
+        />
       </button>
+      <ul class="search-suggestions" *ngIf="showSuggestions && searchSuggestions?.length">
+        <li *ngFor="let item of searchSuggestions" (mousedown)="selectSuggestion(item)">
+          <div class="suggestion-title">{{ item?.name }}</div>
+          <div class="suggestion-subtitle" *ngIf="item?.sOrderCatalogName">{{ item?.sOrderCatalogName }}</div>
+        </li>
+      </ul>
     </div>
   </div>
 

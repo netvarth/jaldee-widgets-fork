@@ -17,6 +17,7 @@
 }
 
 .search {
+  position: relative;
   flex: 1;
   display: flex;
   align-items: center;
@@ -62,6 +63,19 @@
   font-size: 14px;
 }
 
+.count-badge {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #e0565b;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
 .menu {
   margin-top: 12px;
   display: flex;
@@ -79,4 +93,39 @@
 
 .menu-item i {
   margin-right: 4px;
+}
+
+.search-suggestions {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  max-height: 260px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.search-suggestions li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.search-suggestions li:hover {
+  background: #f8fafc;
+}
+
+.suggestion-title {
+  font-weight: 600;
+}
+
+.suggestion-subtitle {
+  font-size: 12px;
+  opacity: 0.75;
 }

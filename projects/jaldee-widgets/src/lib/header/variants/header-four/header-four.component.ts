@@ -21,6 +21,7 @@ export class HeaderFourComponent {
   @Input() smallDevice?: boolean;
   @Input() showCart?: boolean;
   @Input() showWishlist?: boolean;
+  @Input() searchSuggestions: any[] = [];
   @Output() actionPerformed = new EventEmitter<{ type: string; payload?: any }>();
 
   searchValue = '';

@@ -17,19 +17,28 @@
       </button>
       <img [src]="logoSrc" [style.aspect-ratio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" alt="logo" />
     </div>
-    <div class="search-box" *ngIf="showSearch && !smallDevice">
+    <div class="search-box" *ngIf="resolvedShowSearch && !smallDevice">
       <input
         type="text"
         placeholder="Search"
-        (keyup.enter)="emit({ type: 'search', payload: searchValue })"
+        (ngModelChange)="emit({ type: 'search', payload: $event })"
+        (keyup.enter)="triggerSearchSubmit()"
+        (focus)="onSearchFocus()"
+        (blur)="onSearchBlur()"
         [(ngModel)]="searchValue"
       />
-      <button type="button" (click)="emit({ type: 'search', payload: searchValue })">
+      <button type="button" (click)="triggerSearchSubmit()">
         <i class="fa fa-search"></i>
       </button>
+      <ul class="search-suggestions" *ngIf="showSuggestions && searchSuggestions?.length">
+        <li *ngFor="let item of searchSuggestions" (mousedown)="selectSuggestion(item)">
+          <div class="suggestion-title">{{ item?.name }}</div>
+          <div class="suggestion-subtitle" *ngIf="item?.sOrderCatalogName">{{ item?.sOrderCatalogName }}</div>
+        </li>
+      </ul>
     </div>
     <div class="actions">
-      <button *ngIf="showSearch && smallDevice" type="button" (click)="toggleSearch()" [attr.aria-label]="searchOpen ? 'Close search' : 'Open search'">
+      <button *ngIf="resolvedShowSearch && smallDevice" type="button" (click)="toggleSearch()" [attr.aria-label]="searchOpen ? 'Close search' : 'Open search'">
         <i class="fa fa-search"></i>
       </button>
       <button type="button" (click)="emit({ type: 'help' })" aria-label="Help">
@@ -37,14 +46,16 @@
         <span *ngIf="!smallDevice">Help</span>
       </button>
       <span class="divider">|</span>
-      <button type="button" (click)="emit({ type: 'wishlist' })" aria-label="Wishlist">
+      <button *ngIf="resolvedShowWishlist" type="button" (click)="emit({ type: 'wishlist' })" aria-label="Wishlist">
         <i [class]="getActionIcon('wishlist')"></i>
         <span *ngIf="!smallDevice">Wishlist</span>
+        <span class="count-badge" *ngIf="wishlistCount">{{ wishlistCount }}</span>
       </button>
       <span class="divider">|</span>
-      <button *ngIf="showCart" type="button" (click)="emit({ type: 'cart' })" aria-label="Bag">
+      <button *ngIf="resolvedShowCart" type="button" (click)="emit({ type: 'cart' })" aria-label="Bag">
         <i [class]="getActionIcon('cart')"></i>
         <span *ngIf="!smallDevice">Bag</span>
+        <span class="count-badge" *ngIf="cartCount">{{ cartCount }}</span>
       </button>
       <span class="divider">|</span>
       <div class="account-menu-wrap">
@@ -69,17 +80,26 @@
       </div>
     </div>
   </div>
-  <div class="mobile-search-row" *ngIf="showSearch && smallDevice && searchOpen">
+  <div class="mobile-search-row" *ngIf="resolvedShowSearch && smallDevice && searchOpen">
     <div class="search-box">
       <input
         type="text"
         placeholder="Search"
-        (keyup.enter)="emit({ type: 'search', payload: searchValue })"
+        (ngModelChange)="emit({ type: 'search', payload: $event })"
+        (keyup.enter)="triggerSearchSubmit()"
+        (focus)="onSearchFocus()"
+        (blur)="onSearchBlur()"
         [(ngModel)]="searchValue"
       />
-      <button type="button" (click)="emit({ type: 'search', payload: searchValue })">
+      <button type="button" (click)="triggerSearchSubmit()">
         <i class="fa fa-search"></i>
       </button>
+      <ul class="search-suggestions" *ngIf="showSuggestions && searchSuggestions?.length">
+        <li *ngFor="let item of searchSuggestions" (mousedown)="selectSuggestion(item)">
+          <div class="suggestion-title">{{ item?.name }}</div>
+          <div class="suggestion-subtitle" *ngIf="item?.sOrderCatalogName">{{ item?.sOrderCatalogName }}</div>
+        </li>
+      </ul>
     </div>
   </div>
   <div

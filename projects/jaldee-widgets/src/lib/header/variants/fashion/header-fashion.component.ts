@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HeaderAccountMenuItem, HeaderData, HeaderMenuItem } from '../../header.model';
 
@@ -10,13 +10,22 @@ import { HeaderAccountMenuItem, HeaderData, HeaderMenuItem } from '../../header.
   templateUrl: './header-fashion.component.html',
   styleUrls: ['./header-fashion.component.scss']
 })
-export class HeaderFashionComponent {
+export class HeaderFashionComponent implements OnChanges {
   @Input() data?: HeaderData;
   @Input() logo?: string;
   @Input() aspectRatio?: string | null;
+  @Input() menuItems: HeaderMenuItem[] = [];
   @Input() smallDevice?: boolean;
   @Input() isLoggedIn?: boolean;
   @Input() userName?: string;
+  @Input() cartCount?: number;
+  @Input() wishlistCount?: number;
+  @Input() searchVisible?: boolean;
+  @Input() hideItemSearch?: boolean;
+  @Input() showSearch?: boolean;
+  @Input() showCart?: boolean;
+  @Input() showWishlist?: boolean;
+  @Input() searchSuggestions: any[] = [];
   @Output() actionPerformed = new EventEmitter<{ type: string; payload?: any }>();
 
   searchValue = '';
@@ -24,25 +33,57 @@ export class HeaderFashionComponent {
   menuOpen = false;
   searchOpen = false;
   accountMenuOpen = false;
+  showSuggestions = false;
+  
 
   emit(action: { type: string; payload?: any }) {
     this.actionPerformed.emit(action);
   }
 
-  get showSearch(): boolean {
-    return this.data?.showSearch ?? true;
+  onSearchFocus(): void {
+    this.showSuggestions = true;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['searchSuggestions']) {
+      const hasSuggestions = (this.searchSuggestions?.length || 0) > 0;
+      this.showSuggestions = !!this.searchValue?.trim() && hasSuggestions;
+    }
+  }
+
+  onSearchBlur(): void {
+    setTimeout(() => {
+      this.showSuggestions = false;
+    }, 120);
+  }
+
+  selectSuggestion(item: any): void {
+    if (!item) {
+      return;
+    }
+    this.searchValue = `${item?.name ?? ''}`.trim();
+    this.showSuggestions = false;
+    this.emit({ type: 'searchSelect', payload: item });
+  }
+
+  get resolvedShowSearch(): boolean {
+    return (this.showSearch ?? this.data?.showSearch ?? true) && !this.hideItemSearch;
   }
 
   get showLogin(): boolean {
     return this.data?.showLogin ?? true;
   }
 
-  get showCart(): boolean {
-    return this.data?.showCart ?? true;
+  get resolvedShowCart(): boolean {
+    return this.showCart ?? this.data?.showCart ?? true;
+  }
+
+  get resolvedShowWishlist(): boolean {
+    return this.showWishlist ?? true;
   }
 
   get visibleMenu(): HeaderMenuItem[] {
-    return (this.data?.menu ?? []).filter((item) => item.visible !== false);
+    return this.menuItems.filter((item) => item.visible !== false);
   }
 
   navigate(item: HeaderMenuItem): void {
@@ -62,6 +103,13 @@ export class HeaderFashionComponent {
 
   toggleSearch(): void {
     this.searchOpen = !this.searchOpen;
+  }
+  triggerSearchSubmit(): void {
+    const query = this.searchValue?.trim();
+    if (query) {
+      this.showSuggestions = false;
+      this.emit({ type: 'searchSubmit', payload: query });
+    }
   }
 
   get resolvedLoginMenu(): HeaderAccountMenuItem[] {

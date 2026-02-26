@@ -31,13 +31,22 @@
         type="text"
         placeholder="Search"
         [(ngModel)]="searchValue"
+        (ngModelChange)="emit({ type: 'search', payload: $event })"
         (keyup.enter)="triggerSearch()"
+        (focus)="onSearchFocus()"
+        (blur)="onSearchBlur()"
       />
       <button type="button" (click)="triggerSearch()">
         <svg class="search-icon" viewBox="0 0 24 24">
           <path d="M15.5 14h-.79l-.28-.27A6 6 0 1 0 14 15.5l.27.28v.79L20 21.5 21.5 20ZM6.5 11a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0Z" />
         </svg>
       </button>
+      <ul class="search-suggestions" *ngIf="showSuggestions && searchSuggestions?.length">
+        <li *ngFor="let item of searchSuggestions" (mousedown)="selectSuggestion(item)">
+          <div class="suggestion-title">{{ item?.name }}</div>
+          <div class="suggestion-subtitle" *ngIf="item?.sOrderCatalogName">{{ item?.sOrderCatalogName }}</div>
+        </li>
+      </ul>
     </div>
   </div>
 </header>
