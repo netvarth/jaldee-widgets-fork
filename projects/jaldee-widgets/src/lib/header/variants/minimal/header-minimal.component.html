@@ -41,23 +41,23 @@
       <button *ngIf="resolvedShowSearch && smallDevice" type="button" (click)="toggleSearch()" [attr.aria-label]="searchOpen ? 'Close search' : 'Open search'">
         <i class="fa fa-search"></i>
       </button>
-      <button type="button" (click)="emit({ type: 'help' })" aria-label="Help">
+      <!-- <button type="button" (click)="emit({ type: 'help' })" aria-label="Help">
         <i [class]="getActionIcon('help')"></i>
         <span *ngIf="!smallDevice">Help</span>
-      </button>
-      <span class="divider">|</span>
+      </button> -->
+      <!-- <span class="divider">|</span> -->
       <button *ngIf="resolvedShowWishlist" type="button" (click)="emit({ type: 'wishlist' })" aria-label="Wishlist">
         <i [class]="getActionIcon('wishlist')"></i>
         <span *ngIf="!smallDevice">Wishlist</span>
         <span class="count-badge" *ngIf="wishlistCount">{{ wishlistCount }}</span>
       </button>
-      <span class="divider">|</span>
+      <span class="divider" *ngIf="resolvedShowWishlist">|</span>
       <button *ngIf="resolvedShowCart" type="button" (click)="emit({ type: 'cart' })" aria-label="Bag">
         <i [class]="getActionIcon('cart')"></i>
         <span *ngIf="!smallDevice">Bag</span>
         <span class="count-badge" *ngIf="cartCount">{{ cartCount }}</span>
       </button>
-      <span class="divider">|</span>
+      <span class="divider" *ngIf="resolvedShowCart">|</span>
       <div class="account-menu-wrap">
         <button type="button" (click)="onAccountClick($event)" [attr.aria-label]="isLoggedIn ? 'Account' : 'Login'">
           <i [class]="getActionIcon(isLoggedIn ? 'account' : 'login')"></i>

@@ -3,12 +3,12 @@
     <div class="brand" (click)="emit({ type: 'home' })">
       <img *ngIf="logo || data.logo" [src]="logo || data.logo" [style.aspect-ratio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" alt="Logo" />
     </div>
-    <div class="mobile-menu" *ngIf="smallDevice && menuItems.length">
+    <div class="mobile-menu" *ngIf="smallDevice && visibleMenu.length">
       <button type="button" (click)="emit({ type: 'menu-open' })">
         <i class="fa fa-bars"></i>
       </button>
     </div>
-    <div class="search" *ngIf="showSearch && !hideItemSearch">
+    <div class="search" *ngIf="resolvedShowSearch">
       <input
         type="text"
         placeholder="Search"
@@ -31,21 +31,21 @@
       </ul>
     </div>
     <div class="actions">
-      <button type="button" (click)="isLoggedIn ? emit({ type: 'user' }) : doLogin()">
+      <button *ngIf="showLogin" type="button" (click)="isLoggedIn ? emit({ type: 'user' }) : doLogin()">
         <i class="fa fa-user-circle-o"></i>
         <span>{{ isLoggedIn ? 'Account' : 'Login' }}</span>
       </button>
-      <button *ngIf="showWishlist" type="button" (click)="goToWishlist()">
+      <button *ngIf="resolvedShowWishlist" type="button" (click)="goToWishlist()">
         <i class="fa fa-heart-o"></i>
         <span>Wishlist</span>
         <span class="count-badge" *ngIf="wishlistCount">{{ wishlistCount }}</span>
       </button>
-      <button *ngIf="showCart" type="button" (click)="goToCart()">
+      <button *ngIf="resolvedShowCart" type="button" (click)="goToCart()">
         <i class="fa fa-shopping-bag"></i>
         <span>Cart</span>
         <span class="count-badge" *ngIf="cartCount">{{ cartCount }}</span>
       </button>
-      <button *ngIf="isLoggedIn" type="button" (click)="doLogout()">
+      <button *ngIf="showLogin && isLoggedIn" type="button" (click)="doLogout()">
         <i class="fa fa-sign-out"></i>
         <span>Logout</span>
       </button>
@@ -54,7 +54,7 @@
   <nav class="menu">
     <button
       class="menu-item"
-      *ngFor="let item of menuItems"
+      *ngFor="let item of visibleMenu"
       (click)="menuClick(item)"
     >
       <i *ngIf="item.icon" [ngClass]="item.icon"></i>

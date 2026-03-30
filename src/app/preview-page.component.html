@@ -7,21 +7,27 @@
     <button routerLink="/" class="preview-btn">Back to demo</button>
   </header>
 
-  <app-pre-header [header]="previewConfig.header"></app-pre-header>
+  <app-pre-header
+    *ngIf="config.header?.announcements?.length"
+    [header]="config.header"
+    [announcements]="config.header?.announcements"
+  ></app-pre-header>
 
   <lib-preview-header
-    *ngIf="headerData"
+    *ngIf="usePreviewHeader"
     [data]="headerData"
-    [logo]="headerLogo"
+    [logo]="config.logo"
     [aspectRatio]="headerLogoAspectRatio"
-    [variant]="headerData.name"
-    [isLoggedIn]="true"
+    [variant]="headerVariant"
+    [isLoggedIn]="headerLoggedIn"
+    [userName]="headerUserName"
     [cartCount]="headerCartCount"
     [wishlistCount]="headerWishlistCount"
     [showSearch]="headerShowSearch"
     [hideItemSearch]="headerHideItemSearch"
     [smallDevice]="smallDevice"
     [showCart]="headerShowCart"
+    [showWishlist]="headerShowWishlist"
     (actionPerformed)="headerActionPerformed($event)"
   ></lib-preview-header>
 

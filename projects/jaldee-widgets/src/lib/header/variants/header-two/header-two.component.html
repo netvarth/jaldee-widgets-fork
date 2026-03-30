@@ -3,7 +3,7 @@
     <nav class="nav-left" *ngIf="!smallDevice">
       <button
         class="nav-item"
-        *ngFor="let item of menuItems"
+        *ngFor="let item of visibleMenu"
         (click)="menuClick(item)"
       >
         <i *ngIf="item.icon" [ngClass]="item.icon"></i>
@@ -14,18 +14,23 @@
       <img *ngIf="logo || data.logo" [src]="logo || data.logo" [style.aspect-ratio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" alt="Logo" />
     </div>
     <div class="actions">
-      <button type="button" (click)="isLoggedIn ? emit({ type: 'user' }) : doLogin()">
+      <button *ngIf="showLogin" type="button" (click)="isLoggedIn ? emit({ type: 'user' }) : doLogin()">
         <i class="fa fa-user-circle-o"></i>
         <span>{{ isLoggedIn ? 'Account' : 'Login' }}</span>
       </button>
-      <button *ngIf="showCart" type="button" (click)="goToCart()">
+      <button *ngIf="resolvedShowWishlist" type="button" (click)="goToWishlist()">
+        <i class="fa fa-heart-o"></i>
+        <span>Wishlist</span>
+        <span *ngIf="wishlistCount">({{ wishlistCount }})</span>
+      </button>
+      <button *ngIf="resolvedShowCart" type="button" (click)="goToCart()">
         <i class="fa fa-shopping-bag"></i>
         <span>Cart</span>
         <span *ngIf="cartCount">({{ cartCount }})</span>
       </button>
     </div>
   </div>
-  <div class="middle" *ngIf="showSearch && !hideItemSearch">
+  <div class="middle" *ngIf="resolvedShowSearch">
     <div class="search">
       <input
         type="text"

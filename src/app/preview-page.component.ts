@@ -61,6 +61,7 @@ export class PreviewPageComponent implements OnInit {
   headerCartCount = 0;
   headerWishlistCount = 0;
   headerLoggedIn = false;
+  headerUserName = 'Guest';
 
   ngOnInit(): void {
     this.updateDeviceFlags(this.getWindowWidth());
@@ -156,8 +157,16 @@ export class PreviewPageComponent implements OnInit {
     return this.previewConfig.header?.['showCart'] !== false;
   }
 
+  get headerShowWishlist(): boolean {
+    return this.previewConfig.header?.['showWishlist'] !== false;
+  }
+
   get headerHideItemSearch(): boolean {
     return this.previewConfig.header?.['hideItemSearch'] === true;
+  }
+
+  get usePreviewHeader(): boolean {
+    return !!this.headerData;
   }
 
   get footer(): FooterData | undefined {

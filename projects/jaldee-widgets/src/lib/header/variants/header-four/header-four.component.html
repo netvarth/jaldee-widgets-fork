@@ -6,7 +6,7 @@
     <nav class="nav">
       <button
         class="nav-item"
-        *ngFor="let item of menuItems"
+        *ngFor="let item of visibleMenu"
         (click)="menuClick(item)"
       >
         <i *ngIf="item.icon" [ngClass]="item.icon"></i>
@@ -14,18 +14,22 @@
       </button>
     </nav>
     <div class="actions">
-      <button *ngIf="showSearch" (click)="triggerSearch()">
+      <button *ngIf="resolvedShowSearch" (click)="triggerSearch()">
         <i class="fa fa-search"></i>
       </button>
-      <button type="button" (click)="goToCart()" *ngIf="showCart">
+      <button type="button" (click)="goToWishlist()" *ngIf="resolvedShowWishlist">
+        <i class="fa fa-heart-o"></i>
+        <span>{{ wishlistCount || 0 }}</span>
+      </button>
+      <button type="button" (click)="goToCart()" *ngIf="resolvedShowCart">
         <i class="fa fa-shopping-bag"></i>
         <span>{{ cartCount || 0 }}</span>
       </button>
-      <button type="button" (click)="isLoggedIn ? emit({ type: 'user' }) : doLogin()">
+      <button *ngIf="showLogin" type="button" (click)="isLoggedIn ? emit({ type: 'user' }) : doLogin()">
         <i class="fa fa-user-circle-o"></i>
         <span>{{ isLoggedIn ? 'Account' : 'Login' }}</span>
       </button>
-      <button *ngIf="isLoggedIn" type="button" (click)="doLogout()">
+      <button *ngIf="showLogin && isLoggedIn" type="button" (click)="doLogout()">
         <i class="fa fa-sign-out"></i>
       </button>
     </div>

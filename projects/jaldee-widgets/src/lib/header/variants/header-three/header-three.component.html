@@ -1,7 +1,7 @@
 <header class="header-three" *ngIf="data">
   <div class="header-grid">
     <div class="left" *ngIf="!smallDevice">
-      <div class="search" *ngIf="showSearch && !hideItemSearch">
+      <div class="search" *ngIf="resolvedShowSearch">
         <input
           type="text"
           placeholder="what are you looking for?"
@@ -30,20 +30,25 @@
       </div>
     </div>
     <div class="right">
-      <button type="button" (click)="isLoggedIn ? emit({ type: 'user' }) : doLogin()">
+      <button *ngIf="showLogin" type="button" (click)="isLoggedIn ? emit({ type: 'user' }) : doLogin()">
         <i class="fa fa-user-circle-o"></i>
         <span>{{ isLoggedIn ? 'Account' : 'Login' }}</span>
       </button>
-      <button *ngIf="showCart" type="button" (click)="goToCart()">
+      <button *ngIf="resolvedShowWishlist" type="button" (click)="emit({ type: 'wishlist' })">
+        <i class="fa fa-heart-o"></i>
+        <span>Wishlist</span>
+        <span *ngIf="wishlistCount">({{ wishlistCount }})</span>
+      </button>
+      <button *ngIf="resolvedShowCart" type="button" (click)="goToCart()">
         <i class="fa fa-shopping-bag"></i>
         <span>Cart</span>
         <span *ngIf="cartCount">({{ cartCount }})</span>
       </button>
     </div>
   </div>
-  <nav class="navbar" *ngIf="menuItems.length">
+  <nav class="navbar" *ngIf="visibleMenu.length">
     <ul>
-      <li *ngFor="let item of menuItems" (click)="menuClick(item)">
+      <li *ngFor="let item of visibleMenu" (click)="menuClick(item)">
         <i *ngIf="item.icon" [ngClass]="item.icon"></i>
         {{ item.title }}
       </li>
