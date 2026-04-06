@@ -1,0 +1,171 @@
+<header class="header-fashion-inline container" *ngIf="data">
+  <div class="top-row">
+    <div class="brand-block">
+      <div class="brand" (click)="emit({ type: 'home' })">
+        <button
+          *ngIf="smallDevice && visibleMenu.length"
+          type="button"
+          class="hamburger-btn"
+          (click)="toggleMenu(); $event.stopPropagation()"
+          [attr.aria-label]="menuOpen ? 'Close menu' : 'Open menu'"
+        >
+          <svg *ngIf="!menuOpen" class="hamburger-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+          </svg>
+          <svg *ngIf="menuOpen" class="hamburger-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+          </svg>
+        </button>
+        <img [src]="logoSrc" [style.aspect-ratio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" alt="logo" />
+      </div>
+
+      <nav
+        class="desktop-menu"
+        *ngIf="!smallDevice"
+      >
+        <a
+          *ngFor="let item of visibleMenu"
+          class="nav-item"
+          [class.active]="item.link === activeMenu"
+          (click)="navigate(item)"
+        >
+          <i class="menu-icon" [class]="getMenuIcon(item)"></i>
+          {{ item.title }}
+        </a>
+      </nav>
+    </div>
+
+    <div class="right-tools">
+      <div class="search-wrapper compact-search" *ngIf="resolvedShowSearch && !smallDevice">
+        <input
+          type="text"
+          placeholder="Search"
+          (ngModelChange)="emit({ type: 'search', payload: $event })"
+          [(ngModel)]="searchValue"
+          (keyup.enter)="triggerSearchSubmit()"
+          (focus)="onSearchFocus()"
+          (blur)="onSearchBlur()"
+        />
+        <button type="button" (click)="triggerSearchSubmit()">
+          <img
+            class="search-icon"
+            alt="Search"
+            src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%232b2b2b%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Ccircle cx=%2711%27 cy=%2711%27 r=%277%27/%3E%3Cline x1=%2716.65%27 y1=%2716.65%27 x2=%2721%27 y2=%2721%27/%3E%3C/svg%3E"
+          />
+        </button>
+        <ul class="search-suggestions" *ngIf="showSuggestions && searchSuggestions?.length">
+          <li *ngFor="let item of searchSuggestions" (mousedown)="selectSuggestion(item)">
+            <div class="suggestion-title">{{ item?.name }}</div>
+            <div class="suggestion-subtitle" *ngIf="item?.sOrderCatalogName">{{ item?.sOrderCatalogName }}</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="quick-actions">
+        <button
+          *ngIf="resolvedShowSearch && smallDevice"
+          type="button"
+          (click)="toggleSearch()"
+          [attr.aria-label]="searchOpen ? 'Close search' : 'Open search'"
+        >
+          <i class="fa fa-search"></i>
+        </button>
+        <button *ngIf="resolvedShowWishlist" type="button" (click)="emit({ type: 'wishlist' })" aria-label="Wishlist">
+          <i [class]="getActionIcon('wishlist')"></i>
+          <span *ngIf="!smallDevice">Wishlist</span>
+          <span class="count-badge" *ngIf="wishlistCount">{{ wishlistCount }}</span>
+        </button>
+        <span class="divider" *ngIf="resolvedShowWishlist"></span>
+        <button *ngIf="resolvedShowCart" type="button" (click)="emit({ type: 'cart' })" aria-label="Bag">
+          <i [class]="getActionIcon('cart')"></i>
+          <span *ngIf="!smallDevice">Bag</span>
+          <span class="count-badge" *ngIf="cartCount">{{ cartCount }}</span>
+        </button>
+        <span class="divider" *ngIf="resolvedShowCart"></span>
+        <div class="account-menu-wrap" *ngIf="showLogin">
+          <button
+            type="button"
+            (click)="onAccountClick($event)"
+            [attr.aria-label]="isLoggedIn ? 'Account' : 'Login'"
+          >
+            <i [class]="getActionIcon(isLoggedIn ? 'account' : 'login')"></i>
+            <span *ngIf="!smallDevice">{{ isLoggedIn ? 'Account' : 'Login' }}</span>
+          </button>
+          <div
+            class="account-menu"
+            *ngIf="isLoggedIn && accountMenuOpen && resolvedLoginMenu.length"
+          >
+            <button
+              type="button"
+              class="account-menu-item"
+              *ngFor="let item of resolvedLoginMenu"
+              (click)="onLoginMenuClick(item, $event)"
+            >
+              <i [class]="getAccountMenuIcon(item)"></i>
+              <span>{{ item.title }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-search-row" *ngIf="resolvedShowSearch && smallDevice && searchOpen">
+    <div class="search-wrapper">
+      <input
+        type="text"
+        placeholder="Search"
+        (ngModelChange)="emit({ type: 'search', payload: $event })"
+        [(ngModel)]="searchValue"
+        (keyup.enter)="triggerSearchSubmit()"
+        (focus)="onSearchFocus()"
+        (blur)="onSearchBlur()"
+      />
+      <button type="button" (click)="triggerSearchSubmit()">
+        <img
+          class="search-icon"
+          alt="Search"
+          src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%232b2b2b%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Ccircle cx=%2711%27 cy=%2711%27 r=%277%27/%3E%3Cline x1=%2716.65%27 y1=%2716.65%27 x2=%2721%27 y2=%2721%27/%3E%3C/svg%3E"
+        />
+      </button>
+      <ul class="search-suggestions" *ngIf="showSuggestions && searchSuggestions?.length">
+        <li *ngFor="let item of searchSuggestions" (mousedown)="selectSuggestion(item)">
+          <div class="suggestion-title">{{ item?.name }}</div>
+          <div class="suggestion-subtitle" *ngIf="item?.sOrderCatalogName">{{ item?.sOrderCatalogName }}</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="menu-row" *ngIf="smallDevice">
+    <div
+      *ngIf="menuOpen"
+      class="menu-backdrop"
+      (click)="closeMenu()"
+    ></div>
+    <nav
+      class="mobile-drawer"
+      [class.mobile-open]="menuOpen"
+    >
+      <button
+        type="button"
+        class="drawer-close-btn"
+        (click)="closeMenu()"
+        aria-label="Close menu"
+      >
+        <svg class="hamburger-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+        </svg>
+      </button>
+      <a
+        *ngFor="let item of visibleMenu"
+        class="nav-item"
+        [class.active]="item.link === activeMenu"
+        (click)="navigate(item)"
+      >
+        <i class="menu-icon" [class]="getMenuIcon(item)"></i>
+        {{ item.title }}
+      </a>
+    </nav>
+  </div>
+</header>

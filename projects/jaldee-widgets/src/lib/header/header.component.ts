@@ -6,6 +6,7 @@ import { HeaderOneComponent } from './variants/header-one/header-one.component';
 import { HeaderThreeComponent } from './variants/header-three/header-three.component';
 import { HeaderTwoComponent } from './variants/header-two/header-two.component';
 import { HeaderFashionComponent } from './variants/fashion/header-fashion.component';
+import { HeaderFashionInlineComponent } from './variants/fashion-inline/header-fashion-inline.component';
 import { HeaderMinimalComponent } from './variants/minimal/header-minimal.component';
 
 @Component({
@@ -18,6 +19,7 @@ import { HeaderMinimalComponent } from './variants/minimal/header-minimal.compon
     HeaderThreeComponent,
     HeaderFourComponent,
     HeaderFashionComponent,
+    HeaderFashionInlineComponent,
     HeaderMinimalComponent
   ],
   templateUrl: './header.component.html'

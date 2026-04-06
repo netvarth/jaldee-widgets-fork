@@ -29,6 +29,12 @@
       [wishlistCount]="wishlistCount" [showSearch]="showSearch" [hideItemSearch]="hideItemSearch" [showCart]="showCart"
       [showWishlist]="showWishlist" [searchSuggestions]="searchSuggestions"
       (actionPerformed)="handleAction($event)"></app-header-fashion>
+    <app-header-fashion-inline *ngSwitchCase="'fashion-inline'" [data]="data" [logo]="logo || data.logo"
+      [aspectRatio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" [smallDevice]="smallDevice"
+      [menuItems]="data.menu || []" [isLoggedIn]="isLoggedIn" [userName]="userName" [cartCount]="cartCount"
+      [wishlistCount]="wishlistCount" [showSearch]="showSearch" [hideItemSearch]="hideItemSearch" [showCart]="showCart"
+      [showWishlist]="showWishlist" [searchSuggestions]="searchSuggestions"
+      (actionPerformed)="handleAction($event)"></app-header-fashion-inline>
     <app-header-minimal *ngSwitchDefault [data]="data" [logo]="logo || data.logo"
       [aspectRatio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" [smallDevice]="smallDevice"
       [menuItems]="data.menu || []" [isLoggedIn]="isLoggedIn" [userName]="userName" [cartCount]="cartCount"
