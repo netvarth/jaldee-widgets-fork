@@ -73,10 +73,14 @@
         <button
           type="button"
           (click)="onAccountClick($event)"
-          [attr.aria-label]="isLoggedIn ? 'Account' : 'Login'"
+          [attr.aria-label]="isLoggedIn ? userName : 'Login'"
         >
           <i [class]="getActionIcon(isLoggedIn ? 'account' : 'login')"></i>
-          <span *ngIf="!smallDevice">{{ isLoggedIn ? 'Account' : 'Login' }}</span>
+          <span
+            *ngIf="!smallDevice"
+            class="account-label"
+            [attr.title]="isLoggedIn ? userName : null"
+          >{{ isLoggedIn ? userName : 'Login' }}</span>
         </button>
         <div
           class="account-menu"
@@ -106,13 +110,13 @@
         (focus)="onSearchFocus()"
         (blur)="onSearchBlur()"
       />
-      <button type="button" (click)="triggerSearchSubmit()">
+      <!-- <button type="button" (click)="triggerSearchSubmit()">
         <img
           class="search-icon"
           alt="Search"
           src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%232b2b2b%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Ccircle cx=%2711%27 cy=%2711%27 r=%277%27/%3E%3Cline x1=%2716.65%27 y1=%2716.65%27 x2=%2721%27 y2=%2721%27/%3E%3C/svg%3E"
         />
-      </button>
+      </button> -->
       <ul class="search-suggestions" *ngIf="showSuggestions && searchSuggestions?.length">
         <li *ngFor="let item of searchSuggestions" (mousedown)="selectSuggestion(item)">
           <div class="suggestion-title">{{ item?.name }}</div>

@@ -59,9 +59,13 @@
       </button>
       <span class="divider" *ngIf="resolvedShowCart">|</span>
       <div class="account-menu-wrap">
-        <button type="button" (click)="onAccountClick($event)" [attr.aria-label]="isLoggedIn ? 'Account' : 'Login'">
+        <button type="button" (click)="onAccountClick($event)" [attr.aria-label]="isLoggedIn ? userName : 'Login'">
           <i [class]="getActionIcon(isLoggedIn ? 'account' : 'login')"></i>
-          <span *ngIf="!smallDevice">{{ isLoggedIn ? 'Account' : 'Login' }}</span>
+          <span
+            *ngIf="!smallDevice"
+            class="account-label"
+            [attr.title]="isLoggedIn ? userName : null"
+          >{{ isLoggedIn ? userName : 'Login' }}</span>
         </button>
         <div
           class="account-menu"
@@ -91,9 +95,9 @@
         (blur)="onSearchBlur()"
         [(ngModel)]="searchValue"
       />
-      <button type="button" (click)="triggerSearchSubmit()">
+      <!-- <button type="button" (click)="triggerSearchSubmit()">
         <i class="fa fa-search"></i>
-      </button>
+      </button> -->
       <ul class="search-suggestions" *ngIf="showSuggestions && searchSuggestions?.length">
         <li *ngFor="let item of searchSuggestions" (mousedown)="selectSuggestion(item)">
           <div class="suggestion-title">{{ item?.name }}</div>

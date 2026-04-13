@@ -115,6 +115,14 @@
   padding: 6px 4px;
 }
 
+.account-label {
+  display: inline-block;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .count-badge {
   min-width: 18px;
   height: 18px;
