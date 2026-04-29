@@ -11,6 +11,7 @@
     *ngIf="config.header?.announcements?.length"
     [header]="config.header"
     [announcements]="config.header?.announcements"
+    (actionClicked)="actionClicked($event)"
   ></app-pre-header>
 
   <lib-preview-header

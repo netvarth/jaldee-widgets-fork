@@ -10,57 +10,61 @@
     box-sizing: border-box;
 }
 
+.preheader-carousel.has-nav .announcement {
+    padding-left: 44px;
+    padding-right: 44px;
+}
+
+.announcement.clickable {
+    cursor: pointer;
+}
+
 ::ng-deep .announcement-container .announcement p {
     margin-bottom: 0 !important;
     // font-size: 1.1rem;
     font-weight: 600;
+    text-align: center;
+    overflow-wrap: anywhere;
 }
 
 .preheader-carousel {
   position: relative;
-  display: flex;
-  align-items: center;
+  width: 100%;
 }
+
 .announcement-container {
   width: 100%;
 }
 
-.preheader-carousel .jw-carousel {
-  display: flex;
-  gap: 16px;
+.preheader-carousel evm-carousel {
+  display: block;
   width: 100%;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
 }
 
-.preheader-carousel .jw-carousel::-webkit-scrollbar {
-  display: none;
+::ng-deep .preheader-carousel .evm-carousel-stage {
+  cursor: default;
 }
 
-.preheader-carousel .jw-carousel__item {
-  flex: 0 0 100%;
-  scroll-snap-align: start;
+::ng-deep .preheader-carousel .evm-carousel-item {
+  padding: 0 !important;
 }
 
-.carousel-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+::ng-deep .preheader-carousel .evm-carousel-nav {
+  padding: 0 2px;
+}
+
+::ng-deep .preheader-carousel .nav {
   background: transparent;
-  color: currentColor;
-  border: none;
-  font-size: 1.6rem;
-  cursor: pointer;
-  padding: 4px 8px;
-  z-index: 5;
+  box-shadow: none;
+  color: var(--preheader-arrow-color, #000);
+  width: 26px;
+  height: 26px;
 }
 
-.carousel-arrow.prev {
-  left: 0;
+::ng-deep .preheader-carousel .nav:hover {
+  box-shadow: none;
 }
 
-.carousel-arrow.next {
-  right: 0;
+::ng-deep .preheader-carousel .nav svg {
+  margin-left: 0;
 }

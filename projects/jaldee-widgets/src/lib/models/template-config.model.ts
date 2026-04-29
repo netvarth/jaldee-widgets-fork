@@ -99,5 +99,17 @@ export interface Header {
   title?: string;
   description?: string;
   menu?: MenuItem[];
-  announcements?: { message: string; foregroundColor?: string; backgroundColor?: string; fontSize?: FontSize }[];
+  announcements?: {
+    id?: string;
+    message: string;
+    link?: string;
+    foregroundColor?: string;
+    backgroundColor?: string;
+    fontSize?: FontSize;
+  }[];
+  announcement_responsiveness?: {
+    cols_xs_options?: Record<string, unknown>;
+    cols_md_options?: Record<string, unknown>;
+    cols_xl_options?: Record<string, unknown>;
+  };
 }

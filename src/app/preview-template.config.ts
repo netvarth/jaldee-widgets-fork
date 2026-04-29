@@ -467,6 +467,30 @@ export const previewTemplateConfig: PreviewTemplateConfig = {
         "fontSize": 12,
         "foregroundColor": "#f0e1f0",
         "backgroundColor": "#B8AB98"
+      },
+      {
+        "id": "preview-announcement-2",
+        "message": "<p>Book your appointment online today</p>",
+        "fontSize": 12,
+        "foregroundColor": "#ffffff",
+        "backgroundColor": "#6B7280",
+        "link": "appointments"
+      },
+      {
+        "id": "preview-announcement-3",
+        "message": "<p>New seasonal offers are now available</p>",
+        "fontSize": 12,
+        "foregroundColor": "#ffffff",
+        "backgroundColor": "#4F46E5",
+        "link": "offers"
+      },
+      {
+        "id": "preview-announcement-4",
+        "message": "<p>Contact us for custom service packages</p>",
+        "fontSize": 12,
+        "foregroundColor": "#ffffff",
+        "backgroundColor": "#0F766E",
+        "link": "contact"
       }
     ]
   },

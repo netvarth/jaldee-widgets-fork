@@ -136,7 +136,22 @@ export class App {
         message: 'New arrivals are live - shop now',
         foregroundColor: '#ffffff',
         backgroundColor: '#7c3aed',
-        fontSize: 14
+        fontSize: 14,
+        link: 'new-arrivals'
+      },
+      {
+        message: 'Members get early access to seasonal offers',
+        foregroundColor: '#ffffff',
+        backgroundColor: '#0f766e',
+        fontSize: 14,
+        link: 'offers'
+      },
+      {
+        message: 'Book a consultation with our team today',
+        foregroundColor: '#ffffff',
+        backgroundColor: '#b45309',
+        fontSize: 14,
+        link: 'consultation'
       }
     ]
   };

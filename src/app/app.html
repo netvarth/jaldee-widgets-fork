@@ -9,7 +9,7 @@
   <div class="download-host">
     <app-token-card #homeTokenCard [token]="tokenData" [pdf]="false" [png]="false"></app-token-card>
   </div>
-  <app-pre-header [header]="demoHeader"></app-pre-header>
+  <app-pre-header [header]="demoHeader" (actionClicked)="handleAction($event)"></app-pre-header>
   <app-quick-access [section]="quickAccess"></app-quick-access>
 
   <section class="demo-section hero-wrap">
