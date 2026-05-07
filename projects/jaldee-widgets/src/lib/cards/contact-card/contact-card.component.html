@@ -4,8 +4,18 @@
      [class.left-image]="content.imageAlignment === 'left'"
      [class.right-image]="content.imageAlignment === 'right'">
      
-  <div class="card-image" *ngIf="content.image">
-    <img [lazyImage]="content.image" 
+  <div class="card-image" *ngIf="content.video || content.image">
+    <video
+         *ngIf="content.video && content.video !== ''"
+         [src]="content.video"
+         (click)="$event.stopPropagation()"
+         muted
+         controls
+         playsinline
+         [style.aspect-ratio]="content.image_aspectRatio || '1/1'"
+         [style.max-width.px]="content.image_width || 80">
+    </video>
+    <img *ngIf="(!content.video || content.video === '') && content.image" [lazyImage]="content.image" 
          [style.aspect-ratio]="content.image_aspectRatio || '1/1'"
          [style.max-width.px]="content.image_width || 80">
   </div>

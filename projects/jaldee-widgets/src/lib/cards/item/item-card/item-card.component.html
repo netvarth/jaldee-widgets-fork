@@ -1,7 +1,16 @@
 <div class="p-0">
     <div class="image-container">
+        <video
+            *ngIf="content.video && content.video !== ''"
+            [src]="smallDevice ? ((content.video_mob && content.video_mob !== '') ? content.video_mob : content.video) : content.video"
+            [style.aspect-ratio]="smallDevice ? (content.image_mob_aspectRatio || content.image_aspectRatio || null) : (content.image_aspectRatio || null)"
+            (click)="$event.stopPropagation()"
+            muted
+            controls
+            playsinline>
+        </video>
         <img [lazyImage]="smallDevice?((content.image_mob && content.image_mob!='')?content.image_mob:content.image):content.image"
-            [alt]="content.title" *ngIf="content.image || (content.image_mob && content.image_mob!='')" loading="lazy">
+            [alt]="content.title" *ngIf="(!content.video || content.video === '') && (content.image || (content.image_mob && content.image_mob!=''))" loading="lazy">
         <button type="button"  [id]="'btnItem'" [ngStyle]="{
     'color': content.foregroundColor,
     'background-color': content.backgroundColor
@@ -12,11 +21,21 @@
     <div class="content-wrapper">
         <div *ngIf="content.title && content.title!='' || (content.name && content.name!='')">
             <div class="card-title"
-                [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null">
+                [ngStyle]="{
+                    'font-size': content.titleFontSize || null,
+                    'font-weight': content.titleFontWeight || null,
+                    'font-style': content.titleFontStyle || null,
+        'text-align': content.titleTextAlign || null
+                }">
                 {{content.title || content.name}}
             </div>
             <div class="card-subtitle" *ngIf="content.subTitle"
-                [ngStyle]="content.subTitleFontSize ? { 'font-size': content.subTitleFontSize } : null">
+                [ngStyle]="{
+                    'font-size': content.subTitleFontSize || null,
+                    'font-weight': content.subTitleFontWeight || null,
+                    'font-style': content.subTitleFontStyle || null,
+        'text-align': content.subTitleTextAlign || null
+                }">
                 {{content.subTitle}}
             </div>
             <div *ngIf="content.price || content.mrp">

@@ -1,16 +1,27 @@
 <div class="promo-card" *ngIf="content" (click)="_actionClicked(content)" [attr.data-link]="targetLink">
+  <video
+    *ngIf="content.video && content.video !== ''"
+    class="promo-img"
+    [src]="smallDevice ? ((content.video_mob && content.video_mob !== '') ? content.video_mob : content.video) : content.video"
+    [style.aspect-ratio]="smallDevice ? (content.image_mob_aspectRatio || content.image_aspectRatio || null) : (content.image_aspectRatio || null)"
+    (click)="$event.stopPropagation()"
+    muted
+    controls
+    playsinline>
+  </video>
   <img
+    *ngIf="!content.video || content.video === ''"
     class="promo-img"
     [lazyImage]="image"
     [alt]="content.title"
     loading="lazy">
 
   <div class="promo-overlay" *ngIf="showOverlay">
-    <div class="promo-title" [ngStyle]="{ 'font-size': titleFontSize || '16px' }">
+    <div class="promo-title" [ngStyle]="titleStyles">
       {{ truncatedTitle }}
     </div>
     <a class="promo-btn"
-       [ngStyle]="{ 'font-size': subTitleFontSize || '11px' }"
+       [ngStyle]="buttonStyles"
        (click)="onButtonClick($event)"
        >
       {{ buttonCaption }}

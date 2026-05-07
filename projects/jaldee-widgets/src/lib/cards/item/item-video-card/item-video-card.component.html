@@ -4,6 +4,8 @@
       #videoPlayer
       *ngIf="content.video"
       class="item-video-card__video"
+      [style.aspect-ratio]="smallDevice ? (content.image_mob_aspectRatio || content.image_aspectRatio || null) : (content.image_aspectRatio || null)"
+      (click)="$event.stopPropagation()"
       muted
       loop
       playsinline
@@ -11,7 +13,7 @@
      
     >
      <!-- poster="{{ content.image || content.image_mob }}" -->
-      <source [src]="content.video" type="video/mp4" />
+      <source [src]="smallDevice ? ((content.video_mob && content.video_mob !== '') ? content.video_mob : content.video) : content.video" type="video/mp4" />
     </video>
     <!-- <img
       *ngIf="!content.video && (content.image || (content.image_mob && content.image_mob !== ''))"

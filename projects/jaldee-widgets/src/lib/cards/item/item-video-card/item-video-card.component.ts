@@ -33,14 +33,31 @@ export class ItemVideoCardComponent {
   }
 
   getSubtitleFontSize(): Record<string, string> | null {
-    return this.content?.subTitleFontSize ? { 'font-size': this.content.subTitleFontSize } : null;
+    return this.compactStyles({
+      'font-size': this.content?.subTitleFontSize,
+      'font-weight': this.content?.subTitleFontWeight,
+      'font-style': this.content?.subTitleFontStyle,
+      'text-align': this.content?.subTitleTextAlign
+    });
   }
 
   getTitleFontSize(): Record<string, string> | null {
-    if (this.content?.titleFontSize) {
-      return { 'font-size': this.content.titleFontSize };
-    }
-    return null;
+    return this.compactStyles({
+      'font-size': this.content?.titleFontSize,
+      'font-weight': this.content?.titleFontWeight,
+      'font-style': this.content?.titleFontStyle,
+      'text-align': this.content?.titleTextAlign
+    });
+  }
+
+  private compactStyles(styles: Record<string, unknown>): Record<string, string> | null {
+    const compacted = Object.entries(styles).reduce((acc, [key, value]) => {
+      if (value !== null && value !== undefined && value !== '') {
+        acc[key] = String(value);
+      }
+      return acc;
+    }, {} as Record<string, string>);
+    return Object.keys(compacted).length ? compacted : null;
   }
 
   toggleVideoPlay(eventOrForce?: Event | boolean, forcePlay?: boolean) {

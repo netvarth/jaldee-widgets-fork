@@ -1,22 +1,40 @@
 <div class="banner-wrapper">
   <div class="banner-image">
     <img
-      *ngIf="!smallDevice && !mediumDevice"
+      *ngIf="(!content.video || content.video === '') && !smallDevice && !mediumDevice"
       [src]="content.image"
       [alt]="content.title"
     />
     <img
-      *ngIf="smallDevice || mediumDevice"
+      *ngIf="(!content.video || content.video === '') && (smallDevice || mediumDevice)"
       [src]="content.image_mob ? content.image_mob : content.image"
       [alt]="content.title"
     />
+    <video
+      *ngIf="content.video && content.video !== ''"
+      [src]="(smallDevice || mediumDevice) ? ((content.video_mob && content.video_mob !== '') ? content.video_mob : content.video) : content.video"
+      [style.aspect-ratio]="(smallDevice || mediumDevice) ? (content.image_mob_aspectRatio || content.image_aspectRatio || null) : (content.image_aspectRatio || null)"
+      (click)="$event.stopPropagation()"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    >
+      Your browser does not support the video tag.
+    </video>
     <div class="banner-content">
       <div class="cover-profile">
         <div *ngIf="content.title">
           <h4
             class="fs-4"
             *ngIf="content.subTitle"
-            [ngStyle]="content.subTitleFontSize ? { 'font-size': content.subTitleFontSize } : null"
+            [ngStyle]="{
+              'font-size': content.subTitleFontSize || null,
+              'font-weight': content.subTitleFontWeight || null,
+              'font-style': content.subTitleFontStyle || null,
+        'text-align': content.subTitleTextAlign || null
+            }"
           >
             {{ content.subTitle }}
           </h4>
@@ -24,14 +42,24 @@
         <div *ngIf="content.title">
           <h1
             class="fw-bold mb-2 mb-md-4"
-            [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null"
+            [ngStyle]="{
+              'font-size': content.titleFontSize || null,
+              'font-weight': content.titleFontWeight || null,
+              'font-style': content.titleFontStyle || null,
+        'text-align': content.titleTextAlign || null
+            }"
           >
             {{ content.title }}
           </h1>
         </div>
         <div *ngIf="content.description" class="profile-description">
           <p
-            [ngStyle]="content.descriptionFontSize ? { 'font-size': content.descriptionFontSize } : null"
+            [ngStyle]="{
+              'font-size': content.descriptionFontSize || null,
+              'font-weight': content.descriptionFontWeight || null,
+              'font-style': content.descriptionFontStyle || null,
+        'text-align': content.descriptionTextAlign || null
+            }"
             [innerHTML]="content.description"
           ></p>
         </div>

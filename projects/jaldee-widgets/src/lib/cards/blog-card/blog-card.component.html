@@ -3,9 +3,24 @@
   'background': (content.backgroundColor || 'transparent')
 }">
   <div class="card-image">
-    <img *ngIf="content.image" [lazyImage]="content.image" [alt]="content.title" loading="lazy" priority="false">
+    <video
+      *ngIf="content.video && content.video !== ''"
+      [src]="content.video"
+      [style.aspect-ratio]="content.image_aspectRatio || null"
+      (click)="$event.stopPropagation()"
+      muted
+      controls
+      playsinline>
+    </video>
+    <img *ngIf="(!content.video || content.video === '') && content.image" [lazyImage]="content.image" [alt]="content.title" loading="lazy" priority="false">
   </div>
-  <div class="card-title" *ngIf="content.title">
+  <div class="card-title" *ngIf="content.title"
+    [ngStyle]="{
+      'font-size': content.titleFontSize || null,
+      'font-weight': content.titleFontWeight || null,
+      'font-style': content.titleFontStyle || null,
+        'text-align': content.titleTextAlign || null
+    }">
     {{ content.title }}
   </div>
 </div>

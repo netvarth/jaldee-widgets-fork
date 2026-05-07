@@ -21,7 +21,19 @@
   object-fit: cover;
 }
 
+.image-container video {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 10px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
 ::ng-deep .rectangle-vertial-rounded .image-container img {
+  aspect-ratio: 4/5 !important;
+}
+
+::ng-deep .rectangle-vertial-rounded .image-container video {
   aspect-ratio: 4/5 !important;
 }
 
@@ -55,9 +67,17 @@
 .image-container img:hover {
   opacity: 0.6;
 }
+.image-container video:hover {
+  opacity: 0.6;
+}
 .image-container img {
   width: 100%;
   display: block;
+}
+.image-container video {
+  width: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 .image-container .btn-viewItem {

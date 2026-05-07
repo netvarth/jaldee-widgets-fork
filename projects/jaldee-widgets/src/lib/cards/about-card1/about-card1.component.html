@@ -5,8 +5,18 @@
   [class.flex-row-reverse]="!smallDevice && imageAlignment === 'right'"
   [class.flex-column-reverse]="smallDevice && imageAlignment === 'right'">
   <div [ngClass]="smallDevice ? 'col-12' : 'col-6'">
-    <img [lazyImage]="image" [alt]="titleText" *ngIf="!smallDevice && image" class="myclasss">
-    <img [lazyImage]="mobileImage" [alt]="titleText" *ngIf="smallDevice && mobileImage">
+    <video
+      *ngIf="content.video || primaryEntry.video"
+      [src]="smallDevice ? (((primaryEntry.video_mob && primaryEntry.video_mob !== '') ? primaryEntry.video_mob : (content.video_mob && content.video_mob !== '') ? content.video_mob : (primaryEntry.video || content.video))) : (primaryEntry.video || content.video)"
+      [style.aspect-ratio]="smallDevice ? (primaryEntry.image_mob_aspectRatio || content.image_mob_aspectRatio || primaryEntry.image_aspectRatio || content.image_aspectRatio || null) : (primaryEntry.image_aspectRatio || content.image_aspectRatio || null)"
+      (click)="$event.stopPropagation()"
+      muted
+      controls
+      playsinline
+      class="myclasss">
+    </video>
+    <img [lazyImage]="image" [alt]="titleText" *ngIf="!smallDevice && !(content.video || primaryEntry.video) && image" class="myclasss">
+    <img [lazyImage]="mobileImage" [alt]="titleText" *ngIf="smallDevice && !(content.video || primaryEntry.video) && mobileImage">
   </div>
   <div [ngClass]="smallDevice ? 'col-12' : 'col-6'">
     <div

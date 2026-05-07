@@ -1,19 +1,44 @@
 <div class="card" *ngIf="content"  [ngStyle]="{'color': content.foregroundColor,'background-color':content.backgroundColor}">
-  <div class="card-image" *ngIf="content.image">
-    <img  class="w-full" [lazyImage]="content.image" alt="Card image cap" lazyImage loading="lazy"
+  <div class="card-image" *ngIf="content.video || content.image">
+    <video
+      *ngIf="content.video && content.video !== ''"
+      class="w-full"
+      [src]="content.video"
+      [style.aspect-ratio]="content.image_aspectRatio || null"
+      (click)="$event.stopPropagation()"
+      muted
+      controls
+      playsinline>
+    </video>
+    <img *ngIf="(!content.video || content.video === '') && content.image" class="w-full" [lazyImage]="content.image" alt="Card image cap" lazyImage loading="lazy"
       priority="false">
   </div>
   <div class="card-content p-2">
     <div class="card-title"
-      [ngStyle]="content.titleFontSize ? { 'font-size': content.titleFontSize } : null">
+      [ngStyle]="{
+        'font-size': content.titleFontSize || null,
+        'font-weight': content.titleFontWeight || null,
+        'font-style': content.titleFontStyle || null,
+        'text-align': content.titleTextAlign || null
+      }">
       {{content.title}}
     </div>
     <div class="card-subtitle" *ngIf="content.subTitle"
-      [ngStyle]="content.subTitleFontSize ? { 'font-size': content.subTitleFontSize } : null">
+      [ngStyle]="{
+        'font-size': content.subTitleFontSize || null,
+        'font-weight': content.subTitleFontWeight || null,
+        'font-style': content.subTitleFontStyle || null,
+        'text-align': content.subTitleTextAlign || null
+      }">
       {{content.subTitle}}
     </div>
     <p class="card-description" *ngIf="content.description"
-      [ngStyle]="content.descriptionFontSize ? { 'font-size': content.descriptionFontSize } : null"
+      [ngStyle]="{
+        'font-size': content.descriptionFontSize || null,
+        'font-weight': content.descriptionFontWeight || null,
+        'font-style': content.descriptionFontStyle || null,
+        'text-align': content.descriptionTextAlign || null
+      }"
       [innerHTML]="content.description"></p>
     <div class="card-action" *ngIf="content.buttonCaption">
     <a (click)="_contentClicked(content)" class="pointer-cursor" (mouseenter)="isHovered = true"

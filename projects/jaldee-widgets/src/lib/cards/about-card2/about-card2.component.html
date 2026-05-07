@@ -1,25 +1,55 @@
-<section class="about-wrap" [ngStyle]="sectionStyles" *ngIf="leftImage || topRightImage || bottomRightImage || paragraphs.length">
+<section class="about-wrap" [ngStyle]="sectionStyles" *ngIf="leftVideo || leftImage || topRightVideo || topRightImage || bottomRightVideo || bottomRightImage || paragraphs.length">
   <div class="about-inner">
     <div class="about-grid">
 
       <div class="images-col">
         <div class="images-stack">
-          <div class="img-card img-card--big" *ngIf="leftImage">
+          <div class="img-card img-card--big" *ngIf="leftVideo || leftImage">
+            <video
+              *ngIf="leftVideo"
+              [src]="leftVideo"
+              [style.aspect-ratio]="leftImageAspectRatio || null"
+              (click)="$event.stopPropagation()"
+              muted
+              controls
+              playsinline>
+            </video>
             <img
+              *ngIf="!leftVideo && leftImage"
               [lazyImage]="leftImage"
               [alt]="titleText || 'Hero image'"
               loading="lazy">
           </div>
 
-          <div class="stack-col" *ngIf="topRightImage || bottomRightImage">
-            <div class="img-card img-card--small" *ngIf="topRightImage">
+          <div class="stack-col" *ngIf="topRightVideo || topRightImage || bottomRightVideo || bottomRightImage">
+            <div class="img-card img-card--small" *ngIf="topRightVideo || topRightImage">
+              <video
+                *ngIf="topRightVideo"
+                [src]="topRightVideo"
+                [style.aspect-ratio]="topRightImageAspectRatio || null"
+                (click)="$event.stopPropagation()"
+                muted
+                controls
+                playsinline>
+              </video>
               <img
+                *ngIf="!topRightVideo && topRightImage"
                 [lazyImage]="topRightImage"
                 [alt]="(titleText ? titleText + ' top right image' : 'Top right image')"
                 loading="lazy">
             </div>
-            <div class="img-card img-card--small" *ngIf="bottomRightImage">
+            <div class="img-card img-card--small" *ngIf="bottomRightVideo || bottomRightImage">
+              <video
+                *ngIf="bottomRightVideo"
+                [src]="bottomRightVideo"
+                [style.aspect-ratio]="bottomRightImageAspectRatio || null"
+                (click)="$event.stopPropagation()"
+                muted
+                controls
+                playsinline>
+              </video>
               <img
+                *ngIf="!bottomRightVideo && bottomRightImage"
                 [lazyImage]="bottomRightImage"
                 [alt]="(titleText ? titleText + ' bottom right image' : 'Bottom right image')"
                 loading="lazy">

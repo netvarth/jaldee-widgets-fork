@@ -21,6 +21,13 @@
   display: block;
 }
 
+.card-image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Prevents image distortion */
+  display: block;
+}
+
 .card-title {
   position: absolute;
   bottom: -10px;

@@ -65,7 +65,17 @@
     overflow: hidden;
   }
   
-  img, video {
+  img {
+    width: 100%;
+    height: auto; /* Allow natural height on small devices */
+    // object-fit: cover;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    // max-height: 75vh;
+  }
+
+  video {
     width: 100%;
     height: auto; /* Allow natural height on small devices */
     // object-fit: cover;

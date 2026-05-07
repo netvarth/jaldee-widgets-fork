@@ -42,6 +42,13 @@
   display: block;
 }
 
+.img-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .img-card--big {
   min-height: 340px;
 }

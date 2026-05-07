@@ -1,12 +1,24 @@
 <div id="{{section.id}}" class="container text-center mb-4 mt-5">
     <div>
         <div *ngIf="section.subTitle" class="mt-3 mb-3 subTitle"
-            [ngStyle]="section.subTitleFontSize ? { 'font-size': section.subTitleFontSize } : null">
+            [ngStyle]="{
+            'font-size': section.subTitleFontSize || null,
+            'font-weight': section.subTitleFontWeight || null,
+            'font-style': section.subTitleFontStyle || null,
+            'text-align': section.subTitleTextAlign || null,
+            'color': section.subTitleColor || null,
+        }">
             {{section.subTitle}}
         </div>
         <div *ngIf="section.title">
             <h2 class="fw-normal mb-3"
-                [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+                [ngStyle]="{
+            'font-size': section.titleFontSize || null,
+            'font-weight': section.titleFontWeight || null,
+            'font-style': section.titleFontStyle || null,
+            'text-align': section.titleTextAlign || null,
+            'color': section.titleColor || null,
+        }">
                 {{section.title}}
             </h2>
         </div>
@@ -16,13 +28,23 @@
                     <img class="blog-img" [src]="action.image" alt="Blog Image" loading="lazy" priority="false">
                     <div>
                         <span class="fw-bold blog-title"
-                            [ngStyle]="action.titleFontSize ? { 'font-size': action.titleFontSize } : null">
+                            [ngStyle]="{
+                                'font-size': action.titleFontSize || null,
+                                'font-weight': action.titleFontWeight || null,
+                                'font-style': action.titleFontStyle || null,
+                                'text-align': action.titleTextAlign || null
+                            }">
                             {{ action.title }}
                         </span>
                     </div>
                     <div class="mt-2" *ngIf="action.content">
                         <span class="blog-desc"
-                            [ngStyle]="action.descriptionFontSize ? { 'font-size': action.descriptionFontSize } : null"
+                            [ngStyle]="{
+                                'font-size': action.descriptionFontSize || null,
+                                'font-weight': action.descriptionFontWeight || null,
+                                'font-style': action.descriptionFontStyle || null,
+                                'text-align': action.descriptionTextAlign || null
+                            }"
                             [innerHTML]="action.content"></span>
                     </div>
                     <div>

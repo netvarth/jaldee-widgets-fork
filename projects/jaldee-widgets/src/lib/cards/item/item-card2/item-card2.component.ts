@@ -29,6 +29,25 @@ export class ItemCard2Component {
     return this.content?.subTitleFontSize ?? null;
   }
 
+  get titleStyles(): Record<string, string> {
+    return this.compactStyles({
+      'font-size': this.content?.titleFontSize || '16px',
+      'font-weight': this.content?.titleFontWeight,
+      'font-style': this.content?.titleFontStyle,
+      'text-align': this.content?.titleTextAlign,
+      color: this.content?.foregroundColor
+    });
+  }
+
+  get buttonStyles(): Record<string, string> {
+    return this.compactStyles({
+      'font-size': this.content?.subTitleFontSize || '11px',
+      'font-weight': this.content?.subTitleFontWeight,
+      'font-style': this.content?.subTitleFontStyle,
+      'text-align': this.content?.subTitleTextAlign
+    });
+  }
+
   get buttonCaption(): string {
     return this.content?.buttonCaption || 'Shop Now';
   }
@@ -53,5 +72,14 @@ export class ItemCard2Component {
   get truncatedTitle(): string {
     const title = this.content?.title ?? '';
     return title.length > 30 ? `${title.slice(0, 30).trim()}..` : title;
+  }
+
+  private compactStyles(styles: Record<string, unknown>): Record<string, string> {
+    return Object.entries(styles).reduce((acc, [key, value]) => {
+      if (value !== null && value !== undefined && value !== '') {
+        acc[key] = String(value);
+      }
+      return acc;
+    }, {} as Record<string, string>);
   }
 }

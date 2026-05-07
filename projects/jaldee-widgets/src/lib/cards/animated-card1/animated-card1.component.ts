@@ -12,6 +12,7 @@ import { LazyImageDirective } from '../../utils/lazy-image.directive';
 export class AnimatedCard1Component {
 
   @Input() content: any;
+  @Input() smallDevice: boolean | undefined;
 
 }
 

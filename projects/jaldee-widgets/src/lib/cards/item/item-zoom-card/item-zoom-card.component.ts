@@ -11,6 +11,7 @@ import { LazyImageDirective } from '../../../utils/lazy-image.directive';
 })
 export class ItemZoomCardComponent {
   @Input() content: any;
+  @Input() smallDevice: boolean | undefined;
 }
 
 

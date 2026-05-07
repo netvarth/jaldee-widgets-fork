@@ -21,6 +21,16 @@
   // animation: float 3s ease-in-out infinite;
 }
 
+.card-image video {
+  border-radius: 16px 16px 16px 0px;
+  box-shadow: 24px 24px 80px -16px rgba(0, 0, 0, 0.24);
+  width: 100%;
+  height: auto;
+  margin: -70px 0 0 -40px;
+  // border-radius: 5px 5px 0 0;
+  // animation: float 3s ease-in-out infinite;
+}
+
 .card-title {
   width: 100%;
   padding: 0.5rem;

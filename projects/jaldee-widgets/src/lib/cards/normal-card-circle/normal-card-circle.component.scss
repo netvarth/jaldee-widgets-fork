@@ -20,6 +20,14 @@
   border-radius: 100% !important;
 }
 
+.card-image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Prevents image distortion */
+  display: block;
+  border-radius: 100% !important;
+}
+
 .card-title {
   width: 100%;
   padding: 1rem; /* Relative unit (scales with screen) */

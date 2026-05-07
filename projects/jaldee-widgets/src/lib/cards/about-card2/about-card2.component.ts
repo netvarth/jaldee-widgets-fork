@@ -33,6 +33,22 @@ export class AboutCard2Component {
     return this.resolveImage(this.content, ['leftImage', 'heroImage', 'image']);
   }
 
+  get leftVideo(): string | null {
+    const entries = this.sectionEntries;
+    if (entries.length) {
+      return this.resolveVideo(entries[0], ['video', 'leftVideo', 'heroVideo']);
+    }
+    return this.resolveVideo(this.content, ['leftVideo', 'heroVideo', 'video']);
+  }
+
+  get leftImageAspectRatio(): string | null {
+    const entries = this.sectionEntries;
+    if (entries.length) {
+      return this.resolveAspectRatio(entries[0], ['image_aspectRatio', 'leftImage_aspectRatio', 'heroImage_aspectRatio']);
+    }
+    return this.resolveAspectRatio(this.content, ['leftImage_aspectRatio', 'heroImage_aspectRatio', 'image_aspectRatio']);
+  }
+
   get topRightImage(): string | null {
     const entries = this.sectionEntries;
     if (entries.length > 1) {
@@ -41,12 +57,44 @@ export class AboutCard2Component {
     return this.resolveImage(this.content, ['topRightImage', 'image1']);
   }
 
+  get topRightVideo(): string | null {
+    const entries = this.sectionEntries;
+    if (entries.length > 1) {
+      return this.resolveVideo(entries[1], ['video', 'topRightVideo', 'video1']);
+    }
+    return this.resolveVideo(this.content, ['topRightVideo', 'video1']);
+  }
+
+  get topRightImageAspectRatio(): string | null {
+    const entries = this.sectionEntries;
+    if (entries.length > 1) {
+      return this.resolveAspectRatio(entries[1], ['image_aspectRatio', 'topRightImage_aspectRatio', 'image1_aspectRatio']);
+    }
+    return this.resolveAspectRatio(this.content, ['topRightImage_aspectRatio', 'image1_aspectRatio']);
+  }
+
   get bottomRightImage(): string | null {
     const entries = this.sectionEntries;
     if (entries.length > 2) {
       return this.resolveImage(entries[2], ['image', 'bottomRightImage', 'image2']);
     }
     return this.resolveImage(this.content, ['bottomRightImage', 'image2']);
+  }
+
+  get bottomRightVideo(): string | null {
+    const entries = this.sectionEntries;
+    if (entries.length > 2) {
+      return this.resolveVideo(entries[2], ['video', 'bottomRightVideo', 'video2']);
+    }
+    return this.resolveVideo(this.content, ['bottomRightVideo', 'video2']);
+  }
+
+  get bottomRightImageAspectRatio(): string | null {
+    const entries = this.sectionEntries;
+    if (entries.length > 2) {
+      return this.resolveAspectRatio(entries[2], ['image_aspectRatio', 'bottomRightImage_aspectRatio', 'image2_aspectRatio']);
+    }
+    return this.resolveAspectRatio(this.content, ['bottomRightImage_aspectRatio', 'image2_aspectRatio']);
   }
 
   _contentClicked(action: { link: string }) {
@@ -87,6 +135,30 @@ export class AboutCard2Component {
     for (const key of keys) {
       if (entry?.[key]) {
         return entry[key];
+      }
+    }
+    return null;
+  }
+
+  private resolveVideo(entry: any, keys: string[]): string | null {
+    if (!entry || typeof entry === 'string') {
+      return null;
+    }
+    for (const key of keys) {
+      if (entry?.[key]) {
+        return entry[key];
+      }
+    }
+    return null;
+  }
+
+  private resolveAspectRatio(entry: any, keys: string[]): string | null {
+    if (!entry || typeof entry === 'string') {
+      return null;
+    }
+    for (const key of keys) {
+      if (entry?.[key]) {
+        return entry[key].toString();
       }
     }
     return null;

@@ -1,7 +1,12 @@
 <div class="text-card"  *ngIf="items.length" [ngStyle]="{
   'color': content.foregroundColor,'background':  (content.backgroundColor || 'transparent')}">
   <ul>
-    <li *ngFor="let item of items" [ngStyle]="{ 'font-size': fontSize || '14px' }">
+    <li *ngFor="let item of items" [ngStyle]="{
+      'font-size': fontSize || '14px',
+      'font-weight': content.titleFontWeight || null,
+      'font-style': content.titleFontStyle || null,
+      'text-align': content.titleTextAlign || null
+    }">
       {{ item }}
     </li>
   </ul>

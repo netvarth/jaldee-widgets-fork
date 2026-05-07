@@ -12,6 +12,7 @@ import { LazyImageDirective } from '../../utils/lazy-image.directive';
 export class ReviewCardComponent {
 
   @Input() content: any;
+  @Input() smallDevice: boolean | undefined;
   @Output() actionClicked = new EventEmitter<any>();
   isHovered = false;
 

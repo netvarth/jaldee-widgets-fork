@@ -12,6 +12,7 @@ import { LazyImageDirective } from '../../utils/lazy-image.directive';
 export class NormalCardCircleComponent {
 
   @Input() content: any;
+  @Input() smallDevice: boolean | undefined;
 
 }
 

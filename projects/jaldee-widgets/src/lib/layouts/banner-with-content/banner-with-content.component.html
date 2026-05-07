@@ -1,16 +1,25 @@
 <div class="section-video" [ngClass]="className">
     <div class="container">
         <h2 *ngIf="section.title" class="fw-bold mb-2"
-            [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+            [ngStyle]="{
+            'font-size': section.titleFontSize || null,
+            'font-weight': section.titleFontWeight || null,
+            'font-style': section.titleFontStyle || null,
+            'text-align': section.titleTextAlign || null,
+            'color': section.titleColor || null,
+        }">
             {{section.title}}
         </h2>
 
         <div *ngFor="let action of section.content" class="">
             <div *ngIf="action.description" class="section-video-desc my-2"
-                [ngStyle]="action.descriptionFontSize ? { 'font-size': action.descriptionFontSize } : null"
+                [ngStyle]="{
+                    'font-size': action.descriptionFontSize || null,
+                    'text-align': action.descriptionTextAlign || null
+                }"
                 [innerHTML]="action.description"></div>
             <div class="w-100">
-                <video [src]="action.video" muted class="video-banner" controls>
+                <video [src]="smallDevice ? ((action.video_mob && action.video_mob !== '') ? action.video_mob : action.video) : action.video" muted class="video-banner" controls>
                     Your browser does not support the video tag.
                 </video>
             </div>
