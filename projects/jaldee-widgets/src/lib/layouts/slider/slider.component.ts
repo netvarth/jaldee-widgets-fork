@@ -12,7 +12,7 @@ import { ServiceCard2Component } from '../../cards/service-card2/service-card2.c
 import { ReviewCardComponent } from '../../cards/review-card/review-card.component';
 import { TestimonialCardComponent } from '../../cards/testimonial-card/testimonial-card.component';
 import { TextCardComponent } from '../../cards/text-card/text-card.component';
-import { applyContentFontDefaults } from '../../utils/font-utils';
+import { applyContentFontDefaults, applySectionFontDefaults } from '../../utils/font-utils';
 import { CarouselConfig, EvmCarousel, ResponsiveOption } from '../../utils/evm-carousel/evm-carousel';
 
 
@@ -49,6 +49,9 @@ export class SliderComponent implements OnChanges {
   @ViewChild(EvmCarousel) carousel?: EvmCarousel;
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.section) {
+      this.section = applySectionFontDefaults(this.section);
+    }
     this.className = [
       this.section?.className,
       this.section?.titlePosition

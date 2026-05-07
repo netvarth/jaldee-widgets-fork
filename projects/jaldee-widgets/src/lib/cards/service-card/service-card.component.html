@@ -1,5 +1,5 @@
 <div class="card p-0" *ngIf="content">
-  <div class="card-image">
+  <div class="card-image" *ngIf="content.video || content.image">
     <video
       *ngIf="content.video && content.video !== ''"
       class="w-full"

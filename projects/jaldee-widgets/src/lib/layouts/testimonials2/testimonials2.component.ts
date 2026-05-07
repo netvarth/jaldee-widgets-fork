@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { applyContentFontDefaults } from '../../utils/font-utils';
+import { applyContentFontDefaults, applySectionFontDefaults } from '../../utils/font-utils';
 
 @Component({
   selector: 'app-testimonials2',
@@ -19,6 +19,9 @@ export class Testimonials2Component implements OnChanges {
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.section) {
+      this.section = applySectionFontDefaults(this.section);
+    }
     if (this.section?.content?.length) {
       this.section.content = this.section.content.map((item: any) => applyContentFontDefaults(this.section, item));
     }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { CarouselConfig, EvmCarousel, ResponsiveOption } from '../../utils/evm-carousel/evm-carousel';
-import { applyContentFontDefaults } from '../../utils/font-utils';
+import { applyContentFontDefaults, applySectionFontDefaults } from '../../utils/font-utils';
 import { BannerCard1Component } from '../../cards/banner-card1/banner-card1.component';
 import { BannerCardComponent } from '../../cards/banner-card/banner-card.component';
 
@@ -21,6 +21,9 @@ export class HeroSectionComponent implements OnChanges {
   private startY = 0;
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.section) {
+      this.section = applySectionFontDefaults(this.section);
+    }
     if (this.section?.content?.length) {
       this.section.content = this.section.content.map((item: any) =>
         applyContentFontDefaults(this.section, item)

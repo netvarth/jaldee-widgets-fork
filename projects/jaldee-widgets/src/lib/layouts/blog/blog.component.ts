@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { applyContentFontDefaults } from '../../utils/font-utils';
+import { applyContentFontDefaults, applySectionFontDefaults } from '../../utils/font-utils';
 
 @Component({
   selector: 'app-blog',
@@ -15,6 +15,9 @@ export class BlogComponent implements OnChanges {
   blogs: any = [];
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.section) {
+      this.section = applySectionFontDefaults(this.section);
+    }
     this.blogs = this.section?.content ? [...this.section.content] : [];
     this.normalizeBlogs();
   }

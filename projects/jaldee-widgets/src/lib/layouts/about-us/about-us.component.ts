@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AboutCardComponent } from '../../cards/about-card/about-card.component';
 import { AboutCard1Component } from '../../cards/about-card1/about-card1.component';
 import { AboutCard2Component } from '../../cards/about-card2/about-card2.component';
-import { applyContentFontDefaults } from '../../utils/font-utils';
+import { applyContentFontDefaults, applySectionFontDefaults } from '../../utils/font-utils';
 
 @Component({
   selector: 'app-about-us',
@@ -21,6 +21,9 @@ export class AboutUsComponent implements OnChanges {
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.section) {
+      this.section = applySectionFontDefaults(this.section);
+    }
     if (this.section?.content?.length) {
       this.section.content = this.section.content.map((item: any) => applyContentFontDefaults(this.section, item));
     }
@@ -35,7 +38,3 @@ export class AboutUsComponent implements OnChanges {
   }
 
 }
-
-
-
-

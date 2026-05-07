@@ -1,5 +1,5 @@
 <div class="p-0">
-    <div class="image-container">
+    <div class="image-container" *ngIf="content.video || content.image || (content.image_mob && content.image_mob!='')">
         <video
             *ngIf="content.video && content.video !== ''"
             [src]="smallDevice ? ((content.video_mob && content.video_mob !== '') ? content.video_mob : content.video) : content.video"
@@ -41,6 +41,15 @@
             <div *ngIf="content.price || content.mrp">
                 <span class="price-item test" *ngIf="content.price"><span class="currency_symbol">₹</span>{{ content.price }}</span>
                 <span class="mrp" *ngIf="content.mrp && content.mrp!=content.price"><span class="currency_symbol">₹</span>{{ content.mrp }}</span>
+            </div>
+            <!-- Static button shown when there's no media -->
+            <div class="mt-3" *ngIf="!content.video && !content.image && (!content.image_mob || content.image_mob=='')">
+                <button type="button" [id]="'btnItemStatic'" [ngStyle]="{
+                    'color': content.foregroundColor,
+                    'background-color': content.backgroundColor
+                }"
+                    class="btn-viewItem-static btn btn-primary w-100"
+                    (click)="_contentClicked(content,'.')">{{content.buttonCaption || 'View Item'}}</button>
             </div>
         </div>
     </div>

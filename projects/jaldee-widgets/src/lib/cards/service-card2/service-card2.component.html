@@ -41,7 +41,7 @@
       {{content.buttonCaption}}</a>
   </div>
   </div>
-  <div class="card-image">
+  <div class="card-image" *ngIf="content.video || content.image">
     <video
       *ngIf="content.video && content.video !== ''"
       class="w-full"

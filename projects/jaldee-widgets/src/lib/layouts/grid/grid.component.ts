@@ -19,7 +19,7 @@ import { ContactCardComponent } from '../../cards/contact-card/contact-card.comp
 import { ServiceCard4Component } from '../../cards/service-card4/service-card4.component';
 import { CategoryCardComponent } from '../../cards/category-card/category-card.component';
 import { LazyImageDirective } from '../../utils/lazy-image.directive';
-import { applyContentFontDefaults } from '../../utils/font-utils';
+import { applyContentFontDefaults, applySectionFontDefaults } from '../../utils/font-utils';
 
 @Component({
   selector: 'app-grid',
@@ -63,6 +63,9 @@ export class GridComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.section) {
+      this.section = applySectionFontDefaults(this.section);
+    }
     this.className = [
       this.section?.className,
       this.section?.titlePosition
@@ -73,7 +76,6 @@ export class GridComponent implements OnChanges {
     if (this.section?.content?.length) {
       this.section.content = this.section.content.map((item: any) => applyContentFontDefaults(this.section, item));
     }
-
   }
 
   @HostListener('window:resize')

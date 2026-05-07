@@ -1,6 +1,6 @@
 <div class="card p-0" *ngIf="content" [ngStyle]="{
   'color': content.foregroundColor,'background':  (content.backgroundColor || 'transparent')}">
-  <div class="card-image">
+  <div class="card-image" *ngIf="content.video || content.image">
     <video
       *ngIf="content.video && content.video !== ''"
       [src]="content.video"
@@ -11,14 +11,14 @@
       playsinline>
     </video>
     <img *ngIf="(!content.video || content.video === '') && content.image" [lazyImage]="content.image" alt="Card image cap" loading="lazy" priority="false">
-    <div *ngIf="content.title" class="card-title pt-2"
-      [ngStyle]="{
-        'font-size': content.titleFontSize || null,
-        'font-weight': content.titleFontWeight || null,
-        'font-style': content.titleFontStyle || null,
-        'text-align': content.titleTextAlign || null
-      }">
-      {{content.title}}
-    </div>
+  </div>
+  <div *ngIf="content.title" class="card-title pt-2"
+    [ngStyle]="{
+      'font-size': content.titleFontSize || null,
+      'font-weight': content.titleFontWeight || null,
+      'font-style': content.titleFontStyle || null,
+      'text-align': content.titleTextAlign || null
+    }">
+    {{content.title}}
   </div>
 </div>

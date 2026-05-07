@@ -7,6 +7,9 @@ export const normalizeFontSize = (value: FontSize): string | null => {
   if (typeof value === 'number') {
     return `${value}px`;
   }
+  if (typeof value === 'string' && /^\d+(\.\d+)?$/.test(value.trim())) {
+    return `${value.trim()}px`;
+  }
   return value;
 };
 
@@ -58,4 +61,18 @@ export const applyContentFontDefaults = (section: Section | undefined, item: Con
       section?.contentDescriptionTextAlign
     )
   };
+};
+
+export const applySectionFontDefaults = (section: any): any => {
+  if (!section) {
+    return section;
+  }
+  section.preTitleFontSize = normalizeFontSize(section.preTitleFontSize);
+  section.titleFontSize = normalizeFontSize(section.titleFontSize);
+  section.subTitleFontSize = normalizeFontSize(section.subTitleFontSize);
+  section.descriptionFontSize = normalizeFontSize(section.descriptionFontSize);
+  section.contentTitleFontSize = normalizeFontSize(section.contentTitleFontSize);
+  section.contentSubTitleFontSize = normalizeFontSize(section.contentSubTitleFontSize);
+  section.contentDescriptionFontSize = normalizeFontSize(section.contentDescriptionFontSize);
+  return section;
 };
