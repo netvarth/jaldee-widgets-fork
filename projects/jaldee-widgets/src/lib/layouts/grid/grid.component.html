@@ -3,19 +3,34 @@
         <img *ngIf="section.titleImage && section.imagePosition=='top'" class="" [src]="section.titleImage"
             alt="Card image cap" loading="lazy" priority="false">
         <div *ngIf="section.preTitle && section.preTitle!=''" class="subtitle mb-2"
-            [ngStyle]="section.preTitleFontSize ? { 'font-size': section.preTitleFontSize } : null">
+            [ngStyle]="{
+                'font-size': section.preTitleFontSize || null,
+                'font-weight': section.preTitleFontWeight || null,
+                'font-style': section.preTitleFontStyle || null,
+                'text-align': section.preTitleTextAlign || null
+            }">
             {{section.preTitle}}
         </div>
         <div *ngIf="section.title && section.title!=''" class="mt-2">
             <h2 class="mb-0 heading"
-                [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+                [ngStyle]="{
+                    'font-size': section.titleFontSize || null,
+                    'font-weight': section.titleFontWeight || null,
+                    'font-style': section.titleFontStyle || null,
+                    'text-align': section.titleTextAlign || null
+                }">
                 {{section.title}}
             </h2>
         </div>
         <img *ngIf="section.titleImage && section.imagePosition=='middle'" class="" [src]="section.titleImage"
             alt="Card image cap" loading="lazy" priority="false">
         <div *ngIf="section.subTitle && section.subTitle!=''" class="subtitle mt-2"
-            [ngStyle]="section.subTitleFontSize ? { 'font-size': section.subTitleFontSize } : null">
+            [ngStyle]="{
+                'font-size': section.subTitleFontSize || null,
+                'font-weight': section.subTitleFontWeight || null,
+                'font-style': section.subTitleFontStyle || null,
+                'text-align': section.subTitleTextAlign || null
+            }">
             {{section.subTitle}}
         </div>
         <img *ngIf="section.titleImage && section.imagePosition=='bottom'" class="" [src]="section.titleImage"

@@ -2,11 +2,23 @@
     <div class="testimonials-container">
         <div class="text-center">
             <h5 *ngIf="section.subtitle"
-                [ngStyle]="section.subTitleFontSize ? { 'font-size': section.subTitleFontSize } : null">
+                [ngStyle]="{
+            'font-size': section.subTitleFontSize || null,
+            'font-weight': section.subTitleFontWeight || null,
+            'font-style': section.subTitleFontStyle || null,
+            'color': section.subTitleColor || null,
+            'text-align': section.subTitleTextAlign || null
+        }">
                 {{ section.subtitle }}
             </h5>
             <h2 *ngIf="section.title"
-                [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+                [ngStyle]="{
+            'font-size': section.titleFontSize || null,
+            'font-weight': section.titleFontWeight || null,
+            'font-style': section.titleFontStyle || null,
+            'color': section.titleColor || null,
+            'text-align': section.titleTextAlign || null
+        }">
                 {{ section.title }}
             </h2>
         </div>

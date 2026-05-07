@@ -7,10 +7,12 @@
     background: #f5f6fb !important;
 }
 
-.grid.rectangle .item-grid img {
+.grid.rectangle .item-grid img,
+.grid.rectangle .item-grid video {
     height: auto !important;
     width: 100px !important;
     aspect-ratio: 1/1 !important;
+    object-fit: cover;
 }
 
 .grid.rectangle .item-grid .image-wrapper {

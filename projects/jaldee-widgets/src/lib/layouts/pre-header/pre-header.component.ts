@@ -24,6 +24,7 @@ const DEFAULT_ANNOUNCEMENT_OPTIONS: Record<string, unknown> = {
   margin: 0,
   autoplay: true,
   autoplayTimeout: 5000,
+  scrollMode: 'slide',
   dots: false,
   center: false,
   nav: true
@@ -110,6 +111,7 @@ export class PreHeaderComponent implements OnChanges, AfterViewInit, OnDestroy {
         this.carouselConfig?.autoplayTimeout ?? options?.['autoplayTimeout'],
         5000
       ),
+      scrollMode: this.scrollModeValue(this.carouselConfig?.scrollMode ?? options?.['scrollMode']),
       showNav: nav,
       showDots: dots,
       responsiveOptions: this.buildResponsiveOptions(),
@@ -247,6 +249,10 @@ export class PreHeaderComponent implements OnChanges, AfterViewInit, OnDestroy {
       if (normalized === 'false') return false;
     }
     return fallback;
+  }
+
+  private scrollModeValue(value: unknown): 'slide' | 'marquee' {
+    return value === 'marquee' ? 'marquee' : 'slide';
   }
 }
 

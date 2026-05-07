@@ -46,16 +46,19 @@ h1.heading {
     grid-auto-rows: 1fr;
 }
 
-.action-grid img {
+.action-grid img,
+.action-grid video {
     width: 100%;
     height: auto;
     // aspect-ratio: 1/1;
 }
 
-.custom.column img {
+.custom.column img,
+.custom.column video {
     height: 100px !important;
     width: 100px !important;
     aspect-ratio: 1/1 !important;
+    object-fit: cover;
 }
 
 .item-grid {
@@ -107,14 +110,18 @@ h1.heading {
     margin-bottom: 5px;
 }
 
-.cardLayout .item-grid img {
+.cardLayout .item-grid img,
+.cardLayout .item-grid video {
     height: 100px !important;
     width: 100% !important;
+    object-fit: cover;
 }
 
-.userCard img {
+.userCard img,
+.userCard video {
     width: 100% !important;
     height: 150px !important;
+    object-fit: cover;
 }
 
 .cardLayout .title {

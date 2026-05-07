@@ -70,6 +70,7 @@ export class SliderComponent implements OnChanges {
       loop: this.getBooleanOption('loop', false),
       autoplay: this.getBooleanOption('autoplay', false),
       autoplayTimeout: this.numericOption('autoplayTimeout', 5000),
+      scrollMode: this.getScrollMode(),
       showNav: this.shouldShowNav(items),
       showDots: this.getBooleanOption('dots', slides > 1),
       responsiveOptions: this.buildResponsiveOptions(),
@@ -97,6 +98,7 @@ export class SliderComponent implements OnChanges {
 
   private getDefaultItems(): number {
     return (
+      this.currentResponsiveOptions?.['items'] ??
       this.section?.cols_xl_options?.items ??
       this.section?.cols_md_options?.items ??
       this.section?.cols_xs_options?.items ??
@@ -106,9 +108,7 @@ export class SliderComponent implements OnChanges {
 
   private numericOption(key: string, fallback: number): number {
     return this.numericValue(
-      this.section?.cols_xl_options?.[key] ??
-        this.section?.cols_md_options?.[key] ??
-        this.section?.cols_xs_options?.[key] ??
+      this.currentResponsiveOptions?.[key] ??
         this.section?.[key],
       fallback
     );
@@ -133,11 +133,36 @@ export class SliderComponent implements OnChanges {
 
   private getBooleanOption(key: string, fallback: boolean): boolean {
     const option =
-      this.section?.cols_xl_options?.[key] ??
-      this.section?.cols_md_options?.[key] ??
-      this.section?.cols_xs_options?.[key] ??
+      this.currentResponsiveOptions?.[key] ??
       this.section?.[key];
     return this.booleanValue(option, fallback);
+  }
+
+  private getStringOption(key: string, fallback: string): string {
+    const option =
+      this.currentResponsiveOptions?.[key] ??
+      this.section?.[key];
+    return typeof option === 'string' && option.trim().length ? option.trim() : fallback;
+  }
+
+  private get currentResponsiveOptions(): Record<string, any> | null {
+    const width = typeof window === 'undefined' ? Number.MAX_SAFE_INTEGER : window.innerWidth;
+    if (width <= 767) {
+      return this.section?.cols_xs_options || null;
+    }
+    if (width <= 1023) {
+      return this.section?.cols_md_options || this.section?.cols_xs_options || null;
+    }
+    return (
+      this.section?.cols_xl_options ||
+      this.section?.cols_md_options ||
+      this.section?.cols_xs_options ||
+      null
+    );
+  }
+
+  private getScrollMode(): 'slide' | 'marquee' {
+    return this.getStringOption('scrollMode', 'slide') === 'marquee' ? 'marquee' : 'slide';
   }
 
   private shouldShowNav(items: number): boolean {

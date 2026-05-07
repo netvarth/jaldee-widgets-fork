@@ -2,12 +2,24 @@
     <div class="pt-1 text-center">
         <div *ngIf="section.title && section.title!=''" [class.mb-3]="section.subTitle && section.subTitle!=''">
             <h2 class="fw-normal mb-3"
-                [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+                [ngStyle]="{
+            'font-size': section.titleFontSize || null,
+            'font-weight': section.titleFontWeight || null,
+            'font-style': section.titleFontStyle || null,
+            'text-align': section.titleTextAlign || null,
+            'color': section.titleColor || null,
+        }">
                 {{section.title}}
             </h2>
         </div>
         <div *ngIf="section.subTitle && section.subTitle!=''" class="mt-3 mb-3 subTitle"
-            [ngStyle]="section.subTitleFontSize ? { 'font-size': section.subTitleFontSize } : null">
+            [ngStyle]="{
+            'font-size': section.subTitleFontSize || null,
+            'font-weight': section.subTitleFontWeight || null,
+            'font-style': section.subTitleFontStyle || null,
+            'text-align': section.subTitleTextAlign || null,
+            'color': section.subTitleColor || null,
+        }">
             {{section.subTitle}}
         </div>
         <div class="padding action-grid">
@@ -26,7 +38,12 @@
                                             *ngIf="action.image || (action.image_mob && action.image_mob!='')" loading="lazy">
                                         <div *ngIf="action.title && action.title!=''" class="text-center content-text">
                                             <div class="action-name title"
-                                                [ngStyle]="action.titleFontSize ? { 'font-size': action.titleFontSize } : null">
+                                                [ngStyle]="{
+                                                    'font-size': action.titleFontSize || null,
+                                                    'font-weight': action.titleFontWeight || null,
+                                                    'font-style': action.titleFontStyle || null,
+                                                    'text-align': action.titleTextAlign || null
+                                                }">
                                                 {{action.title}}
                                             </div>
                                             <div *ngIf="action.price || action.mrp">

@@ -1,9 +1,21 @@
 <div id="{{ section.id }}" class="slide-container hero-section" [ngClass]="section.className">
   <div class="hero-heading" *ngIf="section.title">
-    <h2 [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+    <h2 [ngStyle]="{
+      'font-size': section.titleFontSize || null,
+      'font-weight': section.titleFontWeight || null,
+      'font-style': section.titleFontStyle || null,
+            'text-align': section.titleTextAlign || null,
+      'color': section.titleColor || null,
+    }">
       {{ section.title }}
     </h2>
-    <p *ngIf="section.subTitle" [ngStyle]="section.subTitleFontSize ? { 'font-size': section.subTitleFontSize } : null">
+    <p *ngIf="section.subTitle" [ngStyle]="{
+      'font-size': section.subTitleFontSize || null,
+      'font-weight': section.subTitleFontWeight || null,
+      'font-style': section.subTitleFontStyle || null,
+            'text-align': section.subTitleTextAlign || null,
+      'color': section.subTitleColor || null,
+    }">
       {{ section.subTitle }}
     </p>
   </div>
@@ -42,7 +54,7 @@
             </div>
             <div class="image-wrapper" *ngIf="banner.video && banner.video !== ''">
               <video
-                [src]="banner.video"
+                [src]="smallDevice ? ((banner.video_mob && banner.video_mob !== '') ? banner.video_mob : banner.video) : banner.video"
                 autoplay
                 muted
                 loop

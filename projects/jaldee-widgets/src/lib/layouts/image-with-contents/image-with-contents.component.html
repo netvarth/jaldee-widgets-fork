@@ -1,6 +1,12 @@
 <div [ngClass]="className">
     <h2 *ngIf="section.title"
-        [ngStyle]="section.titleFontSize ? { 'font-size': section.titleFontSize } : null">
+        [ngStyle]="{
+            'font-size': section.titleFontSize || null,
+            'font-weight': section.titleFontWeight || null,
+            'font-style': section.titleFontStyle || null,
+            'text-align': section.titleTextAlign || null,
+            'color': section.titleColor || null,
+        }">
         {{ section.title }}
     </h2>
     <div class="aboutUs-container" [class.fullWidth]="!(section.image || section.video)">
@@ -8,7 +14,7 @@
             <img [src]="section.image" alt="" width="100%" height="400px" loading="lazy" >
         </div>
         <div *ngIf="section.video" class="">
-            <video [src]="section.video" muted class="video-banner" controls>
+            <video [src]="smallDevice ? ((section.video_mob && section.video_mob !== '') ? section.video_mob : section.video) : section.video" muted class="video-banner" controls>
                 Your browser does not support the video tag.
             </video>                                                   
             </div>
@@ -19,11 +25,21 @@
                 </div>
                 <div class="p-2">
                     <h3 class="fw-bold mb-2 aboutus-h3"
-                        [ngStyle]="card.titleFontSize ? { 'font-size': card.titleFontSize } : null">
+                        [ngStyle]="{
+                            'font-size': card.titleFontSize || null,
+                            'font-weight': card.titleFontWeight || null,
+                            'font-style': card.titleFontStyle || null,
+                            'text-align': card.titleTextAlign || null
+                        }">
                         {{card.title}}
                     </h3>
                     <div class="description" *ngIf="card.description"
-                        [ngStyle]="card.descriptionFontSize ? { 'font-size': card.descriptionFontSize } : null"
+                        [ngStyle]="{
+                            'font-size': card.descriptionFontSize || null,
+                            'font-weight': card.descriptionFontWeight || null,
+                            'font-style': card.descriptionFontStyle || null,
+                            'text-align': card.descriptionTextAlign || null
+                        }"
                         innerHTML="{{card.description}}"></div>
                 </div>
             </div>

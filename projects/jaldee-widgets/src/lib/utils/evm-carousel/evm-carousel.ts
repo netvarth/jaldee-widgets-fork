@@ -27,6 +27,7 @@ export interface CarouselConfig {
   autoplay?: boolean;
   autoplayTimeout?: number;
   loop?: boolean;
+  scrollMode?: 'slide' | 'marquee';
   showDots?: boolean;
   showNav?: boolean;
   responsiveOptions?: ResponsiveOption[];
@@ -88,7 +89,7 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
     console.log('EvmCarousel config:', this.config);
     console.log('EvmCarousel items:', this.items);
     this.calculateResponsiveItems(true);
-    if (this.config.autoplay) {
+    if (this.config.autoplay && !this.isMarqueeMode) {
       this.startAutoplay();
     }
   }
@@ -206,7 +207,7 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
     const width = window.innerWidth;
 
     // ✅ CENTER MODE LOGIC
-    if (this.config.center) {
+    if (this.config.center && !this.isMarqueeMode) {
 
       let baseItems = this.config.items || 1;
 
@@ -283,6 +284,9 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
     this.intervalId = setInterval(() => this.next(), this.config.autoplayTimeout || 3000);
   }
   next() {
+    if (this.isMarqueeMode) {
+      return;
+    }
     if (!this.renderedItems.length || this.isResetting) {
       return;
     }
@@ -300,6 +304,9 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
     }
   }
   prev() {
+    if (this.isMarqueeMode) {
+      return;
+    }
     if (!this.renderedItems.length || this.isResetting) {
       return;
     }
@@ -348,7 +355,10 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
       this.currentIndex = 0;
       return;
     }
-    if (this.config.loop) {
+    if (this.isMarqueeMode) {
+      this.renderedItems = this.createMarqueeItems(slides);
+      this.currentIndex = 0;
+    } else if (this.config.loop) {
       const before = this.createClones(slides, this.itemsToShow, true);
       const after = this.createClones(slides, this.itemsToShow, false);
       this.renderedItems = [...before, ...slides, ...after];
@@ -380,6 +390,15 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
     return clones;
   }
 
+  private createMarqueeItems(slides: any[]): any[] {
+    const baseRepeatCount = Math.max(1, Math.ceil(this.itemsToShow / slides.length));
+    const baseItems: any[] = [];
+    for (let i = 0; i < baseRepeatCount; i++) {
+      baseItems.push(...slides);
+    }
+    return [...baseItems, ...baseItems];
+  }
+
   private scheduleLoopReset(direction: 'next' | 'prev') {
     if (!this.renderedItems.length) {
       return;
@@ -406,15 +425,39 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
   }
 
   get transitionStyle(): string {
+    if (this.isMarqueeMode) {
+      return 'none';
+    }
     return this.disableTransition ? 'none' : 'transform 0.5s ease-in-out';
   }
   getFlex(): string {
+    if (this.isMarqueeMode) {
+      return '0 0 ' + (100 / Math.max(1, this.renderedItems.length)) + '%';
+    }
     return '0 0 ' + (100 / this.itemsToShow) + '%';
   }
 
-  getTransform(): string {
+  getTransform(): string | null {
+    if (this.isMarqueeMode) {
+      return null;
+    }
     const percentage = 100 / this.itemsToShow;
     return 'translateX(-' + (this.currentIndex * percentage) + '%)';
+  }
+
+  getStageWidth(): string | null {
+    if (!this.isMarqueeMode) {
+      return null;
+    }
+    return (Math.max(1, this.renderedItems.length) / this.itemsToShow) * 100 + '%';
+  }
+
+  getMarqueeDuration(): string | null {
+    if (!this.isMarqueeMode) {
+      return null;
+    }
+    const duration = Number(this.config.autoplayTimeout);
+    return (Number.isFinite(duration) && duration > 0 ? duration : 20000) + 'ms';
   }
 
   handleItemClick(renderedIndex: number): void {
@@ -422,7 +465,7 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
     if (!slides.length) {
       return;
     }
-    const loopBase = this.config.loop ? this.itemsToShow : 0;
+    const loopBase = this.config.loop && !this.isMarqueeMode ? this.itemsToShow : 0;
     const rawIndex = renderedIndex - loopBase;
     const normalizedIndex =
       ((rawIndex % slides.length) + slides.length) % slides.length;
@@ -441,13 +484,13 @@ export class EvmCarousel implements OnInit, OnDestroy, OnChanges {
   }
 
   isCenter(idx: number): boolean {
-  if (!this.config?.center) return false;
+  if (!this.config?.center || this.isMarqueeMode) return false;
 
   const centerIndex = this.currentIndex + Math.floor(this.itemsToShow / 2);
   return idx === centerIndex;
 }
 getItemScale(idx: number): number {
-  if (!this.config.center) return 1;
+  if (!this.config.center || this.isMarqueeMode) return 1;
 
   const centerIndex = this.currentIndex + Math.floor(this.itemsToShow / 2);
   const distance = Math.abs(idx - centerIndex);
@@ -456,6 +499,10 @@ getItemScale(idx: number): number {
   if (distance === 1) return 0.85;     // near center
   if (distance === 2) return 0.75;     // far
   return 0.85;                         // default for safety
+}
+
+get isMarqueeMode(): boolean {
+  return this.config?.scrollMode === 'marquee';
 }
 
 

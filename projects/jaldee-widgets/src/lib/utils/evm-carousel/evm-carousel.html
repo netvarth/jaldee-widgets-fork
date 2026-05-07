@@ -1,6 +1,7 @@
 <div 
   class="evm-carousel-wrapper"
-  [class.center-mode]="config.center"
+  [class.center-mode]="config.center && !isMarqueeMode"
+  [class.marquee-mode]="isMarqueeMode"
   role="listbox"
 >
 
@@ -8,8 +9,10 @@
     class="evm-carousel-stage"
     #stage
     [style.transform]="getTransform()"
+    [style.width]="getStageWidth()"
     [style.padding]="'0 ' + (config.stagePadding || 0) + 'px'"
     [style.transition]="transitionStyle"
+    [style.animation-duration]="getMarqueeDuration()"
     (pointerdown)="onPointerDown($event)"
     (pointermove)="onPointerMove($event)"
     (pointerup)="onPointerUp($event)"
@@ -34,7 +37,7 @@
 
   </div>
 
-  <div class="evm-carousel-nav" *ngIf="config.showNav">
+  <div class="evm-carousel-nav" *ngIf="config.showNav && !isMarqueeMode">
     <button class="nav prev" (click)="prev()" aria-label="Previous slide">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M15 5l-6 7 6 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -47,7 +50,7 @@
     </button>
   </div>
 
-  <div class="dots" *ngIf="config.showDots && !config.center">
+  <div class="dots" *ngIf="config.showDots && !config.center && !isMarqueeMode">
     <span
       *ngFor="let item of items; let idx = index"
       [class.active]="idx === currentIndex"

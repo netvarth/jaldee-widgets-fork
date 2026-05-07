@@ -15,6 +15,7 @@
   transition: transform 0.5s ease-in-out;
   touch-action: pan-y;
   cursor: grab;
+  will-change: transform;
 }
 .evm-carousel-stage:active {
   cursor: grabbing;
@@ -104,5 +105,29 @@
   padding: 0 !important;
 }
 
+.marquee-mode .evm-carousel-stage {
+  animation-name: evm-marquee-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  cursor: default;
+}
+
+.marquee-mode .evm-carousel-stage:hover {
+  animation-play-state: paused;
+}
+
+.marquee-mode .evm-carousel-item {
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+@keyframes evm-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
 
 

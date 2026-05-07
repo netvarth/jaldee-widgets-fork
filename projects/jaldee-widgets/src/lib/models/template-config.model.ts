@@ -20,6 +20,24 @@ export interface Section {
   contentTitleFontSize?: FontSize;
   contentSubTitleFontSize?: FontSize;
   contentDescriptionFontSize?: FontSize;
+  preTitleFontWeight?: string;
+  titleFontWeight?: string;
+  subTitleFontWeight?: string;
+  contentTitleFontWeight?: string;
+  contentSubTitleFontWeight?: string;
+  contentDescriptionFontWeight?: string;
+  preTitleFontStyle?: string;
+  titleFontStyle?: string;
+  subTitleFontStyle?: string;
+  contentTitleFontStyle?: string;
+  contentSubTitleFontStyle?: string;
+  contentDescriptionFontStyle?: string;
+  preTitleTextAlign?: string;
+  titleTextAlign?: string;
+  subTitleTextAlign?: string;
+  contentTitleTextAlign?: string;
+  contentSubTitleTextAlign?: string;
+  contentDescriptionTextAlign?: string;
   type?: string;
   dynamic?: boolean;
   content?: Content[];
@@ -67,6 +85,15 @@ export interface Action {
   titleFontSize?: FontSize;
   subTitleFontSize?: FontSize;
   descriptionFontSize?: FontSize;
+  titleFontWeight?: string;
+  subTitleFontWeight?: string;
+  descriptionFontWeight?: string;
+  titleFontStyle?: string;
+  subTitleFontStyle?: string;
+  descriptionFontStyle?: string;
+  titleTextAlign?: string;
+  subTitleTextAlign?: string;
+  descriptionTextAlign?: string;
   useSectionFontSizes?: boolean;
   [key: string]: unknown;
 }
@@ -82,6 +109,15 @@ export interface Content {
   titleFontSize?: FontSize;
   subTitleFontSize?: FontSize;
   descriptionFontSize?: FontSize;
+  titleFontWeight?: string;
+  subTitleFontWeight?: string;
+  descriptionFontWeight?: string;
+  titleFontStyle?: string;
+  subTitleFontStyle?: string;
+  descriptionFontStyle?: string;
+  titleTextAlign?: string;
+  subTitleTextAlign?: string;
+  descriptionTextAlign?: string;
   useSectionFontSizes?: boolean;
   [key: string]: unknown;
 }

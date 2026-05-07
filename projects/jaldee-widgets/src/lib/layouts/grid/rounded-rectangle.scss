@@ -1,15 +1,19 @@
-.grid.rectangle-vertial-rounded .item-grid img {
+.grid.rectangle-vertial-rounded .item-grid img,
+.grid.rectangle-vertial-rounded .item-grid video {
     transition: .3s;
     border-radius: 15px;
     width: 100%;
 }
 
-.grid.rectangle-vertial-rounded .item-grid img:hover {
+.grid.rectangle-vertial-rounded .item-grid img:hover,
+.grid.rectangle-vertial-rounded .item-grid video:hover {
     transform: scale(1.1) !important;
 }
 
-.grid.rectangle-vertial-rounded .item-grid img {
+.grid.rectangle-vertial-rounded .item-grid img,
+.grid.rectangle-vertial-rounded .item-grid video {
     aspect-ratio: 1/1;
+    object-fit: cover;
 }
 
 .grid.rectangle-vertial-rounded.pad-hover .item-grid {
@@ -22,6 +26,7 @@
 }
 
 .grid.rectangle-vertial-rounded.pad-hover .item-grid img,
+.grid.rectangle-vertial-rounded.pad-hover .item-grid video,
 .grid.rectangle-vertial-rounded.pad-hover .item-grid .image-wrapper {
     border: none;
     border-radius: 0 !important;
