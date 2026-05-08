@@ -46,6 +46,10 @@ h1.heading {
     grid-auto-rows: 1fr;
 }
 
+.action-grid--small {
+    row-gap: 14px;
+}
+
 .action-grid img,
 .action-grid video {
     width: 100%;
@@ -138,9 +142,6 @@ h1.heading {
         padding: 5px !important;
     }
 
-    .action-grid {
-        row-gap: 14px;
-    }
 }
 
 .btn-viewallitems

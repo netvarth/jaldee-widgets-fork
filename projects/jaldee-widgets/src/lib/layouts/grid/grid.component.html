@@ -35,7 +35,7 @@
         </div>
         <img *ngIf="section.titleImage && section.imagePosition=='bottom'" class="" [src]="section.titleImage"
             alt="Card image cap" loading="lazy" priority="false">
-        <div class="no-padding mt-3 action-grid" [ngStyle]="{ 'grid-template-columns': gridColumns }">
+        <div class="no-padding mt-3 action-grid" [class.action-grid--small]="smallDevice" [ngStyle]="{ 'grid-template-columns': gridColumns }">
             <div *ngFor="let action of section.content; let i = index; trackBy: trackByIndex"
                 class="item-grid pointer-cursor" carouselslide (click)="_actionClicked(action, section.id)">
                 <!-- [ngStyle]="{ 'aspect-ratio': action.image_aspectRatio || '' }" -->
