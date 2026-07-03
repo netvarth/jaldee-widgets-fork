@@ -8,6 +8,11 @@
     color: #4F4F4F;
 }
 
+.description-type2 a[data-jw-link] {
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
 @media screen and (max-width:991px) {
     .aboutUs-container {
         display: grid;

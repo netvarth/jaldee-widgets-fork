@@ -33,8 +33,26 @@ export class AboutUsComponent implements OnChanges {
     this.actionClicked.emit({ action, target });
   }
 
+  onDescriptionInteraction(event: Event, content: any, target: string) {
+    const clickedElement = event.target as HTMLElement | null;
+    const anchor = clickedElement?.closest('a[data-jw-link]');
+    const href = anchor?.getAttribute('data-jw-link')?.trim();
+
+    if (!anchor || !href) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    this._actionClicked({ ...content, link: href }, target);
+  }
+
   getHTMLContent(description: string) {
-    return this.sanitizer.bypassSecurityTrustHtml(description);
+    const safeDescription = (description || '').replace(
+      /href\s*=\s*(["'])(.*?)\1/gi,
+      'data-jw-link=$1$2$1'
+    );
+    return this.sanitizer.bypassSecurityTrustHtml(safeDescription);
   }
 
 }
