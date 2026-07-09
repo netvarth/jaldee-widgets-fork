@@ -52,13 +52,29 @@
     </div>
   </div>
   <nav class="menu">
-    <button
-      class="menu-item"
+    <div
+      class="menu-item-wrap"
       *ngFor="let item of visibleMenu"
-      (click)="menuClick(item)"
+      [class.has-submenu]="item.submenu?.length"
+      [class.active]="isSubmenuActive(item)"
+      [class.submenu-open]="item.showSubmenu"
+      (mouseenter)="item.submenu?.length && showSubmenu(item)"
+      (mouseleave)="item.submenu?.length && hideSubmenu(item)"
     >
-      <i *ngIf="item.icon" [ngClass]="item.icon"></i>
-      {{ item.title }}
-    </button>
+      <button
+        class="menu-item"
+        (click)="handleMenuItemClick(item)"
+      >
+        <i *ngIf="item.icon" [ngClass]="item.icon"></i>
+        {{ item.title }}
+        <i *ngIf="item.submenu?.length" class="fa dropdown-icon" [class.fa-chevron-right]="smallDevice" [class.fa-chevron-down]="!smallDevice"></i>
+      </button>
+      <ul class="submenu" *ngIf="item.submenu?.length" [class.show]="item.showSubmenu">
+        <li *ngFor="let subItem of item.submenu" (click)="menuClick(subItem)">
+          <i *ngIf="subItem.icon" [ngClass]="subItem.icon"></i>
+          {{ subItem.title }}
+        </li>
+      </ul>
+    </div>
   </nav>
 </header>

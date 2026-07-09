@@ -48,9 +48,24 @@
   </div>
   <nav class="navbar" *ngIf="visibleMenu.length">
     <ul>
-      <li *ngFor="let item of visibleMenu" (click)="menuClick(item)">
+      <li
+        *ngFor="let item of visibleMenu"
+        [class.has-submenu]="item.submenu?.length"
+        [class.active]="isSubmenuActive(item)"
+        [class.submenu-open]="item.showSubmenu"
+        (mouseenter)="item.submenu?.length && showSubmenu(item)"
+        (mouseleave)="item.submenu?.length && hideSubmenu(item)"
+        (click)="handleMenuItemClick(item)"
+      >
         <i *ngIf="item.icon" [ngClass]="item.icon"></i>
         {{ item.title }}
+        <i *ngIf="item.submenu?.length" class="fa dropdown-icon" [class.fa-chevron-right]="smallDevice" [class.fa-chevron-down]="!smallDevice"></i>
+        <ul class="submenu" *ngIf="item.submenu?.length" [class.show]="item.showSubmenu">
+          <li *ngFor="let subItem of item.submenu" (click)="menuClick(subItem); $event.stopPropagation()">
+            <i *ngIf="subItem.icon" [ngClass]="subItem.icon"></i>
+            {{ subItem.title }}
+          </li>
+        </ul>
       </li>
     </ul>
   </nav>

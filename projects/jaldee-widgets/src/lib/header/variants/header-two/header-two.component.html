@@ -1,14 +1,30 @@
 <header class="header-two" *ngIf="data">
   <div class="top-row">
     <nav class="nav-left" *ngIf="!smallDevice">
-      <button
-        class="nav-item"
+      <div
+        class="nav-item-wrap"
         *ngFor="let item of visibleMenu"
-        (click)="menuClick(item)"
+        [class.has-submenu]="item.submenu?.length"
+        [class.active]="isSubmenuActive(item)"
+        [class.submenu-open]="item.showSubmenu"
+        (mouseenter)="item.submenu?.length && showSubmenu(item)"
+        (mouseleave)="item.submenu?.length && hideSubmenu(item)"
       >
-        <i *ngIf="item.icon" [ngClass]="item.icon"></i>
-        {{ item.title }}
-      </button>
+        <button
+          class="nav-item"
+          (click)="handleMenuItemClick(item)"
+        >
+          <i *ngIf="item.icon" [ngClass]="item.icon"></i>
+          {{ item.title }}
+          <i *ngIf="item.submenu?.length" class="fa dropdown-icon" [class.fa-chevron-right]="smallDevice" [class.fa-chevron-down]="!smallDevice"></i>
+        </button>
+        <ul class="submenu" *ngIf="item.submenu?.length" [class.show]="item.showSubmenu">
+          <li *ngFor="let subItem of item.submenu" (click)="menuClick(subItem)">
+            <i *ngIf="subItem.icon" [ngClass]="subItem.icon"></i>
+            {{ subItem.title }}
+          </li>
+        </ul>
+      </div>
     </nav>
     <div class="brand" (click)="emit({ type: 'home' })">
       <img *ngIf="logo || data.logo" [src]="logo || data.logo" [style.aspect-ratio]="aspectRatio || data['logoAspectRatio'] || data['aspectRatio'] || null" alt="Logo" />

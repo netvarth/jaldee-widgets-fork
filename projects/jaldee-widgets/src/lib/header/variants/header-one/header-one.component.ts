@@ -77,6 +77,33 @@ export class HeaderOneComponent {
     this.emit({ type: 'menu', payload: item });
   }
 
+  activeMenuItem = '';
+
+  isSubmenuActive(menuItem: any): boolean {
+    if (!menuItem.submenu?.length) return false;
+    return menuItem.submenu.some((subItem: any) => this.activeMenuItem === subItem.link);
+  }
+
+  showSubmenu(menuItem: any) {
+    menuItem.showSubmenu = true;
+  }
+
+  hideSubmenu(menuItem: any) {
+    menuItem.showSubmenu = false;
+  }
+
+  handleMenuItemClick(menuItem: any) {
+    if (this.smallDevice && menuItem.submenu?.length) {
+      menuItem.showSubmenu = !menuItem.showSubmenu;
+      return;
+    }
+    if (menuItem.link || (menuItem.title === 'Home' && !menuItem.submenu?.length)) {
+      this.menuClick(menuItem);
+    } else if (menuItem.submenu?.length) {
+      menuItem.showSubmenu = !menuItem.showSubmenu;
+    }
+  }
+
   triggerSearch() {
     const query = this.searchValue?.trim();
     if (query) {

@@ -23,15 +23,31 @@
         class="desktop-menu"
         *ngIf="!smallDevice"
       >
-        <a
+        <div
+          class="nav-item-wrap"
           *ngFor="let item of visibleMenu"
-          class="nav-item"
-          [class.active]="item.link === activeMenu"
-          (click)="navigate(item)"
+          [class.has-submenu]="item.submenu?.length"
+          [class.active]="isSubmenuActive(item)"
+          [class.submenu-open]="item.showSubmenu"
+          (mouseenter)="!smallDevice && item.submenu?.length && showSubmenu(item)"
+          (mouseleave)="!smallDevice && item.submenu?.length && hideSubmenu(item)"
         >
-          <i class="menu-icon" [class]="getMenuIcon(item)"></i>
-          {{ item.title }}
-        </a>
+          <a
+            class="nav-item"
+            [class.active]="item.link === activeMenu"
+            (click)="handleMenuItemClick(item)"
+          >
+            <i class="menu-icon" [class]="getMenuIcon(item)"></i>
+            {{ item.title }}
+            <i *ngIf="item.submenu?.length" class="fa dropdown-icon" [class.fa-chevron-right]="smallDevice" [class.fa-chevron-down]="!smallDevice"></i>
+          </a>
+          <ul class="submenu" *ngIf="item.submenu?.length" [class.show]="item.showSubmenu">
+            <li *ngFor="let subItem of item.submenu" (click)="navigate(subItem)">
+              <i class="menu-icon" [class]="getMenuIcon(subItem)"></i>
+              {{ subItem.title }}
+            </li>
+          </ul>
+        </div>
       </nav>
     </div>
 
@@ -161,15 +177,31 @@
           <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
         </svg>
       </button>
-      <a
+      <div
+        class="nav-item-wrap"
         *ngFor="let item of visibleMenu"
-        class="nav-item"
-        [class.active]="item.link === activeMenu"
-        (click)="navigate(item)"
+        [class.has-submenu]="item.submenu?.length"
+        [class.active]="isSubmenuActive(item)"
+        [class.submenu-open]="item.showSubmenu"
+        (mouseenter)="!smallDevice && item.submenu?.length && showSubmenu(item)"
+        (mouseleave)="!smallDevice && item.submenu?.length && hideSubmenu(item)"
       >
-        <i class="menu-icon" [class]="getMenuIcon(item)"></i>
-        {{ item.title }}
-      </a>
+        <a
+          class="nav-item"
+          [class.active]="item.link === activeMenu"
+          (click)="handleMenuItemClick(item)"
+        >
+          <i class="menu-icon" [class]="getMenuIcon(item)"></i>
+          {{ item.title }}
+          <i *ngIf="item.submenu?.length" class="fa dropdown-icon" [class.fa-chevron-right]="smallDevice" [class.fa-chevron-down]="!smallDevice"></i>
+        </a>
+        <ul class="submenu" *ngIf="item.submenu?.length" [class.show]="item.showSubmenu">
+          <li *ngFor="let subItem of item.submenu" (click)="navigate(subItem)">
+            <i class="menu-icon" [class]="getMenuIcon(subItem)"></i>
+            {{ subItem.title }}
+          </li>
+        </ul>
+      </div>
     </nav>
   </div>
 </header>

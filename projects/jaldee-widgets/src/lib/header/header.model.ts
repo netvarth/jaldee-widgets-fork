@@ -5,6 +5,7 @@ export interface HeaderMenuItem {
   iconImage?: string;
   submenu?: HeaderMenuItem[];
   visible?: boolean;
+  showSubmenu?: boolean;
   [key: string]: unknown;
 }
 
